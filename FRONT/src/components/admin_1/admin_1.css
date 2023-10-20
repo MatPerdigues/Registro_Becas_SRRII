@@ -1,0 +1,172 @@
+#sec-btn-admin{
+    top:300px;
+    width:70%;
+    height: 40%;
+    margin: auto auto;
+    display:flex;
+    justify-content: space-around;
+   
+}
+
+.btn-admin{
+    margin: 0px;
+    margin-top: 10%;
+    left: -1800px;
+    top: 0px;
+    color: #f58505;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    background-color: transparent;
+    border-color: #f58505;
+    display: flex;
+}
+
+.btn-admin:hover{
+    transition: 0.5s;
+    background-color: #f58505;
+    color: black;
+}
+
+
+#span-admin{
+    font-size: 20px;
+    position: relative;
+    right: 15px;
+    top:50px;
+}
+
+#span-admin3{
+    font-size: 20px;
+    position: relative;
+    right: 20px;
+    top:50px;
+    
+}
+
+#span-admin4{
+    font-size: 20px;
+    position: relative;
+    right: 20px;
+    top:50px;
+}
+
+
+#span-admin5{
+    font-size: 20px;
+    position: relative;
+    right: 20px;
+    top:50px;
+}
+
+#icon-login{
+    font-size: 30px;
+    position: relative;
+    left: 40px;
+    top:15px;
+}
+
+.form-programa{
+    width: 24%;
+    height: 350px;
+    margin: auto;
+    background-color: transparent;
+    backdrop-filter: blur(5px) grayscale(30%);
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+    display: none;
+    z-index: 2;
+    
+    }
+
+.titulo-form-admin{
+    color: white;
+    font-size: 120%;
+    font-family:'Bruno Ace', cursive;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+}
+
+#inputGroupSelect04{
+    margin-bottom: 15px;
+}
+
+#span-select{
+    height: 38px;
+}
+
+.mb-3{
+   
+    display: flex;
+    width: 100%;
+    
+}
+
+#sec1-form-info{
+ 
+    width:100%;
+    position: absolute;
+    
+    top: 0px;
+}
+
+#sec2-form-info{
+ 
+    width:400px;
+    position: absolute;
+    right: 30px;
+    top:60px;
+}
+
+#file-form-info{
+    height: 38px;
+    color: black;
+    background-color: white;
+    border-radius: 10px;
+    width: 100%;
+}
+
+#formFile{
+    width: 320px;
+    position: relative;
+    
+}
+
+#label-formFile{
+    width:80px;
+    color: grey;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px;
+    
+}
+
+.div-btns-info{
+    position: relative;
+    top:250px;
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+
+.btn-cerrar-info{
+    font-size: 30px;
+    font-weight: 300px;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    margin-top: 30px;
+}
+
+.btn-submit{
+    background-color: #f58505;
+    font-size: 30px;
+    font-weight: 300px;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    margin-top: 30px;
+}

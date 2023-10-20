@@ -1,16 +1,4 @@
-.sec-home{
-   width: 100vw; 
-   height: 47.4vw;
-   background-color: blue;
-    
-}
 
-.img-home{
-    width: 100vw;
-    height: 100VH;
-    background-image: url('./UBA1.jpg');
-    background-repeat: no-repeat;
-}
 
 #form-login{
     display: flex;
@@ -64,4 +52,6 @@
  
  #titulo-login{
     color: whitesmoke;
+    display: flex;
+    justify-content: center;
  }
