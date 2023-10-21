@@ -170,3 +170,36 @@
     height: 50px;
     margin-top: 30px;
 }
+
+
+
+#nivel{
+    margin-top: 15px;
+}
+
+#email{
+    margin-top: 15px; 
+}
+
+
+.form-admin{
+    width: 24%;
+    height: 480px;
+    margin: auto;
+    background-color: transparent;
+    backdrop-filter: blur(5px) grayscale(30%);
+    border: 1px solid whitesmoke;
+    border-radius: 20px;
+    display: none;
+    
+   
+    
+    }
+
+    .div-btns-info-admin{
+        position: relative;
+        top:370px;
+        display: flex;
+        justify-content: space-evenly;
+        
+    }

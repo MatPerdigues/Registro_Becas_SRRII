@@ -4,13 +4,51 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faKey,faUser,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
+
+    let dato="";
+
+
+    const login = async(event)=>{
+        
+        event.preventDefault();
+        
+        const formLogin = JSON.stringify({
+            "usuario":event.target[0].value,
+            "password":event.target[1].value,
+            
+        })
+        
+        const response = await fetch("http://localhost:3200/login",{
+        method:"POST",
+        body:formLogin,
+        headers:{
+           // "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            
+            'Content-Type':'application/json'
+        }})
+
+        .then((res)=>res.json())
+        .then((data)=>{dato=data})
+
+        console.log(dato)
+        alert(dato.mensaje);
+
+        document.getElementById("form-login").reset();
+
+        document.getElementById("form-login").style.display="none";
+
+    }
+
+
+
+
     return (
         <Fragment>
             
              
-            <form id='form-login'method='POST'>
+            <form id='form-login'method='POST' onSubmit={(event)=>{login(event)}}>
                 <section id='sec-datos-login'>
-                    <h4 id='titulo-login'>Ingresá tus datos</h4>
+                    <h4 id='titulo-login'>Ingrese sus datos de acceso</h4>
                     <div>
                         <div class="input-group mb-3" id='input-login1'>
                             <span class="input-group-text" id="inputGroup-sizing-default"><FontAwesomeIcon icon={faUser}/></span>
