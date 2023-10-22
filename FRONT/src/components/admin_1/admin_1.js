@@ -3,12 +3,20 @@ import { Fragment } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faSquarePlus,faTrashCan,faPenToSquare,faMagnifyingGlass,faXmark,faCheck,faUserPlus} from '@fortawesome/free-solid-svg-icons'
 
+import { useRef, useEffect, useState } from "react";
+import emailjs from '@emailjs/browser';
+
 
 export default function Admin_1() {
 
     let dato="";
     let baseClave='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.?,;-_¡!¿*%&$/()[]{}|@><';
     let lengthClave=8;
+    const form = useRef();
+    const[nombre,setNombre]=useState('');
+    const[usuario,setUsuario]=useState('');
+    const[mail,setMail]=useState('');
+
     
 
 
@@ -42,7 +50,7 @@ export default function Admin_1() {
 
     const agregarAdmin = async(event)=>{
 
-        let clave='';
+         let clave='';
 
         for(let x=0; x < lengthClave; x++){
             let random = Math.floor(Math.random() * baseClave.length);
@@ -50,6 +58,13 @@ export default function Admin_1() {
         }
         
         event.preventDefault();
+
+        const serviceId = "service_3o1n3ps";
+        const templateId = "template_i2okhu7";
+        const publicKey= "5yzZimEw4Rf97xil4";
+
+       
+
         
         const formSumarAdmin = JSON.stringify({
             "nombre":event.target[0].value,
@@ -73,6 +88,27 @@ export default function Admin_1() {
 
         .then((res)=>res.json())
         .then((data)=>{dato=data})
+
+        const templateParams={
+            nombre:nombre,
+            usuario:usuario,
+            mail:mail,
+            clave:clave
+
+        }
+
+        emailjs.send(serviceId, templateId, templateParams, publicKey)
+        .then((response) => {
+            console.log('Email sent successfully!', response);
+
+        setNombre('');
+        setMail('');
+        setUsuario('');
+        })
+        .catch((error) => {
+        console.error('Error sending email:', error);
+        });
+
 
         alert(dato);
 
@@ -139,13 +175,13 @@ export default function Admin_1() {
             </form>
 
 
-            <form id='form-admin'method='POST' class="form-admin" onSubmit={(event)=>{agregarAdmin(event)}}>
+            <form id='form-admin'method='POST' class="form-admin" ref={form} onSubmit={(event)=>{agregarAdmin(event)}}>
                 <section id="sec1-form-info">
                     <p class='titulo-form-admin'>Ingrese los datos del nuevo administrador</p>
                     
                     <div class="input-group mb-3" id='input-admin1'>
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
-                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre...' name="nombre"/>
+                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre...' name="nombre" onChange={(event) => setNombre(event.target.value)}/>
                     </div>
                     <div class="input-group mb-3" id='input-admin1'>
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
@@ -182,11 +218,11 @@ export default function Admin_1() {
                     </div>
                     <div class="input-group mb-3" id='email'>
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
-                        <input type="email" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='E-mail...' name="email"/>
+                        <input type="email" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='E-mail...'  name="mail" onChange={(event) => setMail(event.target.value)}/>
                     </div>
                     <div class="input-group mb-3" id='usuario'>
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
-                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre de usuario...' name="usuario"/>
+                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre de usuario...' name="usuario" onChange={(event) => setUsuario(event.target.value)}/>
                     </div>
                                        
                 </section>                

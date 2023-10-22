@@ -21,7 +21,7 @@ const agregarAdmin=async(req,res)=>{
                     if(error){
                         res.send(error);
                     }else{
-                         res.json(`Administrador/a registrado/a correctamente. Se ha enviado un correo electrónico a la dirección ${mail} con los datos de acceso. Clave ${password}`);
+                         res.json(`Administrador/a registrado/a correctamente. Se ha enviado un correo electrónico a la dirección ${mail} con los datos de acceso.`);
                         
                     }
                 })
