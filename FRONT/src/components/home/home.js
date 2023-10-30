@@ -30,9 +30,25 @@ export default function Home() {
         .then((res)=>res.json())
         .then((data)=>{dato=data})
 
+        localStorage.setItem("facultad",dato.facultad)
+        
+        
         console.log(dato)
         alert(dato.mensaje);
-
+        
+        if(dato.mensaje === "Usuario logeado correctamente!"){
+            
+            if(dato.nivel === '1'){
+                
+                window.location.href='../admin1';
+                
+            } else{
+                
+                window.location.href='../programas';
+                
+            }
+        }
+        
         document.getElementById("form-login").reset();
 
         document.getElementById("form-login").style.display="none";

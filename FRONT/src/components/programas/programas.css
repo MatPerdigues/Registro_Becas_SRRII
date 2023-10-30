@@ -1,0 +1,33 @@
+.contenedorTarjetas{
+    width: 90%;
+    margin: 0 auto;
+    height: 50vh;
+    padding-top: 50PX;
+    display: flex;
+    justify-content: space-around;
+    
+}
+
+.formSumarPostulante{
+    
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 0px;
+    height: 400PX;
+    display: none;
+     
+}
+
+.h4Postulante{
+    margin-bottom: 20px;
+    margin-top: 0px;
+    
+}
+
+.btns-sumPostulante{
+    
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}

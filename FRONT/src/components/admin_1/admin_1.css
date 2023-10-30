@@ -68,7 +68,7 @@
 
 .form-programa{
     width: 24%;
-    height: 350px;
+    height: 450px;
     margin: auto;
     background-color: transparent;
     backdrop-filter: blur(5px) grayscale(30%);
@@ -146,7 +146,7 @@
 
 .div-btns-info{
     position: relative;
-    top:250px;
+    top: 350px;
     display: flex;
     justify-content: space-evenly;
     
@@ -203,3 +203,32 @@
         justify-content: space-evenly;
         
     }
+
+    .documentacion{
+        width: 100%;
+        height: 120px;
+        background-color: whitesmoke;
+        border-radius: 4%;
+
+    }
+
+    #p-documentacion {
+        
+        justify-content: center;
+        text-align: center;
+        text-decoration: underline;
+        height: 5%;
+        padding-top: 2%;
+        margin-bottom: 5%;
+       
+    }
+
+    .label-documentacion {
+        margin-left: 5%;
+    }
+
+    .item-documentación{
+        margin-left: 5%;
+    }
+
+   

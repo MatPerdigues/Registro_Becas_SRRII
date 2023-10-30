@@ -55,7 +55,8 @@ const login = (req,res)=>{
                                 res.send({
                                     mensaje:("Usuario logeado correctamente!"),
                                     claveToken:token,
-                                    nivel:info.nivel
+                                    nivel:info.nivel,
+                                    facultad:info.unidad_academica	
                                 }) 
                             
 
@@ -72,4 +73,51 @@ const login = (req,res)=>{
         }
 
 
-module.exports={agregarAdmin,login};
+const agregarPrograma=(req,res)=>{
+    const{nombre,vencimiento,vencimientoPublic}=req.body;
+
+   const img='http://localhost:3200/public/' + req.file.filename;
+
+    dbConnection.query("INSERT INTO programas (nombre,vencimiento,vencimientoPublic,imagen) VALUES (?,?,?,?)",[nombre,vencimiento,vencimientoPublic,img],(error,data)=>{
+        if(error){
+            res.send(error);
+        }else{
+                  
+            res.json(`Programa cargado correctamente!`);
+            
+        }
+    })
+}        
+
+
+const traerProgramas = (req,res)=>{
+    dbConnection.query('SELECT * FROM programas',(error,data)=>{
+        if(error){
+            res.send(error);
+        }else{
+            res.send(data);
+        }
+    })
+}
+
+
+const agregarPostulante=(req,res)=>{
+    const{nombre,dni,email,facultad,programa,fecha_registro,año_registro}=req.body;
+    
+    dbConnection.query("INSERT INTO postulaciones (nombre,dni,email,facultad,programa,fecha_registro,año_registro) VALUES (?,?,?,?,?,?,?)",[nombre,dni,email,facultad,programa,fecha_registro,año_registro],(error,data)=>{
+        if(error){
+            res.send(error);
+        }else{
+                  
+            res.json({
+                mensaje:"Postulante registrado/a correctamente"
+            });
+            
+        }
+    })
+}    
+
+
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante};

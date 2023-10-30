@@ -1,4 +1,7 @@
 .App{
     background-image: url('./UBA1.jpg');
     height: 100VH;
+    position: fixed; 
+    bottom: 0px; 
+    width: 100%; 
 }

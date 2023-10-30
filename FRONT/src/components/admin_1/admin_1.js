@@ -7,6 +7,7 @@ import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
 
 
+
 export default function Admin_1() {
 
     let dato="";
@@ -16,11 +17,14 @@ export default function Admin_1() {
     const[nombre,setNombre]=useState('');
     const[usuario,setUsuario]=useState('');
     const[mail,setMail]=useState('');
+    const[img,setImg]=useState(null);
+    
+    
+    const handleChange=(event)=>{
+        setImg(event.target.files[0]);
+    }
 
     
-
-
-
 
     const mostrar=event=>{
 
@@ -81,7 +85,7 @@ export default function Admin_1() {
         method:"POST",
         body:formSumarAdmin,
         headers:{
-           // "Authorization": `Bearer ${localStorage.getItem("token")}`,
+           "Authorization": `Bearer ${localStorage.getItem("token")}`,
             
             'Content-Type':'application/json'
         }})
@@ -119,6 +123,44 @@ export default function Admin_1() {
 
     }
 
+    const agregarPrograma = async(event)=>{
+
+        console.log(img);
+        event.preventDefault();
+
+        let formatoFecha = event.target[1].value.split("-")
+        let dia = formatoFecha[2];
+        let mes = formatoFecha[1];
+        let year = formatoFecha[0];
+        let vencimientoPublic = dia+'-'+mes+'-'+year;
+
+        
+        
+        const form = new FormData();
+        form.append('imagen',img);
+        form.append("nombre",event.target[0].value);
+        form.append("vencimiento",event.target[1].value);
+        form.append("vencimientoPublic",vencimientoPublic);
+               
+
+
+    const response= await fetch('http://localhost:3200/agregarPrograma',{
+        method:'POST',
+        body: form,
+        headers:{
+           // "Authorization": `Bearer ${localStorage.getItem("token")}`
+        }
+                     
+        })
+        .then((res)=>res.json())
+        .then((data)=>{dato=data})
+        console.log(dato);
+        alert(dato);
+        document.getElementById("form-info").reset();
+        document.getElementById("form-info").style.display="none"
+    
+    } 
+
 
 
 
@@ -150,7 +192,7 @@ export default function Admin_1() {
                 
             </section>
 
-            <form id='form-info'method='POST' class="form-programa" >
+            <form id='form-info'method='POST' class="form-programa" onSubmit={(event)=>{agregarPrograma(event)}}>
                 <section id="sec1-form-info">
                     <p class='titulo-form-admin'>Complete los datos del Programa</p>
                     
@@ -165,13 +207,30 @@ export default function Admin_1() {
                     
                     <div class="mb-3" id='file-form-info'>
                         <label for="formFile" class="form-label" id='label-formFile'>Imagen</label>
-                        <input class="form-control" type="file" id="formFile" name='imagen' />
+                        <input class="form-control" type="file" id="formFile" name='imagen' onChange={handleChange} required/>
+                    </div>
+
+                    <div class="documentacion" id='documentacion'>
+                        <p id='p-documentacion'>Documentación requerida</p>
+                        <div>
+                            <input type="checkbox" class="item-documentación" id='item1-documentación' />
+                            <label for="item1-documentación" class="label-documentacion">Aval</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="item-documentación" id='item2-documentación' />
+                            <label for="item2-documentación" class="label-documentacion">Carta de invitación</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="item-documentación" id='item3-documentación' />
+                            <label for="item3-documentación" class="label-documentacion">Currículum</label>
+                        </div>
                     </div>                    
                 </section>                
                 <div class='div-btns-info'>
                     <button type='button' id='btn-cerrar-info' class="btn-cerrar-info" onClick={ocultar}><FontAwesomeIcon icon={faXmark}/></button>
                     <button type="submit" id='btn-submit0' class="btn-submit"><FontAwesomeIcon icon={faCheck} /></button>
                 </div>
+                
             </form>
 
 
