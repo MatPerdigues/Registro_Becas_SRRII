@@ -9,15 +9,20 @@ import {faTrashCan,faMagnifyingGlass,faUserPlus} from '@fortawesome/free-solid-s
 export default function Card({info}) {
 
 
+
+
     const establecerPrograma=event=>{
         let programa = info.nombre;
-        console.log(programa);
-        document.getElementById("formSumarPostulante").style.display="block";
+        
+        
 
-        localStorage.setItem("programa",info.nombre)
-        console.log(localStorage.getItem("programa"))
+        localStorage.setItem("programa",info.nombre);
+        localStorage.setItem("aval",info.aval);
+        localStorage.setItem("invitacion",info.invitacion);
+        localStorage.setItem("cv",info.cv);
+        localStorage.setItem("avalORI",info.avalORI);
 
-
+        window.location.href='../formPostulante';
 
     }
 
@@ -51,7 +56,7 @@ export default function Card({info}) {
              </section>
 
              
-
+            
              
            
         </Fragment>

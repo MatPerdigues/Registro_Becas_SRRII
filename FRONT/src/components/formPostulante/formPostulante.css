@@ -1,0 +1,86 @@
+
+.formSumarPostulante{
+    
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 0px;
+    height: 400PX;
+    justify-content: space-around;
+}
+
+.h4Postulante{
+    margin-bottom: 20px;
+    margin-top: 0px;
+}
+
+.btns-sumPostulante{
+    
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.pDocumentacion{
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    margin-bottom: 0px;
+    width: 310px;
+    
+}
+
+.tituloDocumentacion{
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.div1-documentacion{
+    border: 1px solid whitesmoke;
+    width: 40%;
+    height: 20PX;
+    margin-top: 10px;
+    border-bottom: none;
+    border-right: none;
+}
+
+.div2-documentacion{
+    border: 1px solid whitesmoke;
+    width: 40%;
+    height: 20PX;
+    margin-top: 10px;
+    border-bottom: none;
+    border-left: none;
+}
+
+
+#formFile{
+    width: 100%;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+
+}
+
+#iconFile{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+#inputPostulante{
+    padding-bottom: 20px;
+    width: 100%;
+}
+
+#aval{
+    width: 100%;
+    
+}
+
+.programaFormPostulante{
+    color: whitesmoke;
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+}

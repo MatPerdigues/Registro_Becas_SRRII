@@ -74,11 +74,11 @@ const login = (req,res)=>{
 
 
 const agregarPrograma=(req,res)=>{
-    const{nombre,vencimiento,vencimientoPublic}=req.body;
+    const{nombre,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
 
    const img='http://localhost:3200/public/' + req.file.filename;
 
-    dbConnection.query("INSERT INTO programas (nombre,vencimiento,vencimientoPublic,imagen) VALUES (?,?,?,?)",[nombre,vencimiento,vencimientoPublic,img],(error,data)=>{
+    dbConnection.query("INSERT INTO programas (nombre,vencimiento,vencimientoPublic,imagen,aval,invitacion,cv,avalORI) VALUES (?,?,?,?,?,?,?,?)",[nombre,vencimiento,vencimientoPublic,img,aval,invitacion,cv,avalORI],(error,data)=>{
         if(error){
             res.send(error);
         }else{

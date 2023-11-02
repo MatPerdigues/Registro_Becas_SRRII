@@ -125,6 +125,16 @@ export default function Admin_1() {
 
     const agregarPrograma = async(event)=>{
 
+        let check1 = document.getElementById("item1-documentación");
+        let check2 = document.getElementById("item2-documentación");
+        let check3 = document.getElementById("item3-documentación");
+        let check4 = document.getElementById("item4-documentación");
+        
+
+        console.log(check1.checked)
+        console.log(check2.checked)
+        console.log(check3.checked)
+
         console.log(img);
         event.preventDefault();
 
@@ -141,6 +151,11 @@ export default function Admin_1() {
         form.append("nombre",event.target[0].value);
         form.append("vencimiento",event.target[1].value);
         form.append("vencimientoPublic",vencimientoPublic);
+        form.append("aval",check1.checked);
+        form.append("invitacion",check2.checked);
+        form.append("cv",check3.checked);
+        form.append("avalORI",check4.checked);
+
                
 
 
@@ -214,7 +229,11 @@ export default function Admin_1() {
                         <p id='p-documentacion'>Documentación requerida</p>
                         <div>
                             <input type="checkbox" class="item-documentación" id='item1-documentación' />
-                            <label for="item1-documentación" class="label-documentacion">Aval</label>
+                            <label for="item1-documentación" class="label-documentacion">Aval Decano</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" class="item-documentación" id='item4-documentación' />
+                            <label for="item4-documentación" class="label-documentacion">Aval ORI</label>
                         </div>
                         <div>
                             <input type="checkbox" class="item-documentación" id='item2-documentación' />
