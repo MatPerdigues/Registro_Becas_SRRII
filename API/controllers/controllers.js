@@ -102,11 +102,20 @@ const traerProgramas = (req,res)=>{
 
 
 const agregarPostulante=(req,res)=>{
-    const{nombre,dni,email,facultad,programa,fecha_registro,año_registro}=req.body;
     
-    dbConnection.query("INSERT INTO postulaciones (nombre,dni,email,facultad,programa,fecha_registro,año_registro) VALUES (?,?,?,?,?,?,?)",[nombre,dni,email,facultad,programa,fecha_registro,año_registro],(error,data)=>{
+    let aval='http://localhost:3200/public/' + req.files.aval[0].filename;
+    let avalORI='http://localhost:3200/public/' + req.files.avalORI[0].filename;
+    let invitacion='http://localhost:3200/public/' + req.files.invitacion[0].filename;
+    let cv='http://localhost:3200/public/' + req.files.cv[0].filename;
+    
+    const{nombre,dni,email,facultad,programa,fecha_registro,year_registro}=req.body;
+    
+    
+    dbConnection.query("INSERT INTO postulaciones (nombre,dni,email,facultad,programa,fecha_registro,año_registro,aval,avalORI,invitacion,cv) VALUES (?,?,?,?,?,?,?,?,?,?,?)",[nombre,dni,email,facultad,programa,fecha_registro,year_registro,aval,avalORI,invitacion,cv],(error,data)=>{
         if(error){
-            res.send(error);
+            res.json({
+                mensaje:'Hubo un error'+' '+error
+            })
         }else{
                   
             res.json({
@@ -115,8 +124,7 @@ const agregarPostulante=(req,res)=>{
             
         }
     })
-}    
-
+} 
 
 
 

@@ -6,6 +6,7 @@ import Programas from '../programas/programas';
 import FormPostulante from '../formPostulante/formPostulante';
 
 
+
 export default function Ruteo() {
 return(
     <BrowserRouter>
@@ -15,6 +16,7 @@ return(
           <Route path='/admin1' element={<Admin_1/>}></Route>
           <Route path='/programas' element={<Programas/>}></Route>
           <Route path='/formPostulante' element={<FormPostulante/>}></Route>
+
         </Routes>
     
     </BrowserRouter>
