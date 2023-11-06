@@ -97,6 +97,8 @@ export default function FormPostulante() {
         alert(respuesta.mensaje);
 
         document.getElementById("formSumarPostulante").reset();
+
+        window.location.href='../programas';
         
     }
         
@@ -117,17 +119,17 @@ export default function FormPostulante() {
                 
                 <div class="input-group mb-3" id='inputPostulante'>
                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faUser}/></span>
-                    <input type="text" class="form-control" placeholder="Nombre y apellido..." aria-label="Username" aria-describedby="basic-addon1" />
+                    <input type="text" class="form-control" placeholder="Nombre y apellido..." aria-label="Username" aria-describedby="basic-addon1" required/>
                 </div>
                  
                 <div class="input-group mb-3" id='inputPostulante'>
                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faPassport}/></span>
-                    <input type="number" class="form-control" placeholder="DNI (solo números)..." aria-label="Username" aria-describedby="basic-addon1" />
+                    <input type="number" class="form-control" placeholder="DNI (solo números)..." aria-label="Username" aria-describedby="basic-addon1" required/>
                 </div>
                 
                 <div class="input-group mb-3" id='inputPostulante'>
                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faEnvelope}/></span>
-                    <input type="text" class="form-control" placeholder="E-mail..." aria-label="Username" aria-describedby="basic-addon1" />
+                    <input type="text" class="form-control" placeholder="E-mail..." aria-label="Username" aria-describedby="basic-addon1" required/>
                 </div>
 
                 {aval==='true'?
@@ -141,7 +143,7 @@ export default function FormPostulante() {
 
                     <div class="mb-3" id='aval'>
                         <span class="input-group-text" id="iconFile"><FontAwesomeIcon icon={faFileLines}/></span>
-                        <input class="form-control" type="file" id="formFile" name='aval' required onChange={handleChangeAval}/>
+                        <input class="form-control" type="file" id="formFile" name='aval' required onChange={handleChangeAval} accept=".pdf" />
                     </div>
                 </section>
 
@@ -158,7 +160,7 @@ export default function FormPostulante() {
                     </section>
                     <div class="mb-3" id='aval'>
                         <span class="input-group-text" id="iconFile"><FontAwesomeIcon icon={faFileLines}/></span>
-                        <input class="form-control" type="file" id="formFile" required  name='avalORI' onChange={handleChangeAvalORI} />
+                        <input class="form-control" type="file" id="formFile" required  name='avalORI' onChange={handleChangeAvalORI} accept=".pdf"/>
                     </div>
                 </section>
 
@@ -175,7 +177,7 @@ export default function FormPostulante() {
 
                     <div class="mb-3" id='aval'>
                         <span class="input-group-text" id="iconFile"><FontAwesomeIcon icon={faFileSignature}/></span>
-                        <input class="form-control" type="file" id="formFile" required name='invitacion' onChange={handleChangeInvitacion}/>
+                        <input class="form-control" type="file" id="formFile" required name='invitacion' onChange={handleChangeInvitacion} accept=".pdf"/>
                     </div>
                 </section>
 
@@ -192,7 +194,7 @@ export default function FormPostulante() {
                     </section>
                     <div class="mb-3" id='aval'>
                         <span class="input-group-text" id="iconFile"><FontAwesomeIcon icon={faIdCard}/></span>
-                        <input class="form-control" type="file" id="formFile" required name='cv' onChange={handleChangeCV}/>
+                        <input class="form-control" type="file" id="formFile" required name='cv' onChange={handleChangeCV} accept=".pdf"/>
                     </div>
                 </section>
 

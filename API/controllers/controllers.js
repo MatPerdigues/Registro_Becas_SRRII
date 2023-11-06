@@ -5,6 +5,8 @@ const PASS_SEGURA = process.env.PASS_SEGURA;
 
 
 
+
+
 const agregarAdmin=async(req,res)=>{
     const{nombre,apellido,unidad_academica,nivel,mail,usuario,password}=req.body;
 
@@ -102,11 +104,39 @@ const traerProgramas = (req,res)=>{
 
 
 const agregarPostulante=(req,res)=>{
-    
-    let aval='http://localhost:3200/public/' + req.files.aval[0].filename;
-    let avalORI='http://localhost:3200/public/' + req.files.avalORI[0].filename;
-    let invitacion='http://localhost:3200/public/' + req.files.invitacion[0].filename;
-    let cv='http://localhost:3200/public/' + req.files.cv[0].filename;
+
+    let aval=''
+    let avalORI=''
+    let invitacion=''
+    let cv=''
+
+
+
+    if(req.files.aval===undefined){
+        aval='N/A'
+    } else {
+        aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
+        
+    };
+
+    if(req.files.avalORI===undefined){
+        avalORI = 'N/A'
+    } else {
+        avalORI='http://localhost:3200/public/' + req.files.avalORI[0].filename;
+    };
+
+    if(req.files.invitacion===undefined){
+        invitacion = 'N/A'
+    } else {
+        invitacion='http://localhost:3200/public/' + req.files.invitacion[0].filename;
+    };
+
+    if(req.files.cv===undefined){
+        cv = 'N/A'
+    } else {
+        cv='http://localhost:3200/public/' + req.files.cv[0].filename;
+    };
+
     
     const{nombre,dni,email,facultad,programa,fecha_registro,year_registro}=req.body;
     

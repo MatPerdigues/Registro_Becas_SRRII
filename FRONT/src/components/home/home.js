@@ -55,6 +55,10 @@ export default function Home() {
 
     }
 
+    const limpiar = event=> { 
+        
+       
+        document.getElementById("form-login").reset()}
 
 
 
@@ -76,7 +80,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div id='div-btns'>
-                        <button type='button' id='btn-submit1'><FontAwesomeIcon icon={faXmark} /></button>
+                        <button type='button' id='btn-submit1'><FontAwesomeIcon icon={faXmark} onClick={limpiar}/></button>
                         <button type="submit" id='btn-submit'><FontAwesomeIcon icon={faCheck}/></button>
                     </div>
             
