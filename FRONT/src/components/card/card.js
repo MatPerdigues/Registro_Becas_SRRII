@@ -21,6 +21,9 @@ export default function Card({info}) {
         localStorage.setItem("invitacion",info.invitacion);
         localStorage.setItem("cv",info.cv);
         localStorage.setItem("avalORI",info.avalORI);
+        localStorage.setItem("nombreCorto",info.nombreCorto);
+
+       
 
         window.location.href='../formPostulante';
 

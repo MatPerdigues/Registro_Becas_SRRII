@@ -1,7 +1,7 @@
 #sec-btn-admin{
     top:300px;
     width:70%;
-    height: 40%;
+    height: 35%;
     margin: auto auto;
     display:flex;
     justify-content: space-around;
@@ -68,7 +68,7 @@
 
 .form-programa{
     width: 24%;
-    height: 500px;
+    height: 550px;
     margin: auto;
     background-color: transparent;
     backdrop-filter: blur(5px) grayscale(30%);
@@ -146,9 +146,10 @@
 
 .div-btns-info{
     position: relative;
-    top: 400px;
+    top: 450px;
     display: flex;
     justify-content: space-evenly;
+    
     
 }
 

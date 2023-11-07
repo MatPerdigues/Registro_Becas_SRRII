@@ -2,6 +2,7 @@ const dbConnection = require('../config/dataBase');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const PASS_SEGURA = process.env.PASS_SEGURA;
+const fs = require('fs');
 
 
 
@@ -76,11 +77,15 @@ const login = (req,res)=>{
 
 
 const agregarPrograma=(req,res)=>{
-    const{nombre,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
+    const{nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
+
+    let dir = `./archivos/${nombreCorto}`;
+
+    fs.mkdirSync(dir, { recursive: true });
 
    const img='http://localhost:3200/public/' + req.file.filename;
 
-    dbConnection.query("INSERT INTO programas (nombre,vencimiento,vencimientoPublic,imagen,aval,invitacion,cv,avalORI) VALUES (?,?,?,?,?,?,?,?)",[nombre,vencimiento,vencimientoPublic,img,aval,invitacion,cv,avalORI],(error,data)=>{
+    dbConnection.query("INSERT INTO programas (nombre,nombreCorto,vencimiento,vencimientoPublic,imagen,aval,invitacion,cv,avalORI) VALUES (?,?,?,?,?,?,?,?,?)",[nombre,nombreCorto,vencimiento,vencimientoPublic,img,aval,invitacion,cv,avalORI],(error,data)=>{
         if(error){
             res.send(error);
         }else{
@@ -138,10 +143,10 @@ const agregarPostulante=(req,res)=>{
     };
 
     
-    const{nombre,dni,email,facultad,programa,fecha_registro,year_registro}=req.body;
+    const{nombre,apellido,dni,email,facultad,programa,fecha_registro,year_registro}=req.body;
     
     
-    dbConnection.query("INSERT INTO postulaciones (nombre,dni,email,facultad,programa,fecha_registro,año_registro,aval,avalORI,invitacion,cv) VALUES (?,?,?,?,?,?,?,?,?,?,?)",[nombre,dni,email,facultad,programa,fecha_registro,year_registro,aval,avalORI,invitacion,cv],(error,data)=>{
+    dbConnection.query("INSERT INTO postulaciones (nombre,apellido,dni,email,facultad,programa,fecha_registro,año_registro,aval,avalORI,invitacion,cv) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[nombre,apellido,dni,email,facultad,programa,fecha_registro,year_registro,aval,avalORI,invitacion,cv],(error,data)=>{
         if(error){
             res.json({
                 mensaje:'Hubo un error'+' '+error

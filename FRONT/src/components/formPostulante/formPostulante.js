@@ -12,6 +12,7 @@ export default function FormPostulante() {
     let cv =  localStorage.getItem("cv");
     let programa =  localStorage.getItem("programa");
     let avalORI =  localStorage.getItem("avalORI");
+    let nombreCorto =  localStorage.getItem("nombreCorto");
     
     let respuesta = "";
     
@@ -65,17 +66,20 @@ export default function FormPostulante() {
         
         const formPostulante = new FormData();
             
-            formPostulante.append('aval',archivoAval);
-            formPostulante.append('avalORI',archivoAvalOri);
-            formPostulante.append('invitacion',archivoInvitacion);
-            formPostulante.append('cv',archivoCV);
-             formPostulante.append("nombre",event.target[0].value);
-            formPostulante.append("dni",event.target[1].value);
-            formPostulante.append("email",event.target[2].value);
+
+            formPostulante.append("nombre",event.target[0].value);
+            formPostulante.append("apellido",event.target[1].value);
+            formPostulante.append("dni",event.target[2].value);
+            formPostulante.append("email",event.target[3].value);
             formPostulante.append("facultad",localStorage.getItem("facultad"));
             formPostulante.append("programa", localStorage.getItem("programa"));
             formPostulante.append("fecha_registro",fecha_registro);
             formPostulante.append("year_registro",yearActual); 
+            formPostulante.append("nombreCorto",nombreCorto); 
+            formPostulante.append('aval',archivoAval);
+            formPostulante.append('avalORI',archivoAvalOri);
+            formPostulante.append('invitacion',archivoInvitacion);
+            formPostulante.append('cv',archivoCV);
             
         
         
@@ -119,7 +123,11 @@ export default function FormPostulante() {
                 
                 <div class="input-group mb-3" id='inputPostulante'>
                     <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faUser}/></span>
-                    <input type="text" class="form-control" placeholder="Nombre y apellido..." aria-label="Username" aria-describedby="basic-addon1" required/>
+                    <input type="text" class="form-control" placeholder="Nombre(s)..." aria-label="Username" aria-describedby="basic-addon1" required/>
+                </div>
+                <div class="input-group mb-3" id='inputPostulante'>
+                    <span class="input-group-text" id="basic-addon1"><FontAwesomeIcon icon={faUser}/></span>
+                    <input type="text" class="form-control" placeholder="Apellido..." aria-label="Username" aria-describedby="basic-addon1" required/>
                 </div>
                  
                 <div class="input-group mb-3" id='inputPostulante'>

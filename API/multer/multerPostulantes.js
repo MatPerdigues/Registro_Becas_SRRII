@@ -1,47 +1,57 @@
 const multer=require('multer');
 
 
-
-
 const storage=multer.diskStorage({
-
-   
+    
     destination:(req,file,cb)=>{ 
-
-        const pathDocument='./archivos';
+        
+        let carpeta = req.body.nombreCorto;
+                
+        const pathDocument= `./archivos/${carpeta}`;
         cb(null,pathDocument);
     },
 
     filename:(req,file,cb)=>{
+
+        let apellido = req.body.apellido;
         
         const ext=file.originalname.split(".").pop();
 
 
         if(file.fieldname==='aval'){
-            const filename=`Aval-${Date.now()}.${ext}`;
+            const filename=`Aval-${apellido}-${Date.now()}.${ext}`;
             cb(null,filename);
         }
 
         if(file.fieldname==='invitacion'){
-            const filename=`Invitacion-${Date.now()}.${ext}`;
+            const filename=`Invitacion-${apellido}-${Date.now()}.${ext}`;
             cb(null,filename);
         }
 
         if(file.fieldname==='cv'){
-            const filename=`CV-${Date.now()}.${ext}`;
+            const filename=`CV-${apellido}-${Date.now()}.${ext}`;
             cb(null,filename);
         }
 
         if(file.fieldname==='avalORI'){
-            const filename=`AvalORI-${Date.now()}.${ext}`;
+            const filename=`AvalORI-${apellido}-${Date.now()}.${ext}`;
             cb(null,filename);
         }
 
+        
+
         }
+        
     },
+
+    
 );
 
+
+
 const uploadPostulantes=multer({storage:storage});
+
+
 
 
 
