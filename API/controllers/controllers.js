@@ -162,5 +162,43 @@ const agregarPostulante=(req,res)=>{
 } 
 
 
+const traerAdmins = (req,res)=>{
+    dbConnection.query('SELECT * FROM admins',(error,data)=>{
+        if(error){
+            res.send(error);
+        }else{
+            res.send(data);
+        }
+    })
+}
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante};
+
+const borrarAdmin = (req,res)=>{
+    const{adminId}=req.body;
+    dbConnection.query(`DELETE FROM admins WHERE id="${adminId}"`,(error,data)=>{
+
+       
+
+         if(error){
+            res.send("Hubo un error" + error)
+        }else{
+            res.json(`Admin eliminado/a correctamente!`);
+        } 
+    })
+}
+
+
+const traerProgramasAdmin = (req,res)=>{
+    dbConnection.query('SELECT * FROM programas',(error,data)=>{
+        if(error){
+            res.send(error);
+        }else{
+            res.send(data);
+        }
+    })
+}
+
+
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin};

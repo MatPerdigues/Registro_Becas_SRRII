@@ -1,0 +1,98 @@
+
+
+
+
+main{
+    color:whitesmoke;
+    width: 100%;
+    margin: 0 auto;
+    height: 95vh;
+    z-index: 1;
+    overflow-y: scroll;
+}
+
+.subtituloAdmins{
+    height: 50px;
+    margin-top: 50px;
+    display: flex;
+    margin-left: 7%;
+   
+}
+
+.tituloAdmins{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.catAdmins{
+    width: 20%;
+    text-align: center;
+    border: 1px solid white;
+    height: 70px;
+    padding-top: 20px;
+    backdrop-filter: blur(50px) grayscale(30%);
+    word-break:break-all;
+}
+
+#nivelAdmin{
+    width: 10%;
+}
+
+.mapAdmins{
+    margin-top: 30px;
+    
+}
+
+#accionAdmin{
+    width: 5%;
+}
+
+.contornoEliminar{
+    width: 100%;
+    height: 100vh;
+    z-index: 2;
+    position: absolute;
+    top:0px;
+    left: 0px;
+    backdrop-filter: blur(8px) grayscale(30%);
+    display: none;
+}
+
+.tarjetaEliminar{
+    border: 1px solid whitesmoke;
+    z-index: 3;
+    width: 30%;
+    height: 40vh;
+    margin-left: 35%;
+    margin-top: 8%;
+    position: absolute;
+    border-radius: 20px;
+    backdrop-filter: blur(20px) grayscale(30%);
+    display: none;
+}
+
+.h5Eliminar{
+    
+    text-align: center;
+    margin-top: 50px;
+    height: 100px;
+}
+
+.btnEliminar{
+    
+    background-color: #f58505;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+@media screen and (max-width: 500px) {
+    .catAdmins{
+        height: 80px;
+        padding-top: 0px;
+        
+
+    }
+}

@@ -32,13 +32,11 @@ export default function Home() {
 
         localStorage.setItem("facultad",dato.facultad)
         
-        
-        console.log(dato)
-        alert(dato.mensaje);
+
         
         if(dato.mensaje === "Usuario logeado correctamente!"){
             
-            if(dato.nivel === '1'){
+            if(dato.nivel === '1' || dato.nivel === '0'){
                 
                 window.location.href='../admin1';
                 

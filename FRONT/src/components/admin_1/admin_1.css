@@ -1,3 +1,15 @@
+
+.contornoAdmin{
+
+    position:absolute;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(8px) grayscale(50%);
+    display: none;
+    
+
+}
+
 #sec-btn-admin{
     top:300px;
     width:70%;
@@ -5,7 +17,7 @@
     margin: auto auto;
     display:flex;
     justify-content: space-around;
-   
+    z-index: -1;
 }
 
 .btn-admin{
@@ -20,6 +32,7 @@
     background-color: transparent;
     border-color: #f58505;
     display: flex;
+    z-index: 0;
 }
 
 .btn-admin:hover{
@@ -192,45 +205,91 @@
     border: 1px solid whitesmoke;
     border-radius: 20px;
     display: none;
+}
+
+.div-btns-info-admin{
+    position: relative;
+    top:370px;
+    display: flex;
+    justify-content: space-evenly;
     
-   
+}
+.documentacion{
+    width: 98%;
+    height: 150px;
+    background-color: whitesmoke;
+    margin: 0 auto;
     
-    }
-
-    .div-btns-info-admin{
-        position: relative;
-        top:370px;
-        display: flex;
-        justify-content: space-evenly;
-        
-    }
-
-    .documentacion{
-        width: 98%;
-        height: 150px;
-        background-color: whitesmoke;
-        margin: 0 auto;
-        
-
-    }
-
-    #p-documentacion {
-        
-        justify-content: center;
-        text-align: center;
-        text-decoration: underline;
-        height: 5%;
-        padding-top: 2%;
-        margin-bottom: 30px;
-       
-    }
-
-    .label-documentacion {
-        margin-left: 5%;
-    }
-
-    .item-documentación{
-        margin-left: 5%;
-    }
-
+}
+#p-documentacion {
+    
+    justify-content: center;
+    text-align: center;
+    text-decoration: underline;
+    height: 5%;
+    padding-top: 2%;
+    margin-bottom: 30px;
    
+}
+.label-documentacion {
+    margin-left: 5%;
+}
+.item-documentación{
+    margin-left: 5%;
+}
+
+.tituloProgramas{
+    color:whitesmoke;
+    width: 100%;
+    text-align: center;
+}
+
+.contenedorProgramas{
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 50px;
+    
+    
+}
+
+#tarjetaEliminarPrograma{
+    color: whitesmoke;
+    position: absolute;
+    top: 100px;
+}
+
+#btn-XeliminarPrograma{
+    font-size: 30px;
+    font-weight: 300px;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    margin-top: 30px;
+
+}
+
+#mapProgramasAdmin{
+    position: relative;
+    display: block;
+}
+
+#btn-XeliminarPrograma1{
+    font-size: 30px;
+    font-weight: 300px;
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    margin-top: 30px;
+    margin-left: 47%;
+}
+
+@media screen and (max-width: 390px) {
+    .mapProgramasAdmin {
+        margin-top: -100px;
+    }
+
+
+}
+
+
+

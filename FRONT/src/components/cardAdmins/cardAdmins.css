@@ -1,0 +1,62 @@
+.datosAdmin{
+    margin-top: 0px;
+    display: flex;
+    margin-left: 7%;
+    border: 1ps solid yellow;
+    flex-wrap: wrap;
+    
+}
+
+.datoAdmin{
+   width: 20%;
+   text-align: center;
+   height: 50px;
+   border: 1px solid whitesmoke;
+   padding-top: 15px;
+   word-break:break-all;
+
+   
+}
+
+#datoNivel{
+    width: 10%;
+}
+
+#datoAccion{
+    width: 5%;
+}
+
+#iconAdmin{
+    color: #f58505;
+
+}
+
+#iconAdmin:hover{
+    color: red;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1350px) {
+    .datoAdmin {
+      display: flex;
+      height: 60px;
+      flex-wrap: wrap;
+      
+      justify-content:center;
+      overflow-wrap: normal;
+    }
+  }
+
+  @media screen and (max-width: 695px) {
+    .datoAdmin {
+        height: 80px;
+
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .datoAdmin {
+        height: 100px;
+
+    }
+}

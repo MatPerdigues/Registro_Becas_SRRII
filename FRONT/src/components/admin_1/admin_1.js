@@ -1,10 +1,10 @@
 import './admin_1.css';
 import { Fragment } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSquarePlus,faTrashCan,faPenToSquare,faMagnifyingGlass,faXmark,faCheck,faUserPlus} from '@fortawesome/free-solid-svg-icons'
-
+import {faSquarePlus,faTrashCan,faPenToSquare,faMagnifyingGlass,faXmark,faCheck,faUserPlus,faUserMinus} from '@fortawesome/free-solid-svg-icons'
 import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
+import CardProgramas from '../cardProgramas/cardProgramas';
 
 
 
@@ -20,38 +20,98 @@ export default function Admin_1() {
     const[usuario,setUsuario]=useState('');
     const[mail,setMail]=useState('');
     const[img,setImg]=useState(null);
+    const[consulta, setConsulta]=useState('');
+    let[esconder,setEsconder]=useState(true);
     
     
     const handleChange=(event)=>{
         setImg(event.target.files[0]);
     }
 
+    const aplicarContorno = ()=>{
+        document.getElementById("contornoAdmin").style.display="flex";
+        document.getElementById('btn-admin').style.zIndex='-1'
+        document.getElementById('btn-admin1').style.zIndex='-1'
+        document.getElementById('btn-admin2').style.zIndex='-1'
+        document.getElementById('btn-admin3').style.zIndex='-1'
+        document.getElementById('btn-admin4').style.zIndex='-1'
+        document.getElementById('btn-admin5').style.zIndex='-1'
+    }
+
+    const quitarContorno=()=>{
+        document.getElementById("contornoAdmin").style.display="none";
+        document.getElementById('btn-admin').style.zIndex='0'
+        document.getElementById('btn-admin1').style.zIndex='0'
+        document.getElementById('btn-admin2').style.zIndex='0'
+        document.getElementById('btn-admin3').style.zIndex='0'
+        document.getElementById('btn-admin4').style.zIndex='0'
+        document.getElementById('btn-admin5').style.zIndex='0'
+    }
+
     
 
     const mostrar=event=>{
+
+        aplicarContorno();
+
+        
 
         console.log(event.currentTarget.id)
         if(event.currentTarget.id==="btn-admin"){
             document.getElementById("form-info").style.display="block";
             document.getElementById("form-admin").style.display="none";
+           
         }
 
         if(event.currentTarget.id==="btn-admin4"){
             document.getElementById("form-admin").style.display="block";
             document.getElementById("form-info").style.display="none";
+           
+         
         }
+
+        if(event.currentTarget.id==="btn-admin1"){
+            setEsconder(false);
+            console.log('deberia aparece la info')
+            document.getElementById("form-info").style.display="none";
+            document.getElementById("form-admin").style.display="none";
+            
+        }
+
+
     }
 
+    
 
     const ocultar=event=>{
+
+        quitarContorno();
+        
+       
         if(event.currentTarget.id==="btn-cerrar-info"){
+            document.getElementById("form-info").reset();
             document.getElementById("form-info").style.display="none";
         }
+        
         if(event.currentTarget.id==="btn-cerrar-admin"){
             document.getElementById("form-admin").style.display="none";
         }
-    }
 
+        if(event.currentTarget.id==="btn-XeliminarPrograma"){
+            document.getElementById("tarjetaEliminarPrograma").style.display="none";
+            setEsconder(true);
+            
+        }
+
+        if(event.currentTarget.id==="btn-XeliminarPrograma1"){
+            setEsconder(true);
+            
+            document.getElementById("form-info").style.display="none";
+            document.getElementById("form-admin").style.display="none";
+        }
+    }
+    
+    
 
 
     const agregarAdmin = async(event)=>{
@@ -118,12 +178,16 @@ export default function Admin_1() {
 
         alert(dato);
 
+        quitarContorno();
+
         
         document.getElementById("form-admin").reset();
 
         document.getElementById("form-admin").style.display="none";
 
     }
+
+
 
     const agregarPrograma = async(event)=>{
         event.preventDefault();
@@ -175,42 +239,75 @@ export default function Admin_1() {
         .then((data)=>{dato=data})
         console.log(dato);
         alert(dato);
+
+        quitarContorno();
+
         document.getElementById("form-info").reset();
         
         document.getElementById("form-info").style.display="none"
     
     } 
 
+    const visitarAdmins = ()=>{
+        window.location.href='../administradores'
+    }
+
+
+
+    const traerProgramasAdmin= async()=>{
+        
+        let programas= await fetch('http://localhost:3200/traerProgramasAdmin')
+        
+        .then((res)=>res.json())
+        .then(data=>{setConsulta(data)})
+        .catch(error => console.log("Se ha producido un error... " +error));
+            return programas;
+        }
+
+
+    useEffect(()=>{
+        traerProgramasAdmin();
+            
+    },[])
+
+    
 
 
 
     return(
 
         <Fragment>
-
-            <section id="sec-btn-admin">
-                <button type="button" id='btn-admin' class="btn-admin" onClick={mostrar}>
-                    <FontAwesomeIcon icon={faSquarePlus} id='icon-login'/>
-                    <span id='span-admin'>Nuevo Programa</span>
-                </button>
-                <button type="button" id='btn-admin1' class="btn-admin" >
-                    <FontAwesomeIcon icon={faTrashCan} id='icon-login'/>
-                    <span id='span-admin'>Borrar Programa</span>
-                </button>
-                <button type="button" id='btn-admin2' class="btn-admin">
-                    <FontAwesomeIcon icon={faPenToSquare} id='icon-login'/>
-                    <span id='span-admin3'>Editar Programa</span>
-                </button>
-                <button type="button" id='btn-admin3' class="btn-admin">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} id='icon-login'/>
-                    <span id='span-admin4'>Visualizar Registros</span>
-                </button>
-                <button type="button" id='btn-admin4' class="btn-admin"  onClick={mostrar}>
-                    <FontAwesomeIcon icon={faUserPlus} id='icon-login'/>
-                    <span id='span-admin4'>Generar Admin</span>
-                </button>
                 
-            </section>
+                <section class='contornoAdmin' id='contornoAdmin'></section>
+                     <section id="sec-btn-admin">
+                        <button type="button" id='btn-admin' class="btn-admin" onClick={mostrar}>
+                            <FontAwesomeIcon icon={faSquarePlus} id='icon-login'/>
+                            <span id='span-admin'>Nuevo Programa</span>
+                        </button>
+                        <button type="button" id='btn-admin1' class="btn-admin" onClick={mostrar}>
+                            <FontAwesomeIcon icon={faTrashCan} id='icon-login'/>
+                            <span id='span-admin'>Borrar Programa</span>
+                        </button>
+                        <button type="button" id='btn-admin2' class="btn-admin">
+                            <FontAwesomeIcon icon={faPenToSquare} id='icon-login'/>
+                            <span id='span-admin3'>Editar Programa</span>
+                        </button>
+                        <button type="button" id='btn-admin3' class="btn-admin">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} id='icon-login'/>
+                            <span id='span-admin4'>Visualizar Registros</span>
+                        </button>
+                        <button type="button" id='btn-admin4' class="btn-admin"  onClick={mostrar}>
+                            <FontAwesomeIcon icon={faUserPlus} id='icon-login'/>
+                            <span id='span-admin4'>Generar Admin</span>
+                        </button>
+                        <button type="button" id='btn-admin5' class="btn-admin"  onClick={visitarAdmins}>
+                            <FontAwesomeIcon icon={faUserMinus} id='icon-login'/>
+                            <span id='span-admin4'>Eliminar Admin</span>
+                        </button>
+                </section>
+
+                
+
 
             <form id='form-info'method='POST' class="form-programa" onSubmit={(event)=>{agregarPrograma(event)}}>
                 <section id="sec1-form-info">
@@ -319,7 +416,30 @@ export default function Admin_1() {
                 </div>
             </form>
 
-        </Fragment>
+            {esconder===false?
+            <section class='mapProgramasAdmin' id='mapProgramasAdmin'>    
+                <h4 class='tituloProgramas'>Seleccione el Programa que desea eliminar</h4>
+
+                <section class="contenedorProgramas">
+                    {consulta.map((dato)=>{                            
+                        return <CardProgramas key={dato.id} info={dato} idTarjetaEliminar={'tarjetaEliminarPrograma'} setEsconder={setEsconder}/>
+                    })}
+                 </section> 
+                 <button type='button' id='btn-XeliminarPrograma1' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
+            </section>
+
+            : ''}
+
+            <section class='tarjetaEliminar' id='tarjetaEliminarPrograma'>
+                <h5 class='h5Eliminar'>Esta acción eliminará también los archivos vinculados al Programa</h5>
+                <div id='div-btns'>
+                    <button type='button' id='btn-XeliminarPrograma' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
+                    <button type="submit" class='btnEliminar'><FontAwesomeIcon icon={faCheck}/></button>
+                </div>
+            </section>
+            
+        </Fragment> 
+
 
     )
 }
