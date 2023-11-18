@@ -1,10 +1,35 @@
 .contenedorTarjetas{
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     height: 100vh;
     padding-top: 50PX;
-    display: flex;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    overflow-y: scroll;
+    text-align: center;
+    row-gap: 20px;
     
     
+}
+
+@media screen and (max-width: 600px) {
+    .contenedorTarjetas {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+
+@media screen and (min-width: 600px) {
+    .contenedorTarjetas {
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 20px;
+    }
+}
+
+@media screen and (min-width: 900px) {
+    .contenedorTarjetas {
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 20px;
+    }
 }

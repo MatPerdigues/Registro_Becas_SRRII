@@ -22,6 +22,7 @@ export default function Admin_1() {
     const[img,setImg]=useState(null);
     const[consulta, setConsulta]=useState('');
     let[esconder,setEsconder]=useState(true);
+    let resEliminarPrograma = '';
     
     
     const handleChange=(event)=>{
@@ -94,6 +95,7 @@ export default function Admin_1() {
         }
         
         if(event.currentTarget.id==="btn-cerrar-admin"){
+            document.getElementById("form-admin").reset();
             document.getElementById("form-admin").style.display="none";
         }
 
@@ -240,11 +242,9 @@ export default function Admin_1() {
         console.log(dato);
         alert(dato);
 
-        quitarContorno();
+        window.location.reload();
 
-        document.getElementById("form-info").reset();
-        
-        document.getElementById("form-info").style.display="none"
+ 
     
     } 
 
@@ -270,6 +270,40 @@ export default function Admin_1() {
             
     },[])
 
+
+
+
+
+
+    const eliminarPrograma = async() => {
+        let programaId = localStorage.getItem('programaId');
+        let nombreCorto = localStorage.getItem('nombreCorto');
+       
+        const form = JSON.stringify({
+            "programaId":programaId,
+            "nombreCorto":nombreCorto
+        })
+
+        const response = await fetch('http://localhost:3200/eliminarPrograma',{
+            method:"DELETE",
+            body:form,
+            headers:{
+                'Content-Type':'application/json',
+                /* "Authorization": `Bearer ${localStorage.getItem("token")}` */
+              
+            }
+        })
+
+        .then((res)=>res.json())
+        .then((data)=>{resEliminarPrograma=data})
+
+        alert(resEliminarPrograma);
+
+        window.location.reload();
+        
+
+    }
+
     
 
 
@@ -277,6 +311,8 @@ export default function Admin_1() {
     return(
 
         <Fragment>
+
+       
                 
                 <section class='contornoAdmin' id='contornoAdmin'></section>
                      <section id="sec-btn-admin">
@@ -434,10 +470,11 @@ export default function Admin_1() {
                 <h5 class='h5Eliminar'>Esta acción eliminará también los archivos vinculados al Programa</h5>
                 <div id='div-btns'>
                     <button type='button' id='btn-XeliminarPrograma' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
-                    <button type="submit" class='btnEliminar'><FontAwesomeIcon icon={faCheck}/></button>
+                    <button type="submit" class='btnEliminar'><FontAwesomeIcon icon={faCheck} onClick={eliminarPrograma}/></button>
                 </div>
             </section>
-            
+        
+
         </Fragment> 
 
 

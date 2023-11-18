@@ -11,6 +11,10 @@ export default function CardProgramas({info,setEsconder,idTarjetaEliminar}) {
         setEsconder(true);
 
         document.getElementById(`${idTarjetaEliminar}`).style.display='block';
+
+        localStorage.setItem('programaId',info.id);
+
+        localStorage.setItem('nombreCorto',info.nombreCorto);
        
 
     }

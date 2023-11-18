@@ -199,6 +199,32 @@ const traerProgramasAdmin = (req,res)=>{
 }
 
 
+const eliminarPrograma = (req,res)=>{
+    const{programaId,nombreCorto}=req.body;
+    
+
+    let dir = `./archivos/${nombreCorto}`;
+
+    fs.rm(dir, { recursive: true, force: true }, err => {
+        if (err) {
+          throw err;
+        }
+        
+      });
+    
+    dbConnection.query(`DELETE FROM programas WHERE id="${programaId}"`,(error,data)=>{
+
+       
+
+         if(error){
+            res.send("Hubo un error" + error)
+        }else{
+            res.json(`Programa eliminado correctamente!`);
+        } 
+    })
+}
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin};
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma};
