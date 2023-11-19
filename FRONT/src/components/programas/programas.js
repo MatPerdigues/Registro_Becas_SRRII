@@ -16,6 +16,7 @@ export default function Programas() {
     
     let [consulta,setConsulta]=useState([]);
     
+    
     const traerProgramas= async()=>{
         
         let programas= await fetch('http://localhost:3200/traerProgramas')
@@ -31,6 +32,9 @@ export default function Programas() {
         traerProgramas();
             
     },[])
+
+
+
     
     
     return(
@@ -42,6 +46,7 @@ export default function Programas() {
                     return <Card key={dato.id} info={dato}/>
                 })}
              </section>
+
              
         </Fragment>
 

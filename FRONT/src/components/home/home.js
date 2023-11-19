@@ -32,8 +32,8 @@ export default function Home() {
 
         localStorage.setItem("facultad",dato.facultad)
         
-
         
+                
         if(dato.mensaje === "Usuario logeado correctamente!"){
             
             if(dato.nivel === '1' || dato.nivel === '0'){
@@ -45,11 +45,16 @@ export default function Home() {
                 window.location.href='../programas';
                 
             }
+
+            localStorage.setItem('gestor',dato.gestor);
+
+        } else{
+            alert(dato.mensaje);
         }
         
         document.getElementById("form-login").reset();
 
-        document.getElementById("form-login").style.display="none";
+        
 
     }
 

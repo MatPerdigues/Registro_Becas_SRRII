@@ -59,7 +59,9 @@ const login = (req,res)=>{
                                     mensaje:("Usuario logeado correctamente!"),
                                     claveToken:token,
                                     nivel:info.nivel,
-                                    facultad:info.unidad_academica	
+                                    facultad:info.unidad_academica,
+                                    gestor:info.usuario
+
                                 }) 
                             
 
@@ -143,10 +145,12 @@ const agregarPostulante=(req,res)=>{
     };
 
     
-    const{nombre,apellido,dni,email,facultad,programa,fecha_registro,year_registro}=req.body;
+    const{nombre,apellido,dni,email,facultad,programa,programaId,fecha_registro,year_registro,gestor}=req.body;
+
+  
     
     
-    dbConnection.query("INSERT INTO postulaciones (nombre,apellido,dni,email,facultad,programa,fecha_registro,año_registro,aval,avalORI,invitacion,cv) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",[nombre,apellido,dni,email,facultad,programa,fecha_registro,year_registro,aval,avalORI,invitacion,cv],(error,data)=>{
+    dbConnection.query("INSERT INTO postulaciones (nombre,apellido,dni,email,facultad,programa,programaId,fecha_registro,año_registro,gestor,aval,avalORI,invitacion,cv) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[nombre,apellido,dni,email,facultad,programa,programaId,fecha_registro,year_registro,gestor,aval,avalORI,invitacion,cv],(error,data)=>{
         if(error){
             res.json({
                 mensaje:'Hubo un error'+' '+error
@@ -226,5 +230,22 @@ const eliminarPrograma = (req,res)=>{
 
 
 
+const traerPostulantes = (req,res)=>{
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma};
+    const{programaId,facultad}=req.body;
+
+
+
+    dbConnection.query(`SELECT * FROM postulaciones WHERE facultad = "${facultad}" AND programaId = ${programaId}`,(error,data)=>{
+        if(error){
+            res.json("Hubo un error" + error);
+        }else{
+            res.json(data);
+        }
+    })
+}
+
+
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes};

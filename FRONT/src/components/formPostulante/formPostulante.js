@@ -62,7 +62,7 @@ export default function FormPostulante() {
         let fecha_registro = hoy+'-'+mesActual+'-'+yearActual;
 
 
-        
+     
         
         const formPostulante = new FormData();
             
@@ -73,6 +73,8 @@ export default function FormPostulante() {
             formPostulante.append("email",event.target[3].value);
             formPostulante.append("facultad",localStorage.getItem("facultad"));
             formPostulante.append("programa", localStorage.getItem("programa"));
+            formPostulante.append('programaId', localStorage.getItem('programaId'));
+            formPostulante.append('gestor', localStorage.getItem('gestor'));
             formPostulante.append("fecha_registro",fecha_registro);
             formPostulante.append("year_registro",yearActual); 
             formPostulante.append("nombreCorto",nombreCorto); 

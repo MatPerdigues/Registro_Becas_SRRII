@@ -5,6 +5,7 @@ import Admin_1 from '../admin_1/admin_1';
 import Programas from '../programas/programas';
 import FormPostulante from '../formPostulante/formPostulante';
 import Administradores from '../administradores/administradores';
+import Postulantes from '../postulantes/postulantes';
 
 
 
@@ -18,6 +19,7 @@ return(
           <Route path='/programas' element={<Programas/>}></Route>
           <Route path='/formPostulante' element={<FormPostulante/>}></Route>
           <Route path='/administradores' element={<Administradores/>}></Route>
+          <Route path='/postulantes' element={<Postulantes/>}></Route>
 
         </Routes>
     
