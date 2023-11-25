@@ -245,7 +245,17 @@ const traerPostulantes = (req,res)=>{
     })
 }
 
+const descargar = (req,res)=>{
+
+    const{carpeta,archivo}=req.body;
+
+    console.log(req.body);
+    console.log(archivo);
+    
+    res.download(`./archivos/${carpeta}/${archivo}`);
+}
 
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes};
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar};

@@ -26,7 +26,12 @@ export default function Card({info}) {
 
         const buscarPostulante = ()=>{
             localStorage.setItem('programaId',info.id);
+            localStorage.setItem("aval",info.aval);
+            localStorage.setItem("invitacion",info.invitacion);
+            localStorage.setItem("cv",info.cv);
+            localStorage.setItem("avalORI",info.avalORI);
             window.location.href='../postulantes';
+            localStorage.setItem("nombreCorto",info.nombreCorto);
         }
 
 
