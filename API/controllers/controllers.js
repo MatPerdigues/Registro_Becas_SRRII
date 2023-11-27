@@ -249,13 +249,61 @@ const descargar = (req,res)=>{
 
     const{carpeta,archivo}=req.body;
 
-    console.log(req.body);
-    console.log(archivo);
+
     
     res.download(`./archivos/${carpeta}/${archivo}`);
 }
 
 
+const borrarPostulante = (req,res)=>{
+    const{idPostulante,nombreCorto,elimAval,elimAvalOri,elimInvitacion,elimCv}=req.body;
+
+    let dir = `./archivos/${nombreCorto}/${elimAval}`;
+    let dir1 = `./archivos/${nombreCorto}/${elimAvalOri}`;
+    let dir2 = `./archivos/${nombreCorto}/${elimInvitacion}`;
+    let dir3 = `./archivos/${nombreCorto}/${elimCv}`;
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar};
+
+    fs.rm(dir, { recursive: true, force: true }, err => {
+        if (err) {
+          throw err;
+        }
+    })
+
+    fs.rm(dir1, { recursive: true, force: true }, err => {
+        if (err) {
+          throw err;
+        }
+    })
+
+    fs.rm(dir2, { recursive: true, force: true }, err => {
+        if (err) {
+          throw err;
+        }
+    })
+
+    fs.rm(dir3, { recursive: true, force: true }, err => {
+        if (err) {
+          throw err;
+        }
+    })
+
+
+
+    dbConnection.query(`DELETE FROM postulaciones WHERE id="${idPostulante}"`,(error,data)=>{
+
+       
+
+         if(error){
+            res.send("Hubo un error" + error)
+        }else{
+            res.json(`Registro eliminado correctamente`);
+        } 
+    })
+} 
+
+
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante};

@@ -1,20 +1,20 @@
-import { Fragment, useState } from 'react';
+import { Fragment} from 'react';
 import './cardPostulantes.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTrashCan} from '@fortawesome/free-solid-svg-icons'
-import Axios from "axios";
-import FileDownload from "js-file-download";
+import {faTrashCan,faDownload} from '@fortawesome/free-solid-svg-icons'
 
 
 
 
-export default function CardPostulantes({inData,aval,avalOri,invitacion,cv}) {
+export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actualizarnombre}) {
 
-    let[respuesta,setRespuesta]=useState('');
+ 
     
     const download =async (e)=>{
 
         e.preventDefault();
+
+
 
         let archivo = ''
         
@@ -36,9 +36,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv}) {
 
 
         localStorage.setItem('nomArchivo',archivo.split('/').pop())
-
-
-        
+   
 
 
         const form = JSON.stringify({
@@ -46,7 +44,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv}) {
             "archivo":localStorage.getItem('nomArchivo')
         })
 
-/*         const response = await fetch('http://localhost:3200/descargar') */
+
 
         const response = await fetch('http://localhost:3200/descargar',{
             method:"POST",
@@ -66,27 +64,24 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv}) {
             a.href = window.URL.createObjectURL(data);
             a.download = localStorage.getItem('nomArchivo');
             a.click();
-          });
-
-        console.log(respuesta);
+          })
         
+        }
 
-/* 
-        Axios({
-            url:"http://localhost:3200/descargar",
-            
-            method:'POST',
-            body: form,
-
-            responseType:"blob",
-            })
-
-        .then((res)=>{
-            
-            FileDownload(res.data,localStorage.getItem('nomArchivo'));
-        }) */
-    }
-    
+        
+        const elimPostulante = ()=>{
+            let nomPostulante = inData.nombre;
+            let apePostulante = inData.apellido;
+            localStorage.setItem('idPostulante', inData.id);
+            localStorage.setItem('nomPostulante', `${nomPostulante} ${apePostulante}`);
+            localStorage.setItem('elimAval',inData.aval.split('/').pop());
+            localStorage.setItem('elimAvalOri',inData.avalORI.split('/').pop());
+            localStorage.setItem('elimInvitacion',inData.invitacion.split('/').pop());
+            localStorage.setItem('elimCv',inData.cv.split('/').pop());
+            actualizarnombre();
+            document.getElementById('contornoAdmin').style.display='flex';
+            document.getElementById('tarjetaEliminarPost').style.display='block';
+          }
     
 
     return(
@@ -100,20 +95,20 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv}) {
                     <h6 class='datoPostulante'>{inData.email}</h6>
                     <h6 class='datoPostulante'>{inData.gestor}</h6>
                     {aval==='true'?
-                    <h6 class='datoPostulante' id='descargaAval' onClick={(e)=>download(e)}>Descargar</h6>
+                    <h6 class='datoPostulante' id='descargaAval' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAval'/></h6>
                     :''}
                     {avalOri==='true'?
-                    <h6 class='datoPostulante' id='descargaAvalOri' onClick={(e)=>download(e)}>Descargar</h6>
+                    <h6 class='datoPostulante' id='descargaAvalOri' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></h6>
                     :''}
                     {invitacion==='true'?
                     
-                    <h6 class='datoPostulante' id='descargaInvitacion' onClick={(e)=>download(e)}>Descargar</h6>
+                    <h6 class='datoPostulante' id='descargaInvitacion' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaInvitacion'/></h6>
                     
                     :''}
                     {cv==='true'?
-                    <h6 class='datoPostulante' id='descargaCv' onClick={(e)=>download(e)}>Descargar</h6>
+                    <h6 class='datoPostulante' id='descargaCv' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaCv'/></h6>
                     :''}
-                    <span class='datoPsotulante' id='iconPostulane'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' /></span>
+                    <span class='datoPsotulante' id='iconPostulane'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' onClick={elimPostulante}/></span>
                 </section>
              
             </section>

@@ -2,6 +2,19 @@ main{
     color: whitesmoke;
 }
 
+
+.contornoAdmin{
+    display: none;
+    z-index: 1;
+}
+
+#tarjetaEliminarPost{
+    display: none;
+    position: absolute;
+    top: 0px;
+}
+
+
 .gridPostulantes{
     display: grid;
     grid-template-columns: 11% 11% 11% 11% 11% 11% 11% 11% 11% 5%;
@@ -12,24 +25,84 @@ main{
     font-style: italic;
     margin-top: 80px;
     word-break:break-all;
-
-    
-    
-    
+    z-index: -1;
 }
 
 .catPostulantes{
     border: 1px solid whitesmoke;
-    height: 50px;
+    height: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(50px) grayscale(30%);
-    
+  
     
 }
 
 #iconPost{
     border:none;
     backdrop-filter: blur(0px) grayscale(0%);
+   
+}
+
+#btnXPostulantes{
+
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    font-size: 30px;
+    margin-top: 30px;
+}
+
+
+
+@media screen and (max-width: 620px) {
+    .catPostulantes {
+        height: 120px;
+        
+     
+
+    }
+    .gridPostulantes{
+        width: 100%;
+        margin-top: 50px;
+        min-width: 800px;
+    }
+
+    #tarjetaEliminarPost{
+        width: 80%;
+        right: 40px;
+       
+    }
+    
+}
+
+
+@media screen and (min-width: 620px) and (max-width: 820px) {
+    .catPostulantes {
+        height: 150px;
+
+    }
+    .gridPostulantes{
+        width: 100%;
+        margin-top: 50px;
+    }
+
+    #tarjetaEliminarPost{
+        width: 60%;
+        right: 120px;
+    }
+
+}
+
+@media screen and (min-width: 820px) and (max-width: 1200px) {
+    .catPostulantes {
+        height: 100px;
+
+    }
+    .gridPostulantes{
+        width: 100%;
+        margin-top: 50px;
+        
+    }
 }

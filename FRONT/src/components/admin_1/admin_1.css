@@ -7,8 +7,6 @@
     backdrop-filter: blur(8px) grayscale(50%);
     position: fixed;
     display: none;
-    
-
 }
 
 #sec-btn-admin{
