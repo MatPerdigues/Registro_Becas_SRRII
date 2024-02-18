@@ -232,17 +232,36 @@ const eliminarPrograma = (req,res)=>{
 
 const traerPostulantes = (req,res)=>{
 
-    const{programaId,facultad}=req.body;
+    const{programaId,facultad,adminNivel}=req.body;
+
+    if(adminNivel==0 || adminNivel ==1){
+
+
+        dbConnection.query(`SELECT * FROM postulaciones WHERE programaId = ${programaId}`,(error,data)=>{
+            if(error){
+                res.json("Hubo un error" + error);
+            }else{
+                res.json(data);
+            }
+        })
+        
+
+    } else {
+
+        
+
+        dbConnection.query(`SELECT * FROM postulaciones WHERE facultad = "${facultad}" AND programaId = ${programaId}`,(error,data)=>{
+            if(error){
+                res.json("Hubo un error" + error);
+            }else{
+                res.json(data);
+            }
+        })
+    }
 
 
 
-    dbConnection.query(`SELECT * FROM postulaciones WHERE facultad = "${facultad}" AND programaId = ${programaId}`,(error,data)=>{
-        if(error){
-            res.json("Hubo un error" + error);
-        }else{
-            res.json(data);
-        }
-    })
+
 }
 
 const descargar = (req,res)=>{

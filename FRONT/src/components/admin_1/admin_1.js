@@ -31,9 +31,10 @@ export default function Admin_1() {
 
     const aplicarContorno = ()=>{
         document.getElementById("contornoAdmin").style.display="flex";
+        document.getElementById("contornoAdmin").style.zIndex="0";
         document.getElementById('btn-admin').style.zIndex='-1'
         document.getElementById('btn-admin1').style.zIndex='-1'
-        document.getElementById('btn-admin2').style.zIndex='-1'
+        
         document.getElementById('btn-admin3').style.zIndex='-1'
         document.getElementById('btn-admin4').style.zIndex='-1'
         document.getElementById('btn-admin5').style.zIndex='-1'
@@ -43,7 +44,7 @@ export default function Admin_1() {
         document.getElementById("contornoAdmin").style.display="none";
         document.getElementById('btn-admin').style.zIndex='0'
         document.getElementById('btn-admin1').style.zIndex='0'
-        document.getElementById('btn-admin2').style.zIndex='0'
+    
         document.getElementById('btn-admin3').style.zIndex='0'
         document.getElementById('btn-admin4').style.zIndex='0'
         document.getElementById('btn-admin5').style.zIndex='0'
@@ -252,6 +253,10 @@ export default function Admin_1() {
         window.location.href='../administradores'
     }
 
+    const verRegistros = ()=>{
+        window.location.href='../programas'
+    }
+
 
 
     const traerProgramasAdmin= async()=>{
@@ -324,11 +329,8 @@ export default function Admin_1() {
                             <FontAwesomeIcon icon={faTrashCan} id='icon-login'/>
                             <span id='span-admin'>Borrar Programa</span>
                         </button>
-                        <button type="button" id='btn-admin2' class="btn-admin">
-                            <FontAwesomeIcon icon={faPenToSquare} id='icon-login'/>
-                            <span id='span-admin3'>Editar Programa</span>
-                        </button>
-                        <button type="button" id='btn-admin3' class="btn-admin">
+
+                        <button type="button" id='btn-admin3' class="btn-admin" onClick={verRegistros}>
                             <FontAwesomeIcon icon={faMagnifyingGlass} id='icon-login'/>
                             <span id='span-admin4'>Visualizar Registros</span>
                         </button>

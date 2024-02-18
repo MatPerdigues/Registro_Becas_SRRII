@@ -7,6 +7,7 @@
     backdrop-filter: blur(8px) grayscale(50%);
     position: fixed;
     display: none;
+   
 }
 
 #sec-btn-admin{
@@ -270,7 +271,7 @@
 #mapProgramasAdmin{
     position: relative;
     display: block;
-    margin-top: -100px;
+    margin-top: 0px;
 }
 
 #btn-XeliminarPrograma1{

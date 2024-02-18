@@ -47,6 +47,7 @@ export default function Home() {
             }
 
             localStorage.setItem('gestor',dato.gestor);
+            localStorage.setItem('adminNivel',dato.nivel);
 
         } else{
             alert(dato.mensaje);

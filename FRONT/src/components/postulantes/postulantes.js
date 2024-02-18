@@ -24,11 +24,13 @@ export default function Postulantes() {
     const traerPostulantes= async()=>{
         
         let programaId = localStorage.getItem('programaId');
-        let facultad = localStorage.getItem('facultad')
+        let facultad = localStorage.getItem('facultad');
+        let adminNivel = localStorage.getItem('adminNivel')
         
         const form = JSON.stringify({
             "programaId":programaId,
-            "facultad":facultad
+            "facultad":facultad,
+            "adminNivel":adminNivel
         })
 
         const response = await fetch('http://localhost:3200/traerPostulantes',{
