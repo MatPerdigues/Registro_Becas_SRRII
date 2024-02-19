@@ -23,6 +23,7 @@ export default function Admin_1() {
     const[consulta, setConsulta]=useState('');
     let[esconder,setEsconder]=useState(true);
     let resEliminarPrograma = '';
+    let adminNivel = localStorage.getItem("adminNivel");
     
     
     const handleChange=(event)=>{
@@ -434,8 +435,11 @@ export default function Admin_1() {
                         <span class="input-group-text" ></span>
                         <select class="form-select" required>
                             <option selected value=''>Nivel de administrador...</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
+
+                            {adminNivel == 0?
+                            <option value="1">1 (Admin Rectorado)</option>
+                            :""}
+                            <option value="2">2 (Admin Facultad)</option>
                         </select>
                     </div>
                     <div class="input-group mb-3" id='email'>

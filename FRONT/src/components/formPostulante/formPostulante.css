@@ -11,6 +11,7 @@
 .h4Postulante{
     margin-bottom: 20px;
     margin-top: 0px;
+    text-align: center;
 }
 
 .btns-sumPostulante{
@@ -83,4 +84,5 @@
     padding-top: 50px;
     display: flex;
     justify-content: center;
+    text-align: center;
 }

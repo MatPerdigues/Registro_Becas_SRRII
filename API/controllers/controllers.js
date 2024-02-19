@@ -167,13 +167,30 @@ const agregarPostulante=(req,res)=>{
 
 
 const traerAdmins = (req,res)=>{
-    dbConnection.query('SELECT * FROM admins',(error,data)=>{
-        if(error){
-            res.send(error);
-        }else{
-            res.send(data);
-        }
-    })
+
+    const{adminNivel}=req.body;
+  
+
+    if(adminNivel == 0){
+
+        dbConnection.query('SELECT * FROM admins',(error,data)=>{
+            if(error){
+                res.send(error);
+            }else{
+                res.send(data);
+            }
+        })
+    } else {
+
+        dbConnection.query('SELECT * FROM admins WHERE nivel=2',(error,data)=>{
+            if(error){
+                res.send(error);
+            }else{
+                res.send(data);
+            }
+        })
+
+    }
 }
 
 

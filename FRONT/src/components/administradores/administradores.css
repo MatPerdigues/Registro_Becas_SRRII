@@ -88,11 +88,15 @@ main{
     margin-top: 30px;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .catAdmins{
         height: 80px;
         padding-top: 0px;
-        
+    }
 
+    .tarjetaEliminar{
+       width: 80%;
+       left: -25%;
+    
     }
 }

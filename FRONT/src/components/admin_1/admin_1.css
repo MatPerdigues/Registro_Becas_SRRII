@@ -80,7 +80,7 @@
 }
 
 .form-programa{
-    width: 24%;
+    width: 30%;
     height: 550px;
     margin: auto;
     background-color: transparent;
@@ -197,7 +197,7 @@
 
 
 .form-admin{
-    width: 24%;
+    width: 30%;
     height: 480px;
     margin: auto;
     background-color: transparent;
@@ -284,13 +284,44 @@
     margin-left: 47%;
 }
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 600px) {
     .mapProgramasAdmin {
         margin-top: -100px;
     }
 
+    .form-programa, .form-admin{
+        width: 80%;
+    }
+
+    #sec-btn-admin{
+        display:flex;
+        flex-wrap: wrap;
+        width: 80%;
+        text-align: center;
+        margin-top: 60px;
+        
+        
+    }
+
+    .btn-admin{
+        margin: 20px auto;
+        z-index: 0;
+    }
+
+    #span-admin{
+        z-index: 0;
+    }
+
 
 }
+
+@media screen and (min-width: 600px) and (max-width:1300px) {
+    .form-programa, .form-admin{
+        width:60%;
+    }
+}
+
+
 
 
 

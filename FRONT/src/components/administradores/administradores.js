@@ -24,8 +24,23 @@ export default function Administradores() {
     
     
     const traerAdmins= async()=>{
+
+        let adminNivel = localStorage.getItem('adminNivel')
         
-        let programas= await fetch('http://localhost:3200/traerAdmins')
+        const form = JSON.stringify({
+            "adminNivel":adminNivel
+        })
+        
+        let programas= await fetch('http://localhost:3200/traerAdmins',{
+            method:"POST",
+            body:form,
+            headers:{
+                'Content-Type':'application/json',
+                /* "Authorization": `Bearer ${localStorage.getItem("token")}` */
+            }
+        }
+        
+        )
         
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})

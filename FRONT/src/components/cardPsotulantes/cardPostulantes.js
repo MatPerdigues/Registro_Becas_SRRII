@@ -8,7 +8,7 @@ import {faTrashCan,faDownload} from '@fortawesome/free-solid-svg-icons'
 
 export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actualizarnombre}) {
 
- 
+    let adminNivel = localStorage.getItem("adminNivel");
     
     const download =async (e)=>{
 
@@ -108,7 +108,11 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
                     {cv==='true'?
                     <h6 class='datoPostulante' id='descargaCv' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaCv'/></h6>
                     :''}
+
+                    {adminNivel!=1?
                     <span class='datoPsotulante' id='iconPostulane'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' onClick={elimPostulante}/></span>
+                    :""}
+
                 </section>
              
             </section>
