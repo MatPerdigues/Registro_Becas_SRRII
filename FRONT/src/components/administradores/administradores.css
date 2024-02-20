@@ -19,6 +19,31 @@ main{
    
 }
 
+#tablaCardAdmin{
+    
+    margin-top: 80px;
+    text-align: center;
+    height: 60px;
+    font-size: 18px;
+    font-style: italic;
+    backdrop-filter: blur(50px) grayscale(30%);
+}
+
+.thTablaAdmin{
+    border: 1px solid whitesmoke;
+    width: 20%;
+}
+
+#thNivel{
+    width: 10%;
+}
+
+#thAccion{
+    width: 5%;
+    border: none;
+}
+
+
 .tituloAdmins{
     margin-top: 50px;
     text-align: center;
@@ -39,7 +64,7 @@ main{
 }
 
 .mapAdmins{
-    margin-top: 30px;
+    margin-top: 0px;
     
 }
 

@@ -26,14 +26,25 @@ export default function CardAdmins({info,idContorno,idTarjetaEliminar, actDatos}
     return(
         
         <Fragment>
-            <section class='datosAdmin'>
+{/*             <section class='datosAdmin'>
                 <h6 class='datoAdmin'>{info.nombre} {info.apellido}</h6>
                 <h6 class='datoAdmin'>{info.unidad_academica}</h6>
                 <h6 class='datoAdmin'>{`${info.mail}`}</h6>
                 <h6 class='datoAdmin'>{info.usuario}</h6>
                 <h6 class='datoAdmin' id='datoNivel'>{info.nivel}</h6>
                 <span class='datoAdmin' id='datoAccion'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' onClick={storage} /></span>
-            </section>
+            </section> */}
+
+            <table class='tablaAdmin'>
+                <tr class='trAdmin'>
+                    <td class='datoAdmin'>{info.nombre} {info.apellido}</td>
+                    <td class='datoAdmin'>{info.unidad_academica}</td>
+                    <td class='datoAdmin'>{`${info.mail}`}</td>
+                    <td class='datoAdmin'>{info.usuario}</td>
+                    <td class='datoAdmin' id='datoNivel'>{info.nivel}</td>
+                    <td class='datoAdmin' id='datoAccion'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' onClick={storage} /></td>
+                </tr>
+            </table>
 
 
         </Fragment>
