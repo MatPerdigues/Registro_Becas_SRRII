@@ -27,20 +27,25 @@ main{
     font-size: 18px;
     font-style: italic;
     backdrop-filter: blur(50px) grayscale(30%);
+    word-break:break-all;
+    
 }
 
 .thTablaAdmin{
     border: 1px solid whitesmoke;
     width: 20%;
+    min-width: 80px;
 }
 
 #thNivel{
     width: 10%;
+    min-width: 50px;
 }
 
 #thAccion{
     width: 5%;
     border: none;
+    min-width: 30px;
 }
 
 
@@ -114,11 +119,7 @@ main{
 }
 
 @media screen and (max-width: 600px) {
-    .catAdmins{
-        height: 80px;
-        padding-top: 0px;
-    }
-
+    
     .tarjetaEliminar{
        width: 80%;
        left: -25%;

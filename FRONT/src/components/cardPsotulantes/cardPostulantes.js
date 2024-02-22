@@ -88,7 +88,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
         <Fragment>
 
             <section class='contenedorCardPostulantes'>
-                <section class='gridCardPostulantes'>
+                {/* <section class='gridCardPostulantes'>
                     <h6 class='datoPostulante'>{inData.nombre+' '+inData.apellido}</h6>
                     <h6 class='datoPostulante'>{inData.dni}</h6>
                     <h6 class='datoPostulante'>{inData.facultad}</h6>
@@ -113,7 +113,40 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
                     <span class='datoPsotulante' id='iconPostulane'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' onClick={elimPostulante}/></span>
                     :""}
 
-                </section>
+                </section> */}
+
+                <table class='tablaAdmin' id='tablaPostulantes'>
+                    <tr class='trAdmin'>
+                        <td class='datoAdmin' id='datoPostulante'>{inData.nombre+' '+inData.apellido}</td>
+                        <td class='datoAdmin' id='datoPostulante'>{inData.dni}</td>
+                        <td class='datoAdmin' id='datoPostulante'>{inData.facultad}</td>
+                        <td class='datoAdmin' id='datoPostulante'>{inData.email}</td>
+                        <td class='datoAdmin' id='datoPostulante'>{inData.gestor}</td>
+
+                        {aval==='true'?
+                        <td class='datoAdmin' id='descargaAval' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></td>
+                        :''}
+
+                        {avalOri==='true'?
+                        <td class='datoAdmin' id='descargaAvalOri' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></td>
+                        :''}
+
+                        {invitacion==='true'?
+                        <td class='datoAdmin' id='descargaInvitacion' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaInvitacion'/></td>
+                        :''}
+
+                        {cv==='true'?
+                        <td class='datoAdmin' id='descargaCv' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaCv'/></td>
+                        :''}
+
+                        
+                        {adminNivel!=1?
+                        <td class='datoAdmin' id='iconPostulane'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' onClick={elimPostulante}/></td>
+                        :''}
+
+
+                    </tr>
+                </table>
              
             </section>
         </Fragment>

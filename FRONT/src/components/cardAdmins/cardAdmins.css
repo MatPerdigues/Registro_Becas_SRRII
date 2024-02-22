@@ -28,16 +28,19 @@
    word-break:break-all;
    align-items: center;
    vertical-align: middle;
+   min-width: 80px;
 
    
 }
 
 #datoNivel{
     width: 10%;
+    min-width: 50px;
 }
 
 #datoAccion{
     width: 5%;
+    min-width: 30px;
 }
 
 #iconAdmin{
@@ -50,27 +53,5 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 1350px) {
-    .datoAdmin {
-      display: flex;
-      height: 60px;
-      flex-wrap: wrap;
-      
-      justify-content:center;
-      overflow-wrap: normal;
-    }
-  }
 
-  @media screen and (max-width: 695px) {
-    .datoAdmin {
-        height: 80px;
 
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .datoAdmin {
-        height: 100px;
-
-    }
-}

@@ -17,6 +17,8 @@ export default function Postulantes() {
     let[nompostulante,setNompostulante] = useState(''); 
     let[idpostulante,setIdpostulante] = useState(''); 
     let resBorrarPostulante = '';
+    let programa = localStorage.getItem('programa');
+    let adminNivel = localStorage.getItem('adminNivel');
   
 
 
@@ -112,27 +114,39 @@ export default function Postulantes() {
 
             <section class='contornoAdmin' id='contornoAdmin'></section>
 
-                <section class='gridPostulantes'> 
-                    <div class='catPostulantes' id="nombrePostulante">Nombre y apellido</div>
-                    <div class='catPostulantes' id="dniPostulante">DNI</div>
-                    <div class='catPostulantes' id="facultadPostulante">Unidad Académica</div>  
-                    <div class='catPostulantes' id="emilPostulante">Correo electrónico</div>
-                    <div class='catPostulantes' id="gestorPostulante">Registrado por</div>
-                    {aval==='true'?
-                    <div class='catPostulantes' id="avalPostuñanye">Aval</div>
-                    :''}
-                    {avalOri==='true'?
-                    <div class='catPostulantes' id="avalOri">Aval ORI</div>
-                    :''}
-                    {invitacion==='true'?
-                    <div class='catPostulantes' id="invitacionPostulante">Invitación</div>
-                    :''}
-                    {cv==='true'?
-                    <div class='catPostulantes' id="cvPostulante">CV</div>
-                    :''}
+                <h4 class='tituloAdmins'>{programa}</h4>
 
-                    <div class='catPostulantes' id="iconPost"></div>
-                </section>
+                <table class='tablaAdmin' id='tablaPostulantes1'>
+                        <tr>
+                            <th class='datoAdmin' id='datoPostulante'>Nombre y apellido</th>
+                            <th class='datoAdmin' id='datoPostulante'>DNI</th>
+                            <th class='datoAdmin' id='datoPostulante'>Unidad Académica</th>
+                            <th class='datoAdmin' id='datoPostulante'>Coreo electrónico</th>
+                            <th class='datoAdmin' id='datoPostulante'>Registrado por</th>
+
+                            {aval==='true'?
+                            <th class='datoAdmin' id='descargaAval'>Aval</th>
+                            :''}
+                            {avalOri==='true'?
+                            
+                            <th class='datoAdmin' id='descargaAvalOri'>Aval ORI</th>
+                            :''}
+                            {invitacion==='true'?
+                            
+                            <th class='datoAdmin' id='descargaInvitacion'>Invitación</th>
+                            :''}
+                            {cv==='true'?
+                            
+                            <th class='datoAdmin' id='descargaCv'>CV</th>
+                            :''}
+
+                            {adminNivel != 1?
+                            <th class='datoAdmin' id='iconPostulantes'></th>
+                            :''}
+                            
+                        </tr>
+                    </table>
+
 
                <section class="contenedorPostulantes">
                     {respuesta.map((datoMap)=>{                            

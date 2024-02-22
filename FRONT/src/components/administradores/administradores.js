@@ -110,13 +110,7 @@ export default function Administradores() {
 
                     <h4 class='tituloAdmins'>Seleccione el/la Administrador/a que desea eliminar</h4>
                     
-{/*                     <section class='subtituloAdmins'>
-                        <div class='catAdmins'><h5>Nombre y apellido</h5></div>
-                        <div class='catAdmins'><h5>Unidad Académica</h5></div>
-                        <div class='catAdmins'><h5>Correo electrónico</h5></div>
-                        <div class='catAdmins'><h5>Usuario</h5></div>
-                        <div class='catAdmins' id='nivelAdmin'><h5>Nivel</h5></div>
-                    </section> */}
+
 
                     <table class='tablaAdmin' id='tablaCardAdmin'>
                         <tr>

@@ -26,6 +26,7 @@ export default function Card({info}) {
     }
 
         const buscarPostulante = ()=>{
+            localStorage.setItem("programa",info.nombre);
             localStorage.setItem('programaId',info.id);
             localStorage.setItem("aval",info.aval);
             localStorage.setItem("invitacion",info.invitacion);
@@ -49,7 +50,7 @@ export default function Card({info}) {
                      <h6>Vencimiento SRRII: {info.vencimientoPublic}</h6>
                  </div>
                  <div class="imgPrograma">
-                     <img src={info.imagen} alt='imagen Programa'/>
+                     <img id='imagenPrograma' src={info.imagen} alt='imagen Programa'/>
                  </div>
                  <div class="opcionesPrograma">
 
