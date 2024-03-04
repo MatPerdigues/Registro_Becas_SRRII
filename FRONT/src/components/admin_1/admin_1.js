@@ -5,12 +5,15 @@ import {faSquarePlus,faTrashCan,faPenToSquare,faMagnifyingGlass,faXmark,faCheck,
 import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
 import CardProgramas from '../cardProgramas/cardProgramas';
+import Llave from '../llave/llave';
 
 
 
 
 
 export default function Admin_1() {
+
+
 
     let dato="";
     let baseClave='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.?,;-_¡!¿*%&$/()[]{}|@><';
@@ -35,17 +38,17 @@ export default function Admin_1() {
         document.getElementById("contornoAdmin").style.zIndex="0";
         document.getElementById('btn-admin').style.zIndex='-1'
         document.getElementById('btn-admin1').style.zIndex='-1'
-        
         document.getElementById('btn-admin3').style.zIndex='-1'
         document.getElementById('btn-admin4').style.zIndex='-1'
         document.getElementById('btn-admin5').style.zIndex='-1'
+        document.getElementById('btnLlave').style.zIndex='-1'
     }
 
     const quitarContorno=()=>{
         document.getElementById("contornoAdmin").style.display="none";
         document.getElementById('btn-admin').style.zIndex='0'
         document.getElementById('btn-admin1').style.zIndex='0'
-    
+        document.getElementById('btnLlave').style.zIndex='0'
         document.getElementById('btn-admin3').style.zIndex='0'
         document.getElementById('btn-admin4').style.zIndex='0'
         document.getElementById('btn-admin5').style.zIndex='0'
@@ -81,9 +84,13 @@ export default function Admin_1() {
             
         }
 
+        if(event.currentTarget.id==="btnLlave"){
+            
+            document.getElementById("tarjetaPass").style.display="block";
+        }
 
     }
-
+ 
     
 
     const ocultar=event=>{
@@ -112,6 +119,11 @@ export default function Admin_1() {
             
             document.getElementById("form-info").style.display="none";
             document.getElementById("form-admin").style.display="none";
+        }
+
+        if(event.currentTarget.id==="btnXpass"){
+            
+            document.getElementById("tarjetaPass").style.display="none";
         }
     }
     
@@ -159,6 +171,23 @@ export default function Admin_1() {
         .then((res)=>res.json())
         .then((data)=>{dato=data})
 
+
+        if(dato.message==='jwt malformed'){
+
+            alert('La sesión ha sido cerrada');
+            window.location.href='../'
+        }else{
+
+            if(dato==='Sesión expirada'){
+                alert(dato);
+                window.location.href='../'
+            } else{
+                alert(dato);
+                window.location.reload();
+            }
+        }
+        
+        
         const templateParams={
             nombre:nombre,
             usuario:usuario,
@@ -180,7 +209,7 @@ export default function Admin_1() {
         });
 
 
-        alert(dato);
+        //alert(dato);
 
         quitarContorno();
 
@@ -235,18 +264,28 @@ export default function Admin_1() {
         method:'POST',
         body: form,
         headers:{
-           // "Authorization": `Bearer ${localStorage.getItem("token")}`
+           "Authorization": `Bearer ${localStorage.getItem("token")}`
         }
                      
         })
         .then((res)=>res.json())
         .then((data)=>{dato=data})
-        console.log(dato);
-        alert(dato);
 
-        window.location.reload();
+        if(dato.message==='jwt malformed'){
 
- 
+            alert('La sesión ha sido cerrada');
+            window.location.href='../'
+        }else{
+
+            if(dato==='Sesión expirada'){
+                alert(dato);
+                window.location.href='../'
+            } else{
+                alert(dato);
+                window.location.reload();
+            }
+        }
+
     
     } 
 
@@ -295,7 +334,7 @@ export default function Admin_1() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                /* "Authorization": `Bearer ${localStorage.getItem("token")}` */
+                "Authorization": `Bearer ${localStorage.getItem("token")}` 
               
             }
         })
@@ -303,11 +342,28 @@ export default function Admin_1() {
         .then((res)=>res.json())
         .then((data)=>{resEliminarPrograma=data})
 
-        alert(resEliminarPrograma);
 
-        window.location.reload();
+        if(resEliminarPrograma.message==='jwt malformed'){
+
+            alert('La sesión ha sido cerrada');
+            window.location.href='../'
+        }else{
+
+            if(resEliminarPrograma==='Sesión expirada'){
+                alert(resEliminarPrograma);
+                window.location.href='../'
+            } else{
+                alert(resEliminarPrograma);
+                window.location.reload();
+            }
+        }
+
         
 
+    }
+
+    const redirigirPass = ()=>{
+        window.location.href='../pass'
     }
 
     
@@ -321,10 +377,12 @@ export default function Admin_1() {
        
                 
                 <section class='contornoAdmin' id='contornoAdmin'></section>
+
+                    <Llave aplicarContorno={mostrar}/>
                      <section id="sec-btn-admin">
                         <button type="button" id='btn-admin' class="btn-admin" onClick={mostrar}>
                             <FontAwesomeIcon icon={faSquarePlus} id='icon-login'/>
-                            <span id='span-admin'>Nuevo Programa</span>
+                            <span id='span-admin'>Crear Programa</span>
                         </button>
                         <button type="button" id='btn-admin1' class="btn-admin" onClick={mostrar}>
                             <FontAwesomeIcon icon={faTrashCan} id='icon-login'/>
@@ -477,6 +535,14 @@ export default function Admin_1() {
                 <div id='div-btns'>
                     <button type='button' id='btn-XeliminarPrograma' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
                     <button type="submit" class='btnEliminar'><FontAwesomeIcon icon={faCheck} onClick={eliminarPrograma}/></button>
+                </div>
+            </section>
+
+            <section class='tarjetaEliminar' id='tarjetaPass'>
+                <h5 class='h5Eliminar'>¿Desea actualizar su contraseña?</h5>
+                <div id='div-btns'>
+                    <button type='button' id='btnXpass' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
+                    <button type="submit" class='btnEliminar' onClick={redirigirPass}><FontAwesomeIcon icon={faCheck} /></button>
                 </div>
             </section>
         

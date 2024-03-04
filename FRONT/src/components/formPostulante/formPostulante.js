@@ -90,7 +90,7 @@ export default function FormPostulante() {
         method:"POST",
         body:formPostulante,
         headers:{
-           // "Authorization": `Bearer ${localStorage.getItem("token")}`,
+           "Authorization": `Bearer ${localStorage.getItem("token")}`,
             
            
         }})
@@ -99,12 +99,36 @@ export default function FormPostulante() {
         
         .then((data)=>{respuesta=data});
 
-        console.log(respuesta)
+        console.log(respuesta);
+
+        
+        if(respuesta.message==='jwt malformed'){
+
+            alert('La sesión ha sido cerrada');
+            window.location.href='../'
+        }else{
+
+            if(respuesta==='Sesión expirada'){
+                alert(respuesta);
+                window.location.href='../'
+            } else{
+                alert(respuesta.mensaje);
+                document.getElementById("formSumarPostulante").reset();
+
+                window.location.href='../programas';
+            }
+        }
+
+
+
+
+
+/*         console.log(respuesta)
         alert(respuesta.mensaje);
 
         document.getElementById("formSumarPostulante").reset();
 
-        window.location.href='../programas';
+        window.location.href='../programas'; */
         
     }
         

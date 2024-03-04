@@ -49,8 +49,9 @@ const login = (req,res)=>{
 
                     if(passOk){
 
-                        jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
-                        
+                        //jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
+                          jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{  
+                           
                         
                             if(error){
                                 res.send(error)
@@ -337,9 +338,76 @@ const borrarPostulante = (req,res)=>{
             res.json(`Registro eliminado correctamente`);
         } 
     })
-} 
+}
+
+const nuevaPass = (req,res)=>{
+    const{usuario,password,nuevaPass}=req.body;
+    
+    dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
+        if(error){
+            res.send("Error en el servidor " + error)
+            }else{
+                if(data.length==0){
+                    res.json({
+                        mensaje:"Usuario no registrado"
+                    });
+                }else{
+                    let info=data[0];
+                    const passOk=await bcrypt.compare(password,info.password);
+
+                    if(passOk){
+
+
+                        const passEncript = await bcrypt.hash(nuevaPass,10);
+                        
+                        dbConnection.query(
+                            `UPDATE admins SET password ="${passEncript}" WHERE usuario=?`,[usuario],async(error,data)=>{
+                            if(error){
+                                res.json("Error al actualizar la contraseña" + error)
+                            
+                            }else{
+                                
+                                res.json({
+                                            mensaje:"Contraseña actualizada correctamente"
+                                        });
+                                    }
+                                    
+                                })
+                    
+                    }else{
+                        res.json({
+                            mensaje:"Contraseña incorrecta"
+                })
+            }
+        }
+    }
+    })}
+
+    const verificacionUsuario=(req,res,next)=>{
+
+        const authToken=req.headers.authorization;
+
+ 
+        
+        const token=authToken.split(" ").pop(); //debido a que al mostrar por consola el token se entrega con "bearer" al principio, se utiliza el split y el pop para quedarnos solo con la última parte (token)
+        //console.log(authToken);
+  
+         
+        jwt.verify(token,PASS_SEGURA,(error,data)=>{ //process.env.PASS_SEGURA
+            if(error){
+                if(error.name=="TokenExpiredError"){return res.json("Sesión expirada")}
+                /* res.send(error); */
+                else{res.json(error)}
+            }else{
+                
+                next();
+            }
+        })
+    
+    }
 
 
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante};
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario};

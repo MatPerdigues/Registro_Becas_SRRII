@@ -5,7 +5,12 @@ import {faKey,faUser,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
 
+    
+    
     let dato="";
+   
+    
+
 
 
     const login = async(event)=>{
@@ -31,33 +36,43 @@ export default function Home() {
         .then((data)=>{dato=data})
 
         localStorage.setItem("facultad",dato.facultad)
+        localStorage.setItem('token',dato.claveToken);
+
         
-        
+
+            console.log('token distinto a 0')
                 
-        if(dato.mensaje === "Usuario logeado correctamente!"){
-            
-            if(dato.nivel === '1' || dato.nivel === '0'){
+            if(dato.mensaje === "Usuario logeado correctamente!"){
+
+
+
+                if(dato.nivel === '1' || dato.nivel === '0'){
+
+                    window.location.href='../admin1';
+
+                } else{
+
+                    window.location.href='../programas';
+
+                }
+
+                localStorage.setItem('gestor',dato.gestor);
+                localStorage.setItem('adminNivel',dato.nivel);
                 
-                window.location.href='../admin1';
-                
+
             } else{
-                
-                window.location.href='../programas';
-                
+                alert(dato.mensaje);
             }
 
-            localStorage.setItem('gestor',dato.gestor);
-            localStorage.setItem('adminNivel',dato.nivel);
+            document.getElementById("form-login").reset();
 
-        } else{
-            alert(dato.mensaje);
-        }
-        
-        document.getElementById("form-login").reset();
 
-        
 
     }
+
+
+
+
 
     const limpiar = event=> { 
         

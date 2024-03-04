@@ -1,11 +1,33 @@
 import './programas.css';
 import { Fragment } from "react";
 import Card from '../card/card';
+import Llave from '../llave/llave';
 import { useState,useEffect} from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faXmark,faCheck} from '@fortawesome/free-solid-svg-icons';
 
 
 
 export default function Programas() {
+
+    const aplicarContorno = ()=>{
+        document.getElementById("contornoAdmin").style.display="flex";
+    }
+
+    const quitarContorno = ()=>{
+        document.getElementById("contornoAdmin").style.display="none";
+    }
+
+    const mostrar = () =>{
+        aplicarContorno();
+        document.getElementById('tarjetaPass').style.display='block';
+    }
+
+    const ocultar = ()=>{
+        quitarContorno();
+        document.getElementById('tarjetaPass').style.display='none';
+
+    }
 
     
         localStorage.setItem("aval",'true');
@@ -34,6 +56,9 @@ export default function Programas() {
     },[])
 
 
+    const redirigirPass = ()=>{
+        window.location.href='../pass'
+    }
 
     
     
@@ -41,11 +66,23 @@ export default function Programas() {
 
         <Fragment>
 
+            <section class='contornoAdmin' id='contornoAdmin'></section>
+
+            <Llave aplicarContorno={mostrar}/>
+
             <section class="contenedorTarjetas">
                 {consulta.map((dato)=>{                            
                     return <Card key={dato.id} info={dato}/>
                 })}
              </section>
+
+             <section class='tarjetaEliminar' id='tarjetaPass'>
+                <h5 class='h5Eliminar'>¿Desea actualizar su contraseña?</h5>
+                <div id='div-btns'>
+                    <button type='button' id='btn-XeliminarPrograma' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
+                    <button type="submit" class='btnEliminar' onClick={redirigirPass}><FontAwesomeIcon icon={faCheck} /></button>
+                </div>
+            </section>
 
              
         </Fragment>

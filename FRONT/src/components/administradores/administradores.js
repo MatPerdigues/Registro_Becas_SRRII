@@ -36,7 +36,7 @@ export default function Administradores() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                /* "Authorization": `Bearer ${localStorage.getItem("token")}` */
+                "Authorization": `Bearer ${localStorage.getItem("token")}` 
             }
         }
         
@@ -45,14 +45,16 @@ export default function Administradores() {
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})
         .catch(error => console.log("Se ha producido un error... " +error));
-            return programas;
-        }
+    
+    }
 
 
     useEffect(()=>{
         traerAdmins();
             
     },[])
+
+
 
     const actDatos = ()=>{
         setNombreAdmin(localStorage.getItem('adminNombre'))
@@ -74,7 +76,7 @@ export default function Administradores() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                /* "Authorization": `Bearer ${localStorage.getItem("token")}` */
+                "Authorization": `Bearer ${localStorage.getItem("token")}` 
               
             }
         })
@@ -82,13 +84,25 @@ export default function Administradores() {
         .then((res)=>res.json())
         .then((data)=>{resBorrarAdmin=data})
 
-        alert(resBorrarAdmin)
-       
-        document.getElementById('tarjetaEliminar').style.display='none';
-        document.getElementById('contornoEliminar').style.display='none';
+        
+        if(resBorrarAdmin.message==='jwt malformed'){
 
-        window.location.reload();
-       
+            alert('La sesión ha sido cerrada');
+            window.location.href='../'
+        }else{
+
+            if(resBorrarAdmin==='Sesión expirada'){
+                alert(resBorrarAdmin);
+                window.location.href='../'
+            } else{
+                alert(resBorrarAdmin);
+                document.getElementById('tarjetaEliminar').style.display='none';
+                document.getElementById('contornoEliminar').style.display='none';
+        
+                window.location.reload();
+                
+            }
+        }
 
     }
 

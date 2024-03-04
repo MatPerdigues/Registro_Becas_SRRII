@@ -1,7 +1,8 @@
 import './card.css';
 import { Fragment } from 'react';
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faMagnifyingGlass,faUserPlus} from '@fortawesome/free-solid-svg-icons'
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faMagnifyingGlass,faUserPlus} from '@fortawesome/free-solid-svg-icons';
+
 
 
 

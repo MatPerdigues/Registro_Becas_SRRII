@@ -6,6 +6,7 @@ import Programas from '../programas/programas';
 import FormPostulante from '../formPostulante/formPostulante';
 import Administradores from '../administradores/administradores';
 import Postulantes from '../postulantes/postulantes';
+import Pass from '../formPass/formPass';
 
 
 
@@ -21,6 +22,7 @@ return(
           <Route path='/formPostulante' element={<FormPostulante/>}></Route>
           <Route path='/administradores' element={<Administradores/>}></Route>
           <Route path='/postulantes' element={<Postulantes/>}></Route>
+          <Route path='/pass' element={<Pass/>}></Route>
        
 
         </Routes>

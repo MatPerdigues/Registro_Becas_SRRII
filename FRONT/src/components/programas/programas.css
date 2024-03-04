@@ -1,21 +1,34 @@
 .contenedorTarjetas{
-    width: 100%;
+    width: 80%;
     margin: 0 auto;
     height: 100vh;
-    padding-top: 50PX;
+    padding-top: 20PX;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: center;
-    overflow-y: scroll;
+    
     text-align: center;
     row-gap: 20px;
     
     
 }
 
+#tarjetaPass{
+    color: whitesmoke;
+    position: absolute;
+    top: 100px;
+    height: 30vh;
+
+}
+
+
 @media screen and (max-width: 600px) {
     .contenedorTarjetas {
         grid-template-columns: repeat(1, 1fr);
+    }
+
+    #tarjetaPass{
+        height: 40vh;
     }
 }
 
