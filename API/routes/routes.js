@@ -4,7 +4,7 @@ const upload=require('../multer/multer');
 const uploadPostulantes=require('../multer/multerPostulantes')
 
 
-const {agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario} = require('../controllers/controllers')
+const {agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass} = require('../controllers/controllers')
 
 router.post('/agregarAdmin',verificacionUsuario,agregarAdmin);
 router.post('/login',login);
@@ -19,6 +19,7 @@ router.post('/traerPostulantes',traerPostulantes);
 router.post('/descargar',descargar)
 router.delete('/borrarPostulante',verificacionUsuario,borrarPostulante); 
 router.post('/nuevaPass',verificacionUsuario,nuevaPass);
+router.post('/enviarPass',enviarPass);
 
 
 module.exports=router;

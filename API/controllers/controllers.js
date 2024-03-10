@@ -34,6 +34,7 @@ const agregarAdmin=async(req,res)=>{
 
 const login = (req,res)=>{
     const{usuario,password}=req.body;
+
     
     dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
         if(error){
@@ -61,7 +62,11 @@ const login = (req,res)=>{
                                     claveToken:token,
                                     nivel:info.nivel,
                                     facultad:info.unidad_academica,
-                                    gestor:info.usuario
+                                    gestor:info.usuario,
+                                    nombre:info.nombre,
+                                    apellido:info.apellido,
+                                    mail:info.mail
+
 
                                 }) 
                             
@@ -406,8 +411,53 @@ const nuevaPass = (req,res)=>{
     
     }
 
+    const enviarPass = (req,res)=>{
+        const{password,usuario}=req.body;
+        
+
+
+        dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
+
+            if(error){
+                res.json({
+                    mensaje:"Error en el servidor" + error
+                })
+            }else{
+                if(data.length==0){
+                    res.json({
+                        mensaje:"Usuario no registrado"
+                    }) 
+                }else{
+                    let info = data[0];
+                    const passEncript = await bcrypt.hash(password,10);
+                    
+                    dbConnection.query(
+                        `UPDATE admins SET password ="${passEncript}" WHERE usuario=?`,[usuario],(error,data)=>{
+                        if(error){
+                            res.json({
+                                mensaje:"Error en el envío de la contraseña" + error
+                            });
+                        
+                        }else{
+                            
+                            res.json({
+                                        mensaje:"Contraseña actualizada correctamente",
+                                        nombre:info.nombre,
+                                        mail:info.mail,
+                                        usuario:info.usuario
+
+                                    });
+                                }
+                                
+                            })
 
 
 
+                }
+            }
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario};
+        })
+    }
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass};

@@ -55,3 +55,93 @@
     display: flex;
     justify-content: center;
  }
+
+ .secRecuperacion{
+   
+    display: flex;
+    margin: auto;
+    padding: auto;
+    margin-top: 40px;
+    width: 60%;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    transition: 1s;
+
+}
+
+.divIconRecuperacion{
+    
+    width: 10%;
+    height: 30px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px 0 0 10px;
+    background-color: var(--bs-tertiary-bg);
+}
+
+.divRecuperacion{
+    
+    width: 87%;
+    height: 30px;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 10px 10px 0;
+    background-color: whitesmoke;
+    color: black;
+    font-size: 10px;
+
+    
+
+}
+
+.h6Recuperacion{
+    margin-top: 7px;
+    font-size: 15px;
+}
+
+
+
+.secRecuperacion:active{
+
+    transform: scale(0.95);
+}
+
+
+.secRecuperacion:hover{
+    background-color: #7DD3FC;
+    transition: 1s;
+}
+
+
+.secRecuperacion:hover > .divIconRecuperacion {
+   
+    cursor: pointer;
+
+}
+
+.secRecuperacion:hover > .divRecuperacion{
+    /* border: 5px solid #7DD3FC; */
+    cursor: pointer;
+
+}
+
+
+#tarjetaPass1{
+    margin-top: -500px;
+    color: whitesmoke;
+
+}
+
+
+#input-pass1{
+    width: 80%;
+    margin: auto;
+
+}

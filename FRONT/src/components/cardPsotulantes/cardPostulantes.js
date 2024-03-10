@@ -88,32 +88,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
         <Fragment>
 
             <section class='contenedorCardPostulantes'>
-                {/* <section class='gridCardPostulantes'>
-                    <h6 class='datoPostulante'>{inData.nombre+' '+inData.apellido}</h6>
-                    <h6 class='datoPostulante'>{inData.dni}</h6>
-                    <h6 class='datoPostulante'>{inData.facultad}</h6>
-                    <h6 class='datoPostulante'>{inData.email}</h6>
-                    <h6 class='datoPostulante'>{inData.gestor}</h6>
-                    {aval==='true'?
-                    <h6 class='datoPostulante' id='descargaAval' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAval'/></h6>
-                    :''}
-                    {avalOri==='true'?
-                    <h6 class='datoPostulante' id='descargaAvalOri' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></h6>
-                    :''}
-                    {invitacion==='true'?
-                    
-                    <h6 class='datoPostulante' id='descargaInvitacion' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaInvitacion'/></h6>
-                    
-                    :''}
-                    {cv==='true'?
-                    <h6 class='datoPostulante' id='descargaCv' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaCv'/></h6>
-                    :''}
-
-                    {adminNivel!=1?
-                    <span class='datoPsotulante' id='iconPostulane'><FontAwesomeIcon icon={faTrashCan} id='iconAdmin' onClick={elimPostulante}/></span>
-                    :""}
-
-                </section> */}
+               
 
                 <table class='tablaAdmin' id='tablaPostulantes'>
                     <tr class='trAdmin'>
@@ -122,6 +97,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
                         <td class='datoAdmin' id='datoPostulante'>{inData.facultad}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.email}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.gestor}</td>
+                        <td class='datoAdmin' id='datoPostulante'>{inData.fecha_registro}</td>
 
                         {aval==='true'?
                         <td class='datoAdmin' id='descargaAval' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></td>

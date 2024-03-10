@@ -1,0 +1,97 @@
+.tarjetaUser{
+    border: 1px solid whitesmoke;
+    width: 25%;
+    height: 500px;
+    margin: auto;
+    margin-top: 150px;
+    color: whitesmoke;
+    border-radius: 20px;
+    backdrop-filter: blur(5px) grayscale(30%);
+}
+
+
+.secSuperior{
+
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.secInferior{
+    height: 350px;
+ 
+}
+
+#iconUser{
+    font-size: 50px;
+    color: #f58505;
+   
+}
+
+
+
+
+#borderUser{
+    
+    width: 80px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.tablaUser{
+
+    width: 100%;
+    height: 100%;
+}
+
+.datoUser{
+    border-top: 1px solid whitesmoke;
+    border-bottom: none ;
+    text-align: center;
+    width: 50%;
+
+}
+
+.datoUser1{
+    border-top: 1px solid whitesmoke;
+    border-bottom: none ;
+    text-align: center;
+    border-right: 1px solid whitesmoke;
+    font-weight: 600;
+    font-size: 20px;
+
+}
+
+
+
+
+@media screen and (max-width:1300px){
+    .tarjetaUser{
+        width: 35%;
+    }
+}
+
+
+
+@media screen and (max-width:900px){
+    .tarjetaUser{
+        width: 45%;
+    }
+}
+
+@media screen and (max-width:600px){
+    .tarjetaUser{
+        width: 65%;
+    }
+}
+
+@media screen and (max-width:400px){
+    .tarjetaUser{
+        width: 85%;
+    }
+}

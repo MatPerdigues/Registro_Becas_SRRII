@@ -1,0 +1,42 @@
+
+#form-pass{
+    width: 100%;
+    margin: auto;
+    height: 600px;
+    margin-top: 150px;
+}
+
+#sec-datos-pass{
+    width: 25%;
+    height: 550px;
+    margin-top: 10%; 
+    margin: auto;  
+    background-color: transparent;
+    backdrop-filter: blur(5px) grayscale(30%);
+    border: 1px solid white;
+    border-radius: 20px;
+    display: block;
+    
+
+}
+
+/* @media screen and (max-width: 1300px) {
+    #sec-datos-passs{
+        width: 70%;
+    }
+} */
+
+@media screen and (min-width: 600px) and (max-width:1300px) {
+    #sec-datos-pass{
+        width: 50%;
+    }
+}
+
+
+@media screen and (max-width: 600px) {
+    #sec-datos-pass{
+        width: 90%;
+    }
+}
+
+

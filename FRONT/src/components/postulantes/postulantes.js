@@ -118,12 +118,7 @@ export default function Postulantes() {
             }
         }
 
-/*         alert(resBorrarPostulante)
-       
-        document.getElementById('tarjetaEliminarPost').style.display='none';
-        document.getElementById('contornoAdmin').style.display='none';
 
-        window.location.reload(); */
     }
 
     const {onDownload} = useDownloadExcel({
@@ -149,6 +144,7 @@ export default function Postulantes() {
                             <th class='datoAdmin' id='datoPostulante'>Unidad Académica</th>
                             <th class='datoAdmin' id='datoPostulante'>Coreo electrónico</th>
                             <th class='datoAdmin' id='datoPostulante'>Registrado por</th>
+                            <th class='datoAdmin' id='datoPostulante'>Fecha</th>
 
                             {aval==='true'?
                             <th class='datoAdmin' id='descargaAval'>Aval</th>

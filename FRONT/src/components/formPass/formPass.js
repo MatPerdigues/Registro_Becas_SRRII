@@ -1,14 +1,22 @@
 import { Fragment } from 'react';
 import './formPass.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faKey,faUser,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons'
+import {faKey,faPaperPlane,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons'
 
 export default function Pass () {
 
     let dato = '';
+    let nivel = localStorage.getItem('adminNivel')
+
 
     const limpiarPass = event=> {
-         document.getElementById("form-login").reset()
+         document.getElementById("form-pass").reset();
+         if(nivel==2){
+            window.location.href='../programas';
+        }else{
+            window.location.href='../admin1';
+        }
+
         }
 
 
@@ -47,7 +55,7 @@ export default function Pass () {
 
 
                 alert(dato.mensaje);
-                document.getElementById("form-login").reset()
+                document.getElementById("form-pass").reset()
 
                 if(dato.mensaje==="Contraseña actualizada correctamente"){
                     if(nivel==2){
@@ -61,21 +69,26 @@ export default function Pass () {
 
         } else{
             alert ('La nueva contraseña debe coincidir en ambos campos');
-            document.getElementById("form-login").reset()
+            document.getElementById("form-pass").reset()
 
         }
+
+
     }    
 
+
+
+    
 
 
     return(
         <Fragment>
 
             
-            <form id='form-login'method='POST' onSubmit={(event)=>{loginPass(event)}}>
+            <form id='form-pass'method='POST' onSubmit={(event)=>{loginPass(event)}}>
 
                 
-                <section id='sec-datos-login'>
+                <section id='sec-datos-pass'>
                 <h4 id='titulo-login'>Actualizar contraseña</h4>
                     
                     <div>
@@ -93,12 +106,15 @@ export default function Pass () {
                         </div>
                     </div>
                     <div id='div-btns'>
-                        <button type='button' id='btn-submit1'><FontAwesomeIcon icon={faXmark} onClick={limpiarPass}/></button>
-                        <button type="submit" id='btn-submit'><FontAwesomeIcon icon={faCheck}/></button>
+                        <button type='button' id='btn-submit1'onClick={limpiarPass}><FontAwesomeIcon icon={faXmark} /></button>
+                        <button type="submit" id='btn-submit' ><FontAwesomeIcon icon={faCheck}/></button>
                     </div>
+
             
                 </section>
             </form>
+
+
         </Fragment>
     )
 }
