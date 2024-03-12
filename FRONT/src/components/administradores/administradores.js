@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react';
 import CardAdmins from '../cardAdmins/cardAdmins';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faXmark,faCheck} from '@fortawesome/free-solid-svg-icons'
-const BACKEND = process.env.REACT_APP_BACKEND_URL;
+const BACKEND = process.env.REACT_APP_BACKEND_URL; //Se define la url de los enpoints
 
 
 
