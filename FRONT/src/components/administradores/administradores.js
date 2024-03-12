@@ -4,9 +4,14 @@ import { useState,useEffect } from 'react';
 import CardAdmins from '../cardAdmins/cardAdmins';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faXmark,faCheck} from '@fortawesome/free-solid-svg-icons'
+const BACKEND = process.env.REACT_APP_BACKEND_URL;
+
+
 
 
 export default function Administradores() {
+
+
 
     let [nombreAdmin,setNombreAdmin] = useState('');
     let [apellidoAdmin,setApellidoAdmin] = useState('');
@@ -31,7 +36,8 @@ export default function Administradores() {
             "adminNivel":adminNivel
         })
         
-        let programas= await fetch('http://localhost:3200/traerAdmins',{
+        // let programas= await fetch(`https://registro-becas-srrii-3.onrender.com/traerAdmins`,{
+            let programas= await fetch(BACKEND+"/traerAdmins",{
             method:"POST",
             body:form,
             headers:{

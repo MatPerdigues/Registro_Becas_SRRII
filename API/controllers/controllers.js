@@ -55,7 +55,8 @@ const login = (req,res)=>{
                            
                         
                             if(error){
-                                res.send(error)
+                                res.send({
+                                    mensaje:error})
                             }else{                            
                                 res.send({
                                     mensaje:("Usuario logeado correctamente!"),
