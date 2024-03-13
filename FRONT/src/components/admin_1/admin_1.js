@@ -6,6 +6,7 @@ import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
 import CardProgramas from '../cardProgramas/cardProgramas';
 import Llave from '../llave/llave';
+const BACKEND = process.env.REACT_APP_BACKEND_URL;
 
 
 
@@ -78,7 +79,7 @@ export default function Admin_1() {
 
         if(event.currentTarget.id==="btn-admin1"){
             setEsconder(false);
-            console.log('deberia aparece la info')
+           
             document.getElementById("form-info").style.display="none";
             document.getElementById("form-admin").style.display="none";
             
@@ -301,7 +302,7 @@ export default function Admin_1() {
 
     const traerProgramasAdmin= async()=>{
         
-        let programas= await fetch('http://localhost:3200/traerProgramasAdmin')
+        let programas= await fetch("http://localhost:3200/traerProgramasAdmin")
         
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})

@@ -36,9 +36,9 @@ export default function Administradores() {
             "adminNivel":adminNivel
         })
         
-        // let programas= await fetch(`https://registro-becas-srrii-3.onrender.com/traerAdmins`,{
-            //let programas= await fetch(BACKEND+"/traerAdmins",{
-            let programas= await fetch(`https://registro-becas-srrii.onrender.com/traerAdmins`,{
+        
+            let programas= await fetch(BACKEND+"/traerAdmins",{
+          
             method:"POST",
             body:form,
             headers:{
