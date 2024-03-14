@@ -127,68 +127,15 @@ export default function Admin_1() {
             document.getElementById("tarjetaPass").style.display="none";
         }
     }
-    
-    
 
 
-    const agregarAdmin = async(event)=>{
-
-         let clave='';
-
-        for(let x=0; x < lengthClave; x++){
-            let random = Math.floor(Math.random() * baseClave.length);
-            clave = clave + baseClave.charAt(random);
-        }
-        
-        event.preventDefault();
+    const enviarMail = (nombre,usuario,mail,clave)=>{
 
         const serviceId = "service_3o1n3ps";
         const templateId = "template_i2okhu7";
         const publicKey= "5yzZimEw4Rf97xil4";
 
-       
 
-        
-        const formSumarAdmin = JSON.stringify({
-            "nombre":event.target[0].value,
-            "apellido":event.target[1].value,
-            "unidad_academica":event.target[2].value,
-            "nivel":event.target[3].value,
-            "mail":event.target[4].value,
-            "usuario":event.target[5].value,
-            "password":clave
-            //generarPassword()
-        })
-        
-        const response = await fetch("http://localhost:3200/agregarAdmin",{
-        method:"POST",
-        body:formSumarAdmin,
-        headers:{
-           "Authorization": `Bearer ${localStorage.getItem("token")}`,
-            
-            'Content-Type':'application/json'
-        }})
-
-        .then((res)=>res.json())
-        .then((data)=>{dato=data})
-
-
-        if(dato.message==='jwt malformed'){
-
-            alert('La sesión ha sido cerrada');
-            window.location.href='../'
-        }else{
-
-            if(dato==='Sesión expirada'){
-                alert(dato);
-                window.location.href='../'
-            } else{
-                alert(dato);
-                window.location.reload();
-            }
-        }
-        
-        
         const templateParams={
             nombre:nombre,
             usuario:usuario,
@@ -210,14 +157,97 @@ export default function Admin_1() {
         });
 
 
-        //alert(dato);
+    }
+    
+    
 
-        quitarContorno();
+
+    const agregarAdmin = async(event)=>{
+
+
+        event.preventDefault();
+
+        let clave='';
+
+        for(let x=0; x < lengthClave; x++){
+            let random = Math.floor(Math.random() * baseClave.length);
+            clave = clave + baseClave.charAt(random);
+        }
+        
+
+
+
+
+        let nombre = event.target[0].value;
+        let apellido = event.target[1].value;
+        let unidad_academica = event.target[2].value;
+        let nivel = event.target[3].value;
+        let mail = event.target[4].value;
+        let usuario = event.target[5].value;
+       
 
         
-        document.getElementById("form-admin").reset();
+        const formSumarAdmin = JSON.stringify({
+            "nombre":nombre,
+            "apellido":apellido,
+            "unidad_academica":unidad_academica,
+            "nivel":nivel,
+            "mail":mail,
+            "usuario":usuario,
+            "password":clave
+   
+        })     
 
-        document.getElementById("form-admin").style.display="none";
+    
+
+        
+        const response = await fetch(BACKEND+"/agregarAdmin",{    
+        //const response = await fetch("http://localhost:3200/agregarAdmin",{  
+
+
+        method:"POST",
+        body:formSumarAdmin,
+        headers:{
+           "Authorization": `Bearer ${localStorage.getItem("token")}`,
+            
+            'Content-Type':'application/json'
+        }})
+
+        .then((res)=>res.json())
+        .then((data)=>{dato=data})
+
+        console.log(dato);
+
+
+        if(dato.message==='jwt malformed'){
+
+            alert('La sesión ha sido cerrada');
+            window.location.href='../'
+        }else{
+
+            if(dato==='Sesión expirada'){
+                alert(dato);
+                window.location.href='../'
+            } else{
+
+                if(dato===`Administrador/a registrado/a correctamente. Se ha enviado un correo electrónico a la dirección ${mail} con los datos de acceso.`){
+
+                    enviarMail(nombre,usuario,mail,clave);
+
+                    alert(dato);
+
+                    window.location.reload();
+                    
+                } else{
+
+                    alert(dato);
+                    
+                    window.location.reload();
+                }
+            }
+        }
+        
+
 
     }
 
@@ -271,6 +301,8 @@ export default function Admin_1() {
         })
         .then((res)=>res.json())
         .then((data)=>{dato=data})
+
+        
 
         if(dato.message==='jwt malformed'){
 

@@ -5,6 +5,7 @@ import { useState,useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCheck,faXmark,faFileExcel} from '@fortawesome/free-solid-svg-icons'
 import { useDownloadExcel } from 'react-export-table-to-excel';
+const BACKEND = process.env.REACT_APP_BACKEND_URL;
 
 
 
@@ -39,7 +40,7 @@ export default function Postulantes() {
             "adminNivel":adminNivel
         })
 
-        const response = await fetch('http://localhost:3200/traerPostulantes',{
+        const response = await fetch(BACKEND+"/traerPostulantes",{
             method:"POST",
             body:form,
             headers:{
@@ -86,7 +87,7 @@ export default function Postulantes() {
             "elimCv":localStorage.getItem('elimCv')
         })
 
-        const response = await fetch('http://localhost:3200/borrarPostulante',{
+        const response = await fetch(BACKEND+'/borrarPostulante',{
             method:"DELETE",
             body:form,
             headers:{

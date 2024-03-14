@@ -38,6 +38,7 @@ export default function Administradores() {
         
         
             let programas= await fetch(BACKEND+"/traerAdmins",{
+            //let programas= await fetch("http://localhost:3200/traerAdmins",{
           
             method:"POST",
             body:form,
@@ -56,10 +57,10 @@ export default function Administradores() {
     }
 
 
-    useEffect(()=>{
+     useEffect(()=>{
         traerAdmins();
             
-    },[])
+    },[]) 
 
 
 
@@ -78,7 +79,7 @@ export default function Administradores() {
             "adminId":localStorage.getItem('adminId')
         })
 
-        const response = await fetch('http://localhost:3200/borrarAdmin',{
+        const response = await fetch(BACKEND+'/borrarAdmin',{
             method:"DELETE",
             body:form,
             headers:{

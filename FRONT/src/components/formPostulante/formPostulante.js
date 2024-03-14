@@ -2,7 +2,7 @@ import './formPostulante.css';
 import { Fragment } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faIdCard,faEnvelope,faUser,faXmark,faCheck,faPassport,faFileSignature,faFileLines} from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
+const BACKEND = process.env.REACT_APP_BACKEND_URL;
 
 
 export default function FormPostulante() {
@@ -86,7 +86,7 @@ export default function FormPostulante() {
         
         
         
-        const response = await fetch("http://localhost:3200/agregarPostulante",{
+        const response = await fetch(BACKEND+"/agregarPostulante",{
         method:"POST",
         body:formPostulante,
         headers:{
@@ -120,15 +120,6 @@ export default function FormPostulante() {
         }
 
 
-
-
-
-/*         console.log(respuesta)
-        alert(respuesta.mensaje);
-
-        document.getElementById("formSumarPostulante").reset();
-
-        window.location.href='../programas'; */
         
     }
         
