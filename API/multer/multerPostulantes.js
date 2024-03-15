@@ -9,7 +9,7 @@ const storage=multer.diskStorage({
         let carpeta = req.body.nombreCorto;
                 
         //const pathDocument= `./archivos/${carpeta}`;
-        const pathDocument= BACKEND`/archivos/${carpeta}`;
+        const pathDocument=`./archivos/${carpeta}`;
         cb(null,pathDocument);
     },
 

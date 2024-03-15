@@ -141,26 +141,26 @@ const agregarPostulante=(req,res)=>{
         aval='N/A'
     } else {
         //aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
-        aval =BACKEND + req.files.aval[0].filename;
+        aval ='https://registro-becas-srrii.onrender.com/' + req.files.aval[0].filename;
         
     };
 
     if(req.files.avalORI===undefined){
         avalORI = 'N/A'
     } else {
-        avalORI='http://localhost:3200/public/' + req.files.avalORI[0].filename;
+        avalORI='https://registro-becas-srrii.onrender.com/' + req.files.avalORI[0].filename;
     };
 
     if(req.files.invitacion===undefined){
         invitacion = 'N/A'
     } else {
-        invitacion='http://localhost:3200/public/' + req.files.invitacion[0].filename;
+        invitacion='https://registro-becas-srrii.onrender.com/' + req.files.invitacion[0].filename;
     };
 
     if(req.files.cv===undefined){
         cv = 'N/A'
     } else {
-        cv='http://localhost:3200/public/' + req.files.cv[0].filename;
+        cv='https://registro-becas-srrii.onrender.com/' + req.files.cv[0].filename;
     };
 
     
