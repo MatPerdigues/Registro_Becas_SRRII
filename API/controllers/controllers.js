@@ -3,6 +3,7 @@ const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken');
 const PASS_SEGURA = process.env.PASS_SEGURA;
 const fs = require('fs');
+const BACKEND = process.env.REACT_APP_BACKEND_URL;
 
 
 
@@ -139,7 +140,8 @@ const agregarPostulante=(req,res)=>{
     if(req.files.aval===undefined){
         aval='N/A'
     } else {
-        aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
+        //aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
+        aval =BACKEND + req.files.aval[0].filename;
         
     };
 

@@ -1,4 +1,5 @@
 const multer=require('multer');
+const BACKEND = process.env.REACT_APP_BACKEND_URL;
 
 
 const storage=multer.diskStorage({
@@ -7,7 +8,8 @@ const storage=multer.diskStorage({
         
         let carpeta = req.body.nombreCorto;
                 
-        const pathDocument= `./archivos/${carpeta}`;
+        //const pathDocument= `./archivos/${carpeta}`;
+        const pathDocument= BACKEND`/archivos/${carpeta}`;
         cb(null,pathDocument);
     },
 
