@@ -19,7 +19,7 @@ const storage=multer.diskStorage({
         
                 
         //const pathDocument= `./archivos/${carpeta}`;
-        const pathDocument=API+"/archivos/";
+        const pathDocument="./archivos/";
         cb(null,pathDocument);
     },
 
