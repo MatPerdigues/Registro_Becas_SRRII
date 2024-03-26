@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faKey,faUser,faCheck,faXmark,faPaperPlane} from '@fortawesome/free-solid-svg-icons'
 import { useState,useEffect } from 'react';
 import emailjs from '@emailjs/browser';
+const API = process.env.REACT_APP_BACKEND_URL;
 
 
 export default function Home() {
@@ -42,7 +43,8 @@ export default function Home() {
             
         })
         
-        const response = await fetch("http://localhost:3200/login",{
+        //const response = await fetch("http://localhost:3200/login",{
+        const response = await fetch(API+"/login",{
         method:"POST",
         body:formLogin,
         headers:{
@@ -126,7 +128,8 @@ export default function Home() {
         })
 
   
-        const response = await fetch("http://localhost:3200/enviarPass",{
+        //const response = await fetch("http://localhost:3200/enviarPass",{
+        const response = await fetch(API+"/enviarPass",{
         method:"POST",
         body:formLogin,
         headers:{

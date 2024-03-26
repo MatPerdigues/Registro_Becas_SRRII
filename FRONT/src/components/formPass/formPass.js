@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import './formPass.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faKey,faPaperPlane,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons'
+const API = process.env.REACT_APP_BACKEND_URL;
 
 export default function Pass () {
 
@@ -30,6 +31,10 @@ export default function Pass () {
         let password=event.target[0].value;
         let nuevaPass1 = event.target[1].value;
         let nuevaPass2 = event.target[2].value;
+
+        if(nuevaPass1.length<6 || nuevaPass2.length<6){
+            return(alert('Error: la nueva contraseña debe contener al menos 6 caracteres'))
+        }
         
         if(nuevaPass1===nuevaPass2){
             let nuevaPass=nuevaPass1;
@@ -41,7 +46,8 @@ export default function Pass () {
                 
             })
 
-            const response = await fetch("http://localhost:3200/nuevaPass",{
+            //const response = await fetch("http://localhost:3200/nuevaPass",{
+            const response = await fetch(API+"/nuevaPass",{
                 method:"POST",
                 body:formLogin,
                 headers:{

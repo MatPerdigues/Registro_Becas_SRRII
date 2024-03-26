@@ -16,7 +16,7 @@ router.delete('/borrarAdmin',verificacionUsuario,borrarAdmin);
 router.get('/traerProgramasAdmin',traerProgramasAdmin);
 router.delete('/eliminarPrograma',verificacionUsuario,eliminarPrograma);
 router.post('/traerPostulantes',traerPostulantes);
-router.post('/descargar',descargar)
+//router.post('/descargar',descargar)
 router.delete('/borrarPostulante',verificacionUsuario,borrarPostulante); 
 router.post('/nuevaPass',verificacionUsuario,nuevaPass);
 router.post('/enviarPass',enviarPass);

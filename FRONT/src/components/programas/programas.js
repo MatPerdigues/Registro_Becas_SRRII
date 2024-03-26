@@ -5,6 +5,7 @@ import Llave from '../llave/llave';
 import { useState,useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faXmark,faCheck} from '@fortawesome/free-solid-svg-icons';
+const API = process.env.REACT_APP_BACKEND_URL;
 
 
 
@@ -41,7 +42,8 @@ export default function Programas() {
     
     const traerProgramas= async()=>{
         
-        let programas= await fetch('http://localhost:3200/traerProgramas')
+        //let programas= await fetch('http://localhost:3200/traerProgramas')
+        let programas= await fetch(API+'/traerProgramas')
         
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})

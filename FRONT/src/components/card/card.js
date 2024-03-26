@@ -51,7 +51,8 @@ export default function Card({info}) {
                      <h6>Vencimiento SRRII: {info.vencimientoPublic}</h6>
                  </div>
                  <div class="imgPrograma">
-                     <img id='imagenPrograma' src={info.imagen} alt='imagen Programa'/>
+                     <img id='imagenPrograma' src={info.imagen} alt='imagen Programa'/> 
+                    
                  </div>
                  <div class="opcionesPrograma">
 

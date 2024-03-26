@@ -2,7 +2,7 @@ import './formPostulante.css';
 import { Fragment } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faIdCard,faEnvelope,faUser,faXmark,faCheck,faPassport,faFileSignature,faFileLines} from '@fortawesome/free-solid-svg-icons'
-const BACKEND = process.env.REACT_APP_BACKEND_URL;
+const API = process.env.REACT_APP_BACKEND_URL;
 
 
 export default function FormPostulante() {
@@ -54,6 +54,16 @@ export default function FormPostulante() {
     const agregarPostulante = async(event)=>{
         event.preventDefault();
 
+
+        let dni = event.target[2].value;
+        
+        let result = dni.search(/[^0-9]/ig);
+
+        if(result>0){
+            return(alert('Error: el DNI debe contener solo números'))
+        }
+
+
         const fecha = new Date();
         const yearActual = fecha.getFullYear();
         const hoy = fecha.getDate();
@@ -86,7 +96,7 @@ export default function FormPostulante() {
         
         
         
-        const response = await fetch(BACKEND+"/agregarPostulante",{
+        const response = await fetch(API+"/agregarPostulante",{
         //const response = await fetch("http://localhost:3200/agregarPostulante",{
         method:"POST",
         body:formPostulante,

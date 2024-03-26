@@ -4,7 +4,7 @@ import { useState,useEffect } from 'react';
 import CardAdmins from '../cardAdmins/cardAdmins';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faXmark,faCheck} from '@fortawesome/free-solid-svg-icons'
-const BACKEND = process.env.REACT_APP_BACKEND_URL; //Se define la url de los enpoints
+const API = process.env.REACT_APP_BACKEND_URL; //Se define la url de los enpoints
 
 
 
@@ -37,7 +37,7 @@ export default function Administradores() {
         })
         
         
-            let programas= await fetch(BACKEND+"/traerAdmins",{
+            let programas= await fetch(API+"/traerAdmins",{
             //let programas= await fetch("http://localhost:3200/traerAdmins",{
           
             method:"POST",
@@ -79,7 +79,8 @@ export default function Administradores() {
             "adminId":localStorage.getItem('adminId')
         })
 
-        const response = await fetch(BACKEND+'/borrarAdmin',{
+        const response = await fetch(API+'/borrarAdmin',{
+        //const response = await fetch('http://localhost:3200/borrarAdmin',{
             method:"DELETE",
             body:form,
             headers:{

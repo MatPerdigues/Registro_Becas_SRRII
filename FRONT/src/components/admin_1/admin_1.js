@@ -6,7 +6,7 @@ import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
 import CardProgramas from '../cardProgramas/cardProgramas';
 import Llave from '../llave/llave';
-const BACKEND = process.env.REACT_APP_BACKEND_URL;
+const API = process.env.REACT_APP_BACKEND_URL;
 
 
 
@@ -201,7 +201,7 @@ export default function Admin_1() {
     
 
         
-        const response = await fetch(BACKEND+"/agregarAdmin",{    
+        const response = await fetch(API+"/agregarAdmin",{    
         //const response = await fetch("http://localhost:3200/agregarAdmin",{  
 
 
@@ -263,19 +263,12 @@ export default function Admin_1() {
         let check4 = document.getElementById("item4-documentación");
         
 
-        console.log(check1.checked)
-        console.log(check2.checked)
-        console.log(check3.checked)
-
-        console.log(img);
-        
 
         let formatoFecha = event.target[2].value.split("-")
         let dia = formatoFecha[2];
         let mes = formatoFecha[1];
         let year = formatoFecha[0];
         let vencimientoPublic = dia+'-'+mes+'-'+year;
-
 
         const form = new FormData();
         form.append('imagen',img);
@@ -286,12 +279,17 @@ export default function Admin_1() {
         form.append("aval",check1.checked);
         form.append("invitacion",check2.checked);
         form.append("cv",check3.checked);
-        form.append("avalORI",check4.checked);
+        form.append("avalORI",check4.checked);  
 
-               
+        let nombreCarpeta = event.target[1].value;
+        let testCarpeta = nombreCarpeta.search(/\s/ig);
+        if(testCarpeta>0){
+            return(alert('Error: el nombre corto del Programa no debe contener espacios'))
+        }
 
 
-    const response= await fetch('http://localhost:3200/agregarPrograma',{
+    //const response= await fetch('http://localhost:3200/agregarPrograma',{
+    const response= await fetch(API+'/agregarPrograma',{
         method:'POST',
         body: form,
         headers:{
@@ -314,7 +312,7 @@ export default function Admin_1() {
                 alert(dato);
                 window.location.href='../'
             } else{
-                alert(dato);
+                alert(dato.mensaje);
                 window.location.reload();
             }
         }
@@ -334,8 +332,8 @@ export default function Admin_1() {
 
     const traerProgramasAdmin= async()=>{
         
-        let programas= await fetch("http://localhost:3200/traerProgramasAdmin")
-        
+        //let programas= await fetch("http://localhost:3200/traerProgramasAdmin")
+        let programas= await fetch(API+"/traerProgramasAdmin")
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})
         .catch(error => console.log("Se ha producido un error... " +error));
@@ -362,7 +360,8 @@ export default function Admin_1() {
             "nombreCorto":nombreCorto
         })
 
-        const response = await fetch('http://localhost:3200/eliminarPrograma',{
+        //const response = await fetch('http://localhost:3200/eliminarPrograma',{
+        const response = await fetch(API+"/eliminarPrograma",{
             method:"DELETE",
             body:form,
             headers:{
@@ -415,7 +414,7 @@ export default function Admin_1() {
                      <section id="sec-btn-admin">
                         <button type="button" id='btn-admin' class="btn-admin" onClick={mostrar}>
                             <FontAwesomeIcon icon={faSquarePlus} id='icon-login'/>
-                            <span id='span-admin'>Crear Programa</span>
+                            <span id='span-admin'>Generar Programa</span>
                         </button>
                         <button type="button" id='btn-admin1' class="btn-admin" onClick={mostrar}>
                             <FontAwesomeIcon icon={faTrashCan} id='icon-login'/>
@@ -439,7 +438,7 @@ export default function Admin_1() {
                 
 
 
-            <form id='form-info'method='POST' class="form-programa" onSubmit={(event)=>{agregarPrograma(event)}}>
+            <form id='form-info'method='POST' class="form-programa" encType="multipart/form-data" onSubmit={(event)=>{agregarPrograma(event)}}>
                 <section id="sec1-form-info">
                     <p class='titulo-form-admin'>Complete los datos del Programa</p>
                     
@@ -447,10 +446,12 @@ export default function Admin_1() {
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
                         <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre del Programa...' name="nombre"/>
                     </div>
-                     <div class="input-group mb-3" id='input-admin1'>
+            
+                    <div class="input-group mb-3" id='input-admin1'>
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
                         <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre corto...' name="nombreCorto"/>
-                    </div> 
+                    </div>
+                    
                     <div class="input-group mb-3" id='input-admin1'>
                         <span class="input-group-text" id="inputGroup-sizing-default">Vencimiento UBA</span>
                         <input type="date" required class="form-control" id='vtoUBA' aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Vencimiento UBA...' name="nomCient"/>
@@ -459,7 +460,7 @@ export default function Admin_1() {
                     <div class="mb-3" id='file-form-info'>
                         <label for="formFile" class="form-label" id='label-formFile'>Imagen</label>
                         <input class="form-control" type="file" id="formFile" name='imagen' onChange={handleChange} required/>
-                    </div>
+                    </div> 
 
                     <div class="documentacion" id='documentacion'>
                         <p id='p-documentacion'>Documentación requerida</p>

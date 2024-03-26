@@ -7,69 +7,24 @@ import {faTrashCan,faDownload} from '@fortawesome/free-solid-svg-icons'
 
 
 export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actualizarnombre}) {
-
-    let adminNivel = localStorage.getItem("adminNivel");
     
-    const download =async (e)=>{
+    let adminNivel = localStorage.getItem("adminNivel");
 
-        e.preventDefault();
+    
 
+    let linkAval = inData.aval;
+    let linkAvalOri = inData.avalORI;
+    let linkInvitacion = inData.invitacion;
+    let linkCv = inData.cv;
 
-
-        let archivo = ''
+    const descarga = ()=>{
         
-        if(e.currentTarget.id === 'descargaInvitacion'){
-            archivo = `${inData.invitacion}`
-        }
-
-        if(e.currentTarget.id === 'descargaAval'){
-            archivo = `${inData.aval}`
-        }
-
-        if(e.currentTarget.id === 'descargaAvalOri'){
-            archivo = `${inData.avalORI}`
-        }
-
-        if(e.currentTarget.id === 'descargaCv'){
-            archivo = `${inData.cv}`
-        }
-
-
-        localStorage.setItem('nomArchivo',archivo.split('/').pop())
-   
-
-
-        const form = JSON.stringify({
-            "carpeta":localStorage.getItem('nombreCorto'),
-            "archivo":localStorage.getItem('nomArchivo')
-        })
-
-
-
-        const response = await fetch('http://localhost:3200/descargar',{
-            method:"POST",
-            body:form,
-            headers:{
-                'Content-Type':'application/json',
-                /*  "Authorization": `Bearer ${localStorage.getItem("token")}` */
-              
-            }
-        })
-
-
+        console.log('funciona la funcion')
         
-        .then((res)=>res.blob())
-        .then(data => {
-            var a = document.createElement("a");
-            a.href = window.URL.createObjectURL(data);
-            a.download = localStorage.getItem('nomArchivo');
-            a.click();
-          })
         
-        }
-
-        
-        const elimPostulante = ()=>{
+    }
+    
+    const elimPostulante = ()=>{
             let nomPostulante = inData.nombre;
             let apePostulante = inData.apellido;
             localStorage.setItem('idPostulante', inData.id);
@@ -100,19 +55,22 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
                         <td class='datoAdmin' id='datoPostulante'>{inData.fecha_registro}</td>
 
                         {aval==='true'?
-                        <td class='datoAdmin' id='descargaAval' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></td>
+
+                        
+
+                        <td class='datoAdmin' id='descargaAval' ><a class='linkDescarga' href={linkAval} ><FontAwesomeIcon icon={faDownload} id='iconDescargaAval' onClick={descarga}/></a></td>
                         :''}
 
                         {avalOri==='true'?
-                        <td class='datoAdmin' id='descargaAvalOri' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></td>
+                        <td class='datoAdmin' id='descargaAvalOri'><a class='linkDescarga' href={linkAvalOri} ><FontAwesomeIcon icon={faDownload} id='iconDescargaAvalOri'/></a></td>
                         :''}
 
                         {invitacion==='true'?
-                        <td class='datoAdmin' id='descargaInvitacion' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaInvitacion'/></td>
+                        <td class='datoAdmin' id='descargaInvitacion'><a class='linkDescarga' href={linkInvitacion} ><FontAwesomeIcon icon={faDownload} id='iconDescargaInvitacion'/></a></td>
                         :''}
 
                         {cv==='true'?
-                        <td class='datoAdmin' id='descargaCv' onClick={(e)=>download(e)}><FontAwesomeIcon icon={faDownload} id='iconDescargaCv'/></td>
+                        <td class='datoAdmin' id='descargaCv'><a class='linkDescarga' href={linkCv} ><FontAwesomeIcon icon={faDownload} id='iconDescargaCv'/></a></td>
                         :''}
 
                         
@@ -127,4 +85,5 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
             </section>
         </Fragment>
     )
+
 }
