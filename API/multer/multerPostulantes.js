@@ -1,5 +1,5 @@
 const multer=require('multer');
-const BACKEND = process.env.REACT_APP_BACKEND_URL;
+const API = process.env.REACT_APP_BACKEND_URL;
 const fs = require('fs');
 
 
@@ -19,7 +19,7 @@ const storage=multer.diskStorage({
         
                 
         //const pathDocument= `./archivos/${carpeta}`;
-        const pathDocument=`./archivos/`;
+        const pathDocument=API+"/archivos/";
         cb(null,pathDocument);
     },
 
