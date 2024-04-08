@@ -1,13 +1,15 @@
 const multer=require('multer');
 
 
-const storage=multer.diskStorage({
+//const storage=multer.diskStorage({
+
+const storage=multer.memoryStorage({
 
     
-    destination:(req,file,cb)=>{ 
+/*      destination:(req,file,cb)=>{ 
         const pathDocument='./imagenes';
         cb(null,pathDocument);
-    },
+    },  */
 
     filename:(req,file,cb)=>{
         const ext=file.originalname.split(".").pop(); 

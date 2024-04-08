@@ -1,6 +1,7 @@
 const mysql=require('mysql2');
 require('dotenv').config();
 
+
 const dataBaseInfo = { 
     host:process.env.HOST,
     user:process.env.DB_USER,

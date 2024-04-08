@@ -4,15 +4,21 @@ const jwt=require('jsonwebtoken');
 const PASS_SEGURA = process.env.PASS_SEGURA;
 const fs = require('fs');
 const BACKEND = process.env.REACT_APP_BACKEND_URL;
+const { S3Client,PutObjectCommand, DeleteObjectCommand } = require("@aws-sdk/client-s3");
 const AWS =require('aws-sdk');
 const s3 = new AWS.S3({
     accessKeyId:process.env.S3ACCESKEY,
-    secretAccessKey:process.env.S3SECRETKEY
-
+    secretAccessKey:process.env.S3SECRETKEY,
+    bucketRegion:process.env.S3BUCKET_REGION
 });
 
-
-
+const s3Client = new S3Client({
+    credentials:{
+        accessKeyId:process.env.S3ACCESKEY,
+        secretAccessKey:process.env.S3SECRETKEY,
+    },
+    region:process.env.S3BUCKET_REGION
+})
 
 
 
@@ -47,6 +53,9 @@ const agregarAdmin=async(req,res)=>{
                 })
             }
         }})}
+
+
+
 
 
 const login = (req,res)=>{
@@ -103,72 +112,52 @@ const login = (req,res)=>{
         }
 
 
-const agregarPrograma=(req,res)=>{
-    const{nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
-
-    const imgS3=req.file.filename;
-
-//---------GUARDAMOS LA IMAGEN LOCAL-------------
 
 
-    fs.readFile(`./imagenes/${imgS3}`,(error,data)=>{
- 
-        if(error){
 
-            console.log(error)
-        }else{
-        var parametros ={
-            Bucket:'registro.becas.srrii.uba',
-            Key:`programas/${nombreCorto}/imagenes/${imgS3}`,
-            Body:data
+
+    const agregarPrograma= async (req,res)=>{
+        const{nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
+        const imgS3=req.file.buffer;
+        
+        const ext=req.file.originalname.split(".").pop(); 
+        const filename=`img-${Date.now()}.${ext}`; 
+
+
+        const params = {
+            Bucket: process.env.S3BUCKET_NAME,
+            Key: `programas/${nombreCorto}/imagenes/${filename}`,
+            Body: imgS3,
+            ContentType: req.file.mimeType
         }
 
+        const commandPut = new PutObjectCommand(params);
 
-       
+        
 
- //---------GUARDAMOS LA IMAGEN REMOTO EN S3-------------
-            
-         s3.putObject(parametros,(error,data)=>{
+        await s3Client.send(commandPut) 
+
+
+        const img=` https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/imagenes/` + filename;
+
+        
+        dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI) VALUES (?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI],(error,data)=>{
             if(error){
                 console.log(error);
+                res.json({
+                    mensaje:error.sqlMessage});
+            }else{
+
+                res.json({
+                    mensaje:`Programa cargado correctamente!`});
+                
             }
-    }) 
-
-
-
-    }})  
-
-    //---------ELIMINAMOS LA IMAGEN LOCAL-------------
-
-    let dir = `./imagenes/${imgS3}`
-
-    fs.rm(dir, { recursive: true, force: true }, err => {
-        if (err) {
-          throw err;
         }
-    })
-
-
-
-   const img=` https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/imagenes/` + imgS3;
-
- 
+        )}
    
 
-    dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI) VALUES (?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI],(error,data)=>{
-        if(error){
-            console.log(error);
-            res.json({
-                mensaje:error.sqlMessage});
-        }else{
-                  
-            res.json({
-                mensaje:`Programa cargado correctamente!`});
-            
-        }
-    }
-    )}
-      
+       
+        
 
 
 const traerProgramas = (req,res)=>{
@@ -182,6 +171,9 @@ const traerProgramas = (req,res)=>{
 }
 
 
+
+
+
 const agregarPostulante=(req,res)=>{
 
     const{nombre,apellido,dni,email,facultad,programa,nombreCorto,programaId,fecha_registro,year_registro,gestor}=req.body;
@@ -192,85 +184,50 @@ const agregarPostulante=(req,res)=>{
     let invitacion=''
     let cv=''
 
-    
+    const subirArchivo = async(archivo,buffer)=>{
 
+        const params = {
+            Bucket: process.env.S3BUCKET_NAME,
+            Key: `programas/${nombreCorto}/archivos/${archivo}`,
+            Body: buffer,
+            ContentType: req.files.mimeType
+        }
+        const commandPut = new PutObjectCommand(params);
+        await s3Client.send(commandPut)
+    }
+    
+    
     if(req.files.aval===undefined){
         aval='N/A'
     } else {
 
-        let archivo = req.files.aval[0].filename;
-        let dir = `./archivos/${archivo}`
+        const ext=req.files.aval[0].originalname.split(".").pop(); 
+        const archivo=`aval-${apellido}-${Date.now()}.${ext}`;
+        const buffer=req.files.aval[0].buffer;
 
-        fs.readFile(`./archivos/${archivo}`,(error,data)=>{
- 
-            if(error){
-    
-                console.log(error)
-            }else{
-                var parametros ={
-                    Bucket:'registro.becas.srrii.uba',
-                    Key:`programas/${nombreCorto}/archivos/${archivo}`,
-                    Body:data
-                }
-
-                s3.putObject(parametros,(error,data)=>{
-                    if(error){
-                        console.log(error);
-                    }
-                })
-
-                }})
-
-            
-            fs.rm(dir, { recursive: true, force: true }, err => {
-                if (err) {
-                  throw err;
-                }
-            })
-
-            
-           // aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
+              
+        subirArchivo(archivo,buffer);
+        
+        //aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
         aval =`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
-
-        
-        
+    
     };
 
     
     
-    if(req.files.avalORI===undefined){
+     if(req.files.avalORI===undefined){
         avalORI = 'N/A'
     } else {
+        
+        const ext=req.files.avalORI[0].originalname.split(".").pop(); 
+        const archivo=`avalORI-${apellido}-${Date.now()}.${ext}`;
+        const buffer=req.files.avalORI[0].buffer;
 
-        let archivo = req.files.avalORI[0].filename
-        let dir = `./archivos/${archivo}`
-
-        fs.readFile(`./archivos/${archivo}`,(error,data)=>{
- 
-            if(error){
-    
-                console.log(error)
-            }else{
-                var parametros ={
-                    Bucket:'registro.becas.srrii.uba',
-                    Key:`programas/${nombreCorto}/archivos/${archivo}`,
-                    Body:data
-                }
-
-                s3.putObject(parametros,(error,data)=>{
-                    if(error){
-                        console.log(error);
-                    }
-                })
-                }})
-
-            fs.rm(dir, { recursive: true, force: true }, err => {
-                if (err) {
-                  throw err;
-                }
-            })
+              
+        subirArchivo(archivo,buffer);
+       
             
-            avalORI=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
+        avalORI=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
     };
 
 
@@ -279,34 +236,12 @@ const agregarPostulante=(req,res)=>{
         invitacion = 'N/A'
     } else {
 
-        let archivo = req.files.invitacion[0].filename
-        let dir = `./archivos/${archivo}`
+        const ext=req.files.invitacion[0].originalname.split(".").pop(); 
+        const archivo=`invitacion-${apellido}-${Date.now()}.${ext}`;
+        const buffer=req.files.invitacion[0].buffer;
 
-        fs.readFile(`./archivos/${archivo}`,(error,data)=>{
- 
-            if(error){
-    
-                console.log(error)
-            }else{
-                var parametros ={
-                    Bucket:'registro.becas.srrii.uba',
-                    Key:`programas/${nombreCorto}/archivos/${archivo}`,
-                    Body:data
-                }
-
-                s3.putObject(parametros,(error,data)=>{
-                    if(error){
-                        console.log(error);
-                    }
-                })
-        
-            }})
-
-        fs.rm(dir, { recursive: true, force: true }, err => {
-            if (err) {
-              throw err;
-            }
-        })
+              
+        subirArchivo(archivo,buffer);
         
         invitacion=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
     };
@@ -317,33 +252,12 @@ const agregarPostulante=(req,res)=>{
         cv = 'N/A'
     } else {
 
-        let archivo = req.files.cv[0].filename
-        let dir = `./archivos/${archivo}`
+        const ext=req.files.cv[0].originalname.split(".").pop(); 
+        const archivo=`CV-${apellido}-${Date.now()}.${ext}`;
+        const buffer=req.files.cv[0].buffer;
 
-        fs.readFile(`./archivos/${archivo}`,(error,data)=>{
- 
-            if(error){
-    
-                console.log(error)
-            }else{
-                var parametros ={
-                    Bucket:'registro.becas.srrii.uba',
-                    Key:`programas/${nombreCorto}/archivos/${archivo}`,
-                    Body:data
-                }
-
-                s3.putObject(parametros,(error,data)=>{
-                    if(error){
-                        console.log(error);
-                    }
-                })
-                }})
-
-        fs.rm(dir, { recursive: true, force: true }, err => {
-            if (err) {
-              throw err;
-            }
-        })
+              
+        subirArchivo(archivo,buffer);
         
         cv=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
     };
@@ -364,6 +278,8 @@ const agregarPostulante=(req,res)=>{
         }
     })
 } 
+ 
+
 
 
 const traerAdmins = (req,res)=>{
@@ -421,21 +337,17 @@ const traerProgramasAdmin = (req,res)=>{
 }
 
 
-const eliminarPrograma = (req,res)=>{
-
-    
+const eliminarPrograma = async (req,res)=>{
 
     let listObjetos = [];
     const{programaId,nombreCorto}=req.body;
     
-
     const params = {
         Bucket: 'registro.becas.srrii.uba',
-       // Delimiter: '/',
         Prefix: `programas/${nombreCorto}/`,
-      }; 
+    };  
 
-      s3.listObjectsV2(params,(error,data)=>{
+    s3.listObjectsV2(params,(error,data)=>{
         if(error){console.log(error)
         }else{
   
@@ -443,27 +355,28 @@ const eliminarPrograma = (req,res)=>{
                 listObjetos.push(data.Contents[x].Key)
             }
 
-            for(let y = 0; y < listObjetos.length; y++){
+
+             for(let y = 0; y < listObjetos.length; y++){
                 let paramsDelete = ({
                     Bucket:`registro.becas.srrii.uba`,
                     Key:`${listObjetos[y]}`
                 })
 
-                s3.deleteObject(paramsDelete, (error,data)=> {
+                 const command = new DeleteObjectCommand(paramsDelete);
+
+                 s3Client.send(command) 
+
+                 s3.deleteObject(paramsDelete, (error,data)=> {
                     if(error){
                         console.log(error)
                     }
                 })
-
             }
-           
-            
-      }})
+        }})
     
-      listObjetos = [];
+    listObjetos = [];    
       
-      
-       dbConnection.query(`DELETE FROM programas WHERE id="${programaId}"`,(error,data)=>{
+    dbConnection.query(`DELETE FROM programas WHERE id="${programaId}"`,(error,data)=>{
      
 
          if(error){
@@ -513,69 +426,35 @@ const traerPostulantes = (req,res)=>{
 const descargar = (req,res)=>{
 
     const{carpeta,archivo}=req.body;
-
-
     
     //res.download(`./archivos/${carpeta}/${archivo}`);
-  
-
     res.download(`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/archivos/${carpeta}/${archivo}`)
-
-
-
 }
 
+    
+    
+    
+    
 
 const borrarPostulante = (req,res)=>{
-    const{idPostulante,nombreCorto,elimAval,elimAvalOri,elimInvitacion,elimCv}=req.body;
+    const{idPostulante}=req.body;
 
-    let dir = `./archivos/${nombreCorto}/${elimAval}`;
-    let dir1 = `./archivos/${nombreCorto}/${elimAvalOri}`;
-    let dir2 = `./archivos/${nombreCorto}/${elimInvitacion}`;
-    let dir3 = `./archivos/${nombreCorto}/${elimCv}`;
+     dbConnection.query(`DELETE FROM postulaciones WHERE id="${idPostulante}"`,(error,data)=>{
 
-
-
-    fs.rm(dir, { recursive: true, force: true }, err => {
-        if (err) {
-          throw err;
-        }
-    })
-
-    fs.rm(dir1, { recursive: true, force: true }, err => {
-        if (err) {
-          throw err;
-        }
-    })
-
-    fs.rm(dir2, { recursive: true, force: true }, err => {
-        if (err) {
-          throw err;
-        }
-    })
-
-    fs.rm(dir3, { recursive: true, force: true }, err => {
-        if (err) {
-          throw err;
-        }
-    })
-
-
-
-    dbConnection.query(`DELETE FROM postulaciones WHERE id="${idPostulante}"`,(error,data)=>{
-
-       
-
-         if(error){
-            res.send("Hubo un error" + error)
-        }else{
-            res.json(`Registro eliminado correctamente`);
-        } 
-    })
+        if(error){
+           res.send("Hubo un error" + error)
+       }else{
+           res.json(`Registro eliminado correctamente`);
+       } 
+   })
 }
 
-const nuevaPass = (req,res)=>{
+   
 
+
+
+
+const nuevaPass = (req,res)=>{
     
     const{usuario,password,nuevaPass}=req.body;
     
@@ -626,18 +505,18 @@ const nuevaPass = (req,res)=>{
     }
     })}
 
+    
+    
+    
+    
+    
+    
     const verificacionUsuario=(req,res,next)=>{
-
-        
-
         const authToken=req.headers.authorization;
-
- 
         
         const token=authToken.split(" ").pop(); //debido a que al mostrar por consola el token se entrega con "bearer" al principio, se utiliza el split y el pop para quedarnos solo con la última parte (token)
         //console.log(authToken);
   
-         
         jwt.verify(token,PASS_SEGURA,(error,data)=>{ //process.env.PASS_SEGURA
             if(error){
                 if(error.name=="TokenExpiredError"){return res.json("Sesión expirada")}
@@ -651,10 +530,12 @@ const nuevaPass = (req,res)=>{
     
     }
 
+
+    
+    
+
     const enviarPass = (req,res)=>{
         const{password,usuario}=req.body;
-        
-
 
         dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
 
@@ -690,14 +571,38 @@ const nuevaPass = (req,res)=>{
                                 }
                                 
                             })
-
-
-
-                }
+                        }
+                    }
+        
+                })
             }
+                                
+                                
 
-        })
-    }
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass};
+
+    const enviarS3Url = async(req,res)=>{
+
+        const{nombreCorto}=req.body;
+
+        const imgS3=req.file.filename;
+    
+            
+            let params=({
+                Bucket:'registro.becas.srrii.uba',
+                Key:`${imgS3}`,
+                Expires: 60
+            })
+        
+            let url = await s3.getSignedUrlPromise('putObject', params);
+
+            console.log(url);
+
+            res.json(url);
+        
+        }
+    
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,enviarS3Url};

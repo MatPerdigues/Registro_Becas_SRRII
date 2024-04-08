@@ -7,16 +7,14 @@ require('./config/dataBase');
 var bodyParser = require('body-parser');
 const fs = require('fs')
 const AWS =require('aws-sdk');
-const s3 = new AWS.S3({
+/* const s3 = new AWS.S3({
     accessKeyId:process.env.S3ACCESKEY,
     secretAccessKey:process.env.S3SECRETKEY
 
-});
-
-
-
+}); */
 
 const routes=require('./routes/routes');
+
 
 server.use(express.json());
 server.use(cors());

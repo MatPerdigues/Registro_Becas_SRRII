@@ -6,11 +6,11 @@ const fs = require('fs');
 
 
 
-const storage=multer.diskStorage({
+const storage=multer.memoryStorage({
 
     
     
-    destination:async(req,file,cb)=>{ 
+/*     destination:async(req,file,cb)=>{ 
 
 
         let carpeta = req.body.nombreCorto;
@@ -19,9 +19,9 @@ const storage=multer.diskStorage({
         
                 
         //const pathDocument= `./archivos/${carpeta}`;
-        const pathDocument="./archivos/";
+        const pathDocument=`./archivos/`;
         cb(null,pathDocument);
-    },
+    }, */
 
     filename:(req,file,cb)=>{
 

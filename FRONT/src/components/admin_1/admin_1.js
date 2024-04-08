@@ -28,6 +28,7 @@ export default function Admin_1() {
     let[esconder,setEsconder]=useState(true);
     let resEliminarPrograma = '';
     let adminNivel = localStorage.getItem("adminNivel");
+    let url = '';
     
     
     const handleChange=(event)=>{
@@ -270,6 +271,15 @@ export default function Admin_1() {
         let year = formatoFecha[0];
         let vencimientoPublic = dia+'-'+mes+'-'+year;
 
+
+
+        let nombreCarpeta = event.target[1].value;
+        let testCarpeta = nombreCarpeta.search(/\s/ig);
+        if(testCarpeta>0){
+            return(alert('Error: el nombre corto del Programa no debe contener espacios'))
+        }
+
+        
         const form = new FormData();
         form.append('imagen',img);
         form.append("nombre",event.target[0].value);
@@ -280,45 +290,40 @@ export default function Admin_1() {
         form.append("invitacion",check2.checked);
         form.append("cv",check3.checked);
         form.append("avalORI",check4.checked);  
-
-        let nombreCarpeta = event.target[1].value;
-        let testCarpeta = nombreCarpeta.search(/\s/ig);
-        if(testCarpeta>0){
-            return(alert('Error: el nombre corto del Programa no debe contener espacios'))
-        }
-
-
-    //const response= await fetch('http://localhost:3200/agregarPrograma',{
-    const response= await fetch(API+'/agregarPrograma',{
-        method:'POST',
-        body: form,
-        headers:{
-           "Authorization": `Bearer ${localStorage.getItem("token")}`
-        }
-                     
-        })
-        .then((res)=>res.json())
-        .then((data)=>{dato=data})
-
         
 
-        if(dato.message==='jwt malformed'){
 
-            alert('La sesión ha sido cerrada');
-            window.location.href='../'
-        }else{
-
-            if(dato==='Sesión expirada'){
-                alert(dato);
-                window.location.href='../'
-            } else{
-                alert(dato.mensaje);
-                window.location.reload();
+        //const response= await fetch('http://localhost:3200/agregarPrograma',{
+        const response= await fetch(API+'/agregarPrograma',{
+            method:'POST',
+            body: form,
+            headers:{
+               "Authorization": `Bearer ${localStorage.getItem("token")}`
             }
-        }
 
-    
-    } 
+            })
+            .then((res)=>res.json())
+            .then((data)=>{dato=data})
+
+            
+
+            if(dato.message==='jwt malformed'){
+
+                alert('La sesión ha sido cerrada');
+                window.location.href='../'
+            }else{
+
+                if(dato==='Sesión expirada'){
+                    alert(dato);
+                    window.location.href='../'
+                } else{
+                    alert(dato.mensaje);
+                    window.location.reload();
+                }
+            }
+
+        
+        } 
 
     const visitarAdmins = ()=>{
         window.location.href='../administradores'

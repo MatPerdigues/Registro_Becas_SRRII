@@ -51,24 +51,27 @@ export default function Postulantes() {
             }
         })
 
-
-        
         .then((res)=>res.json())
         .then(data=>{setRespuesta(data)})
         .catch(error => console.log("Se ha producido un error... " +error));
-           
-        }
-
+    }
+    
     useEffect(()=>{
         traerPostulantes();
             
     },[])
 
 
+
+
     const actualizarnombre = () => {
         setNompostulante(localStorage.getItem('nomPostulante'));
         setIdpostulante(localStorage.getItem('idPostulante'))
     }
+        
+
+
+
 
     const cerrarCuadro = ()=>{
         document.getElementById('tarjetaEliminarPost').style.display='none';
@@ -77,15 +80,12 @@ export default function Postulantes() {
 
 
 
+
      const borrarPostulante = async(event)=>{
         event.preventDefault();
         const form = JSON.stringify({
             "idPostulante":localStorage.getItem('idPostulante'),
-            "nombreCorto":localStorage.getItem('nombreCorto'),
-            "elimAval":localStorage.getItem('elimAval'),
-            "elimAvalOri":localStorage.getItem('elimAvalOri'),
-            "elimInvitacion":localStorage.getItem('elimInvitacion'),
-            "elimCv":localStorage.getItem('elimCv')
+
         })
 
         const response = await fetch(API+'/borrarPostulante',{
@@ -102,8 +102,6 @@ export default function Postulantes() {
         .then((res)=>res.json())
         .then((data)=>{resBorrarPostulante=data})
 
-
-        
         if(resBorrarPostulante.message==='jwt malformed'){
 
             alert('La sesión ha sido cerrada');
@@ -124,11 +122,16 @@ export default function Postulantes() {
 
     }
 
+        
+
+    
     const {onDownload} = useDownloadExcel({
         currentTableRef: document.getElementById('contenedorPostulantes'),
         filename: 'Postulantes',
         sheet: 'Postulantes'
     })
+
+
  
 
     return(

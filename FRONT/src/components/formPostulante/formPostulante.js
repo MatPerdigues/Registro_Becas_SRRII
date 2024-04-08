@@ -21,6 +21,9 @@ export default function FormPostulante() {
     let archivoCV={};
     let archivoAvalOri={};
 
+
+
+
     
    
 

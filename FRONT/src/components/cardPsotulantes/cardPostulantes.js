@@ -29,10 +29,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
             let apePostulante = inData.apellido;
             localStorage.setItem('idPostulante', inData.id);
             localStorage.setItem('nomPostulante', `${nomPostulante} ${apePostulante}`);
-            localStorage.setItem('elimAval',inData.aval.split('/').pop());
-            localStorage.setItem('elimAvalOri',inData.avalORI.split('/').pop());
-            localStorage.setItem('elimInvitacion',inData.invitacion.split('/').pop());
-            localStorage.setItem('elimCv',inData.cv.split('/').pop());
+
             actualizarnombre();
             document.getElementById('contornoAdmin').style.display='flex';
             document.getElementById('tarjetaEliminarPost').style.display='block';
