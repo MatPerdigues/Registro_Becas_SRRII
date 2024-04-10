@@ -99,7 +99,7 @@ export default function FormPostulante() {
         
         
         
-        const response = await fetch(API+"/agregarPostulante",{
+        const response = await fetch(API +"/agregarPostulante",{
         //const response = await fetch("http://localhost:3200/agregarPostulante",{
         method:"POST",
         body:formPostulante,

@@ -26,6 +26,12 @@ export default function Home() {
         document.getElementById(`tarjetaPass1`).style.display='block';
     }
 
+    const spinner = ()=>{
+        document.getElementById('form-login').style.display='none';
+        //document.getElementById(`contornoLogin`).style.display='flex';
+        document.getElementById(`contenedorSpinner`).style.display='flex';
+    }
+
     const ocultar=()=>{
         document.getElementById(`contornoAdmin`).style.display='none';
         document.getElementById(`tarjetaPass1`).style.display='none';
@@ -36,12 +42,15 @@ export default function Home() {
     
     const login = async(event)=>{
         event.preventDefault()
-        
-        const formLogin = JSON.stringify({
+
+               
+         const formLogin = JSON.stringify({
             "usuario":event.target[0].value,
             "password":event.target[1].value,
             
         })
+
+        spinner();
         
         //const response = await fetch("http://localhost:3200/login",{
         const response = await fetch(API+"/login",{
@@ -88,7 +97,7 @@ export default function Home() {
         document.getElementById("form-login").reset();  
      }
 
-
+ 
      
 
 
@@ -187,11 +196,15 @@ export default function Home() {
     return (
         <Fragment>
             
-            <section class='contornoAdmin' id='contornoAdmin'></section>
-             
-             <form id='form-login'method='POST' onSubmit={(event)=>{login(event)}}>  
+
+
+             <section class='contenedorSpinner' id='contenedorSpinner'>
+                <div class="spinner" id='spinner'></div>
+             </section>
             
-       
+
+            <form id='form-login'method='POST' onSubmit={(event)=>{login(event)}}>  
+                   
                 <section id='sec-datos-login'>
                     <h4 id='titulo-login'>Ingrese sus datos de acceso</h4>
                     <div>
