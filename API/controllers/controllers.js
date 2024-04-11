@@ -553,7 +553,7 @@ const nuevaPass = (req,res)=>{
                     const passEncript = await bcrypt.hash(password,10);
                     
                     dbConnection.query(
-                        `UPDATE admins SET pass_temporal = "${passEncript}", exp_pass = ${exp_pass} WHERE usuario=?`,[usuario],(error,data)=>{
+                        `UPDATE admins SET pass_temporal = "${passEncript}", exp_pass = "${exp_pass}" WHERE usuario=?`,[usuario],(error,data)=>{
                         if(error){
                             res.json({
                                 mensaje:"Error en el envío de la contraseña" + error
