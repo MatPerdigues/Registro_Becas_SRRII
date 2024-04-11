@@ -14,11 +14,10 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 
 
-
 export default function Admin_1() {
-
-
-
+    
+    
+ 
     let dato="";
     let baseClave='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.?,;-_¡!¿*%&$/()[]{}|@><';
     let lengthClave=8;
@@ -30,7 +29,7 @@ export default function Admin_1() {
     const[consulta, setConsulta]=useState('');
     let[esconder,setEsconder]=useState(true);
     let resEliminarPrograma = '';
-    let adminNivel = localStorage.getItem("adminNivel");
+    let adminNivel = sessionStorage.getItem("adminNivel");
     let url = '';
     
     
@@ -212,7 +211,7 @@ export default function Admin_1() {
         method:"POST",
         body:formSumarAdmin,
         headers:{
-           "Authorization": `Bearer ${localStorage.getItem("token")}`,
+           "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
             
             'Content-Type':'application/json'
         }})
@@ -301,7 +300,7 @@ export default function Admin_1() {
             method:'POST',
             body: form,
             headers:{
-               "Authorization": `Bearer ${localStorage.getItem("token")}`
+               "Authorization": `Bearer ${sessionStorage.getItem("token")}`
             }
 
             })
@@ -360,8 +359,8 @@ export default function Admin_1() {
 
 
     const eliminarPrograma = async() => {
-        let programaId = localStorage.getItem('programaId');
-        let nombreCorto = localStorage.getItem('nombreCorto');
+        let programaId = sessionStorage.getItem('programaId');
+        let nombreCorto = sessionStorage.getItem('nombreCorto');
        
         const form = JSON.stringify({
             "programaId":programaId,
@@ -374,7 +373,7 @@ export default function Admin_1() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                "Authorization": `Bearer ${localStorage.getItem("token")}` 
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}` 
               
             }
         })
@@ -594,3 +593,4 @@ export default function Admin_1() {
 
     )
 }
+

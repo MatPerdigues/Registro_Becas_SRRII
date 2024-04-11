@@ -31,10 +31,10 @@ export default function Programas() {
     }
 
     
-        localStorage.setItem("aval",'true');
-        localStorage.setItem("invitacion",'true');
-        localStorage.setItem("cv",'true');
-        localStorage.setItem("avalORI",'true');
+        sessionStorage.setItem("aval",'true');
+        sessionStorage.setItem("invitacion",'true');
+        sessionStorage.setItem("cv",'true');
+        sessionStorage.setItem("avalORI",'true');
 
     
     let [consulta,setConsulta]=useState([]);

@@ -9,31 +9,31 @@ import {faMagnifyingGlass,faUserPlus} from '@fortawesome/free-solid-svg-icons';
 
 export default function Card({info}) {
 
-    let adminNivel = localStorage.getItem("adminNivel");
+    let adminNivel = sessionStorage.getItem("adminNivel");
     
     
     const establecerPrograma=event=>{
         let programa = info.nombre;
         
-        localStorage.setItem("programa",info.nombre);
-        localStorage.setItem("aval",info.aval);
-        localStorage.setItem("invitacion",info.invitacion);
-        localStorage.setItem("cv",info.cv);
-        localStorage.setItem("avalORI",info.avalORI);
-        localStorage.setItem("nombreCorto",info.nombreCorto);
-        localStorage.setItem("programaId",info.id);
+        sessionStorage.setItem("programa",info.nombre);
+        sessionStorage.setItem("aval",info.aval);
+        sessionStorage.setItem("invitacion",info.invitacion);
+        sessionStorage.setItem("cv",info.cv);
+        sessionStorage.setItem("avalORI",info.avalORI);
+        sessionStorage.setItem("nombreCorto",info.nombreCorto);
+        sessionStorage.setItem("programaId",info.id);
         window.location.href='../formPostulante';
 
     }
 
         const buscarPostulante = ()=>{
-            localStorage.setItem("programa",info.nombre);
-            localStorage.setItem('programaId',info.id);
-            localStorage.setItem("aval",info.aval);
-            localStorage.setItem("invitacion",info.invitacion);
-            localStorage.setItem("cv",info.cv);
-            localStorage.setItem("avalORI",info.avalORI);
-            localStorage.setItem("nombreCorto",info.nombreCorto);
+            sessionStorage.setItem("programa",info.nombre);
+            sessionStorage.setItem('programaId',info.id);
+            sessionStorage.setItem("aval",info.aval);
+            sessionStorage.setItem("invitacion",info.invitacion);
+            sessionStorage.setItem("cv",info.cv);
+            sessionStorage.setItem("avalORI",info.avalORI);
+            sessionStorage.setItem("nombreCorto",info.nombreCorto);
             window.location.href='../postulantes';
             
         }

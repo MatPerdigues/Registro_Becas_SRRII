@@ -10,6 +10,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export default function Home() {
 
+   
     
     
     let dato='';
@@ -72,6 +73,8 @@ export default function Home() {
 
          if(dato.mensaje === "Usuario logeado correctamente!"){
 
+            sessionStorage.setItem('log','true');
+
             if(dato.nivel === '1' || dato.nivel === '0'){
 
                 window.location.href='../admin1';
@@ -82,13 +85,13 @@ export default function Home() {
 
             }
 
-            localStorage.setItem('gestor',dato.gestor);
-            localStorage.setItem('adminNivel',dato.nivel);
-            localStorage.setItem("facultad",dato.facultad)
-            localStorage.setItem('token',dato.claveToken);
-            localStorage.setItem('nombre',dato.nombre);
-            localStorage.setItem('apellido',dato.apellido);
-            localStorage.setItem('mail',dato.mail);
+            sessionStorage.setItem('gestor',dato.gestor);
+            sessionStorage.setItem('adminNivel',dato.nivel);
+            sessionStorage.setItem("facultad",dato.facultad)
+            sessionStorage.setItem('token',dato.claveToken);
+            sessionStorage.setItem('nombre',dato.nombre);
+            sessionStorage.setItem('apellido',dato.apellido);
+            sessionStorage.setItem('mail',dato.mail);
     
             
 

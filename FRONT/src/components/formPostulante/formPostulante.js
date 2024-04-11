@@ -7,12 +7,12 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export default function FormPostulante() {
 
-    let aval =  localStorage.getItem("aval");
-    let invitacion =  localStorage.getItem("invitacion");
-    let cv =  localStorage.getItem("cv");
-    let programa =  localStorage.getItem("programa");
-    let avalORI =  localStorage.getItem("avalORI");
-    let nombreCorto =  localStorage.getItem("nombreCorto");
+    let aval =  sessionStorage.getItem("aval");
+    let invitacion =  sessionStorage.getItem("invitacion");
+    let cv =  sessionStorage.getItem("cv");
+    let programa =  sessionStorage.getItem("programa");
+    let avalORI =  sessionStorage.getItem("avalORI");
+    let nombreCorto =  sessionStorage.getItem("nombreCorto");
     
     let respuesta = "";
     
@@ -84,10 +84,10 @@ export default function FormPostulante() {
             formPostulante.append("apellido",event.target[1].value);
             formPostulante.append("dni",event.target[2].value);
             formPostulante.append("email",event.target[3].value);
-            formPostulante.append("facultad",localStorage.getItem("facultad"));
-            formPostulante.append("programa", localStorage.getItem("programa"));
-            formPostulante.append('programaId', localStorage.getItem('programaId'));
-            formPostulante.append('gestor', localStorage.getItem('gestor'));
+            formPostulante.append("facultad",sessionStorage.getItem("facultad"));
+            formPostulante.append("programa", sessionStorage.getItem("programa"));
+            formPostulante.append('programaId', sessionStorage.getItem('programaId'));
+            formPostulante.append('gestor', sessionStorage.getItem('gestor'));
             formPostulante.append("fecha_registro",fecha_registro);
             formPostulante.append("year_registro",yearActual); 
             formPostulante.append("nombreCorto",nombreCorto); 
@@ -104,7 +104,7 @@ export default function FormPostulante() {
         method:"POST",
         body:formPostulante,
         headers:{
-           "Authorization": `Bearer ${localStorage.getItem("token")}`,
+           "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
             
            
         }})

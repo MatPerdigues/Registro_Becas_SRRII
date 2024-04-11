@@ -7,11 +7,11 @@ import {faXmark,faUserTie} from '@fortawesome/free-solid-svg-icons';
 
 export default function User(){
 
-    let nombre= localStorage.getItem('nombre');
-    let apellido= localStorage.getItem('apellido');
-    let mail= localStorage.getItem('mail');
-    let facultad = localStorage.getItem('facultad');
-    let usuario = localStorage.getItem('gestor');
+    let nombre= sessionStorage.getItem('nombre');
+    let apellido= sessionStorage.getItem('apellido');
+    let mail= sessionStorage.getItem('mail');
+    let facultad = sessionStorage.getItem('facultad');
+    let usuario = sessionStorage.getItem('gestor');
 
 
 

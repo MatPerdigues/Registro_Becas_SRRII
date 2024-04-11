@@ -12,9 +12,9 @@ export default function CardProgramas({info,setEsconder,idTarjetaEliminar}) {
 
         document.getElementById(`${idTarjetaEliminar}`).style.display='block';
 
-        localStorage.setItem('programaId',info.id);
+        sessionStorage.setItem('programaId',info.id);
 
-        localStorage.setItem('nombreCorto',info.nombreCorto);
+        sessionStorage.setItem('nombreCorto',info.nombreCorto);
        
 
     }

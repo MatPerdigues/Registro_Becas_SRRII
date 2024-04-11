@@ -14,10 +14,10 @@ export default function CardAdmins({info,idContorno,idTarjetaEliminar, actDatos}
 
 
 
-        localStorage.setItem('adminId',info.id);
-        localStorage.setItem('adminFac',info.unidad_academica);
-        localStorage.setItem('adminNombre',info.nombre);
-        localStorage.setItem('adminApellido',info.apellido);
+        sessionStorage.setItem('adminId',info.id);
+        sessionStorage.setItem('adminFac',info.unidad_academica);
+        sessionStorage.setItem('adminNombre',info.nombre);
+        sessionStorage.setItem('adminApellido',info.apellido);
 
         actDatos()
     

@@ -14,31 +14,8 @@ export default function Llave(){
  
 
     const elimToken = ()=>{
-        localStorage.setItem('token',0);
-        localStorage.removeItem("aval");
-        localStorage.removeItem("programa");
-        localStorage.removeItem("nombreCorto");
-        localStorage.removeItem("adminId");
-        localStorage.removeItem("gestor");
-        localStorage.removeItem("adminFac");
-        localStorage.removeItem("idPostulante");
-        localStorage.removeItem("invitacion");
-        localStorage.removeItem("nomPostulante");
-        localStorage.removeItem("programaId");
-        localStorage.removeItem("adminApellido");
-        localStorage.removeItem("facultad");
-        localStorage.removeItem("elimAvalOri");
-        localStorage.removeItem("elimAval");
-        localStorage.removeItem("adminNombre");
-        localStorage.removeItem("cv");
-        localStorage.removeItem("avalORI");
-        localStorage.removeItem("elimInvitacion");
-        localStorage.removeItem("nomArchivo");
-        localStorage.removeItem("adminNivel");
-        localStorage.removeItem("elimCv");
-        localStorage.removeItem("nombre");
-        localStorage.removeItem("apellido");
-        localStorage.removeItem("mail");
+        sessionStorage.clear();
+        localStorage.clear();
         window.location.href='../';
     }
 

@@ -8,7 +8,7 @@ import {faTrashCan,faDownload} from '@fortawesome/free-solid-svg-icons'
 
 export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actualizarnombre}) {
     
-    let adminNivel = localStorage.getItem("adminNivel");
+    let adminNivel = sessionStorage.getItem("adminNivel");
 
     
 
@@ -27,8 +27,8 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
     const elimPostulante = ()=>{
             let nomPostulante = inData.nombre;
             let apePostulante = inData.apellido;
-            localStorage.setItem('idPostulante', inData.id);
-            localStorage.setItem('nomPostulante', `${nomPostulante} ${apePostulante}`);
+            sessionStorage.setItem('idPostulante', inData.id);
+            sessionStorage.setItem('nomPostulante', `${nomPostulante} ${apePostulante}`);
 
             actualizarnombre();
             document.getElementById('contornoAdmin').style.display='flex';

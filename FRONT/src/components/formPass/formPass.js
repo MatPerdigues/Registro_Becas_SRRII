@@ -7,7 +7,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 export default function Pass () {
 
     let dato = '';
-    let nivel = localStorage.getItem('adminNivel')
+    let nivel = sessionStorage.getItem('adminNivel')
 
 
     const limpiarPass = event=> {
@@ -26,8 +26,8 @@ export default function Pass () {
     
         event.preventDefault();
 
-        let nivel = localStorage.getItem('adminNivel');
-        let usuario = localStorage.getItem('gestor');
+        let nivel = sessionStorage.getItem('adminNivel');
+        let usuario = sessionStorage.getItem('gestor');
         let password=event.target[0].value;
         let nuevaPass1 = event.target[1].value;
         let nuevaPass2 = event.target[2].value;
@@ -51,7 +51,7 @@ export default function Pass () {
                 method:"POST",
                 body:formLogin,
                 headers:{
-                   "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                   "Authorization": `Bearer ${sessionStorage.getItem("token")}`,
                     
                     'Content-Type':'application/json'
                 }})

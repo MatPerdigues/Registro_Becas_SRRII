@@ -13,15 +13,15 @@ const API = process.env.REACT_APP_BACKEND_URL;
 export default function Postulantes() {
 
     let [respuesta,setRespuesta]=useState([]);
-    let aval = localStorage.getItem('aval');
-    let avalOri = localStorage.getItem('avalORI');
-    let invitacion = localStorage.getItem('invitacion');
-    let cv = localStorage.getItem('cv');
+    let aval = sessionStorage.getItem('aval');
+    let avalOri = sessionStorage.getItem('avalORI');
+    let invitacion = sessionStorage.getItem('invitacion');
+    let cv = sessionStorage.getItem('cv');
     let[nompostulante,setNompostulante] = useState(''); 
     let[idpostulante,setIdpostulante] = useState(''); 
     let resBorrarPostulante = '';
-    let programa = localStorage.getItem('programa');
-    let adminNivel = localStorage.getItem('adminNivel');
+    let programa = sessionStorage.getItem('programa');
+    let adminNivel = sessionStorage.getItem('adminNivel');
 
 
   
@@ -30,9 +30,9 @@ export default function Postulantes() {
     
     const traerPostulantes= async()=>{
         
-        let programaId = localStorage.getItem('programaId');
-        let facultad = localStorage.getItem('facultad');
-        let adminNivel = localStorage.getItem('adminNivel')
+        let programaId = sessionStorage.getItem('programaId');
+        let facultad = sessionStorage.getItem('facultad');
+        let adminNivel = sessionStorage.getItem('adminNivel')
         
         const form = JSON.stringify({
             "programaId":programaId,
@@ -46,7 +46,7 @@ export default function Postulantes() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                "Authorization": `Bearer ${localStorage.getItem("token")}` 
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}` 
               
             }
         })
@@ -65,8 +65,8 @@ export default function Postulantes() {
 
 
     const actualizarnombre = () => {
-        setNompostulante(localStorage.getItem('nomPostulante'));
-        setIdpostulante(localStorage.getItem('idPostulante'))
+        setNompostulante(sessionStorage.getItem('nomPostulante'));
+        setIdpostulante(sessionStorage.getItem('idPostulante'))
     }
         
 
@@ -84,7 +84,7 @@ export default function Postulantes() {
      const borrarPostulante = async(event)=>{
         event.preventDefault();
         const form = JSON.stringify({
-            "idPostulante":localStorage.getItem('idPostulante'),
+            "idPostulante":sessionStorage.getItem('idPostulante'),
 
         })
 
@@ -94,7 +94,7 @@ export default function Postulantes() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                "Authorization": `Bearer ${localStorage.getItem("token")}` 
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}` 
               
             }
         })

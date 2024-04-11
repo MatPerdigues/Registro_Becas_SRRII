@@ -30,7 +30,7 @@ export default function Administradores() {
     
     const traerAdmins= async()=>{
 
-        let adminNivel = localStorage.getItem('adminNivel')
+        let adminNivel = sessionStorage.getItem('adminNivel')
         
         const form = JSON.stringify({
             "adminNivel":adminNivel
@@ -44,7 +44,7 @@ export default function Administradores() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                "Authorization": `Bearer ${localStorage.getItem("token")}` 
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}` 
             }
         }
         
@@ -65,9 +65,9 @@ export default function Administradores() {
 
 
     const actDatos = ()=>{
-        setNombreAdmin(localStorage.getItem('adminNombre'))
-        setApellidoAdmin(localStorage.getItem('adminApellido'))
-        setFacultadAdmin(localStorage.getItem('adminFac'))
+        setNombreAdmin(sessionStorage.getItem('adminNombre'))
+        setApellidoAdmin(sessionStorage.getItem('adminApellido'))
+        setFacultadAdmin(sessionStorage.getItem('adminFac'))
         
     }
 
@@ -76,7 +76,7 @@ export default function Administradores() {
     const borrarAdmin = async(event)=>{
         event.preventDefault();
         const form = JSON.stringify({
-            "adminId":localStorage.getItem('adminId')
+            "adminId":sessionStorage.getItem('adminId')
         })
 
         const response = await fetch(API+'/borrarAdmin',{
@@ -85,7 +85,7 @@ export default function Administradores() {
             body:form,
             headers:{
                 'Content-Type':'application/json',
-                "Authorization": `Bearer ${localStorage.getItem("token")}` 
+                "Authorization": `Bearer ${sessionStorage.getItem("token")}` 
               
             }
         })

@@ -49,7 +49,15 @@ export default function RecPass(){
                     .then((data)=>{dato=data})
     
                     alert(dato.mensaje);
-                    document.getElementById("form-pass1").reset()
+
+                    if(dato.mensaje==='xxxxxxx'){
+
+                        window.location.href='../';
+
+                    }else{
+
+                        document.getElementById("form-pass1").reset()
+                    }
 
             }else{
                 alert ('La nueva contraseña debe coincidir en ambos campos');
