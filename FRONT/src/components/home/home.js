@@ -7,6 +7,7 @@ import emailjs from '@emailjs/browser';
 const API = process.env.REACT_APP_BACKEND_URL;
 
 
+
 export default function Home() {
 
     
@@ -22,7 +23,8 @@ export default function Home() {
     
 
     const contorno = ()=>{
-        document.getElementById(`contornoAdmin`).style.display='block';
+ 
+        document.getElementById(`contornoEliminar`).style.display='block';
         document.getElementById(`tarjetaPass1`).style.display='block';
     }
 
@@ -33,7 +35,7 @@ export default function Home() {
     }
 
     const ocultar=()=>{
-        document.getElementById(`contornoAdmin`).style.display='none';
+        document.getElementById(`contornoEliminar`).style.display='none';
         document.getElementById(`tarjetaPass1`).style.display='none';
     }
 
@@ -92,9 +94,10 @@ export default function Home() {
 
         } else{
             alert(dato.mensaje);
+            window.location.reload();
         }
 
-        document.getElementById("form-login").reset();  
+        
      }
 
  
@@ -116,24 +119,24 @@ export default function Home() {
 
         let clave='';
         let usuario = event.target[0].value;
+        
+        const serviceId = 'service_3o1n3ps';
+        const templateId = 'template_vw32n8k';
+        const publicKey= '5yzZimEw4Rf97xil4';
+
+        let exp_pass = new Date();
+        exp_pass.setMinutes(exp_pass.getMinutes()+30);
 
         for(let x=0; x < lengthClave; x++){
             let random = Math.floor(Math.random() * baseClave.length);
             clave = clave + baseClave.charAt(random);
         }
-        
-        event.preventDefault();
-
-        const serviceId = "service_3o1n3ps";
-        const templateId = "template_i2okhu7";
-        const publicKey= "5yzZimEw4Rf97xil4";
-
+          
         
         const formLogin = JSON.stringify({
             "usuario":usuario,
-            "password":clave
-          
-            
+            "password":clave,
+            "exp_pass":exp_pass
         })
 
   
@@ -174,7 +177,7 @@ export default function Home() {
             });
     
     
-            alert(`Se ha enviado una nueva contraseña a la dirección ${dato.mail}`);
+            alert(`Se ha enviado un correo electrónico a la dirección ${dato.mail}`);
     
             
     
@@ -182,10 +185,11 @@ export default function Home() {
             document.getElementById("form-pass1").reset();
     
             document.getElementById("tarjetaPass1").style.display="none";
-            document.getElementById("contornoAdmin").style.display="none";
+            document.getElementById("contornoEliminar").style.display="none";
     
         }else{
             alert(dato.mensaje);
+            window.location.reload();
         }
     }
 
@@ -196,7 +200,7 @@ export default function Home() {
     return (
         <Fragment>
             
-
+            <section class='contornoEliminar' id='contornoEliminar'></section>
 
              <section class='contenedorSpinner' id='contenedorSpinner'>
                 <div class="spinner" id='spinner'></div>

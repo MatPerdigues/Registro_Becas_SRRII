@@ -535,7 +535,7 @@ const nuevaPass = (req,res)=>{
     
 
     const enviarPass = (req,res)=>{
-        const{password,usuario}=req.body;
+        const{password,usuario,exp_pass}=req.body;
 
         dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
 
@@ -553,7 +553,7 @@ const nuevaPass = (req,res)=>{
                     const passEncript = await bcrypt.hash(password,10);
                     
                     dbConnection.query(
-                        `UPDATE admins SET password ="${passEncript}" WHERE usuario=?`,[usuario],(error,data)=>{
+                        `UPDATE admins SET pass_temporal = "${passEncript}", exp_pass = ${exp_pass} WHERE usuario=?`,[usuario],(error,data)=>{
                         if(error){
                             res.json({
                                 mensaje:"Error en el envío de la contraseña" + error
@@ -579,7 +579,7 @@ const nuevaPass = (req,res)=>{
                                 
                                 
 
-
+/* 
 
 
     const enviarS3Url = async(req,res)=>{
@@ -602,7 +602,7 @@ const nuevaPass = (req,res)=>{
             res.json(url);
         
         }
-    
+     */
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,enviarS3Url};
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass};

@@ -12,6 +12,9 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 
 
+
+
+
 export default function Admin_1() {
 
 
@@ -132,9 +135,10 @@ export default function Admin_1() {
 
     const enviarMail = (nombre,usuario,mail,clave)=>{
 
-        const serviceId = "service_3o1n3ps";
-        const templateId = "template_i2okhu7";
-        const publicKey= "5yzZimEw4Rf97xil4";
+        const serviceId = 'service_3o1n3ps';
+        const templateId = 'template_i2okhu7';
+        const publicKey= '5yzZimEw4Rf97xil4';
+
 
 
         const templateParams={
@@ -168,6 +172,7 @@ export default function Admin_1() {
 
         event.preventDefault();
 
+
         let clave='';
 
         for(let x=0; x < lengthClave; x++){
@@ -175,8 +180,6 @@ export default function Admin_1() {
             clave = clave + baseClave.charAt(random);
         }
         
-
-
 
 
         let nombre = event.target[0].value;
