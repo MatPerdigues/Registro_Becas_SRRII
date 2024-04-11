@@ -8,6 +8,7 @@ import Administradores from '../administradores/administradores';
 import Postulantes from '../postulantes/postulantes';
 import Pass from '../formPass/formPass';
 import User from '../user/user';
+import RecPass from '../recPass/recPass';
 
 
 
@@ -26,7 +27,7 @@ return(
           <Route path='/postulantes' element={<Postulantes/>}></Route>
           <Route path='/pass' element={<Pass/>}></Route>
           <Route path='/user' element={<User/>}></Route>
-       
+          <Route path='/newPass' element={<RecPass/>}></Route>
 
         </Routes>
     

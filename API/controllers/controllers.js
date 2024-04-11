@@ -475,8 +475,6 @@ const nuevaPass = (req,res)=>{
 
                     if(passOk){
                         
-
-
                         const passEncript = await bcrypt.hash(nuevaPass,10);
                         
                         dbConnection.query(
@@ -576,6 +574,71 @@ const nuevaPass = (req,res)=>{
         
                 })
             }
+
+
+
+
+    const recuperarPass = async(req,res)=>{
+        const{password,usuario,nuevaPass}=req.body;
+
+        dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
+
+            if(error){
+                res.json({
+                    mensaje:"Error en el servidor" + error
+                })
+            }else{
+                if(data.length==0){
+                    res.json({
+                        mensaje:"Usuario no registrado"
+                    }) 
+                }else{
+                    let info=data[0];
+                    const passOk=await bcrypt.compare(password,info.pass_temporal);
+                    let fechaActual = new Date();
+                    let fechaDB = new Date(info.exp_pass);
+                    const passEncript = await bcrypt.hash(nuevaPass,10);
+
+                    if(passOk){
+                        if(fechaActual<fechaDB){
+
+                            dbConnection.query(
+                                `UPDATE admins SET password ="${passEncript}" WHERE usuario=?`,[usuario],(error,data)=>{
+                                if(error){
+                                    
+                                    res.json({
+                                        mensaje:"Error al actualizar la contraseña" + error})
+                                
+                                }else{
+                                    res.json({
+                                        mensaje:"Contraseña actualizada correctamente"
+                                    })
+                                }
+                            
+                            })
+
+
+
+                        }else{
+                            res.json({
+                                mensaje:"La contraseña generada por el sistema ha expirado"})
+                        }
+
+                    }else{
+                        res.json({
+                            mensaje:"La contraseña generada por el sistema no es correcta"})
+                    }
+
+                    
+                }
+            }
+        })}
+
+
+
+
+
+                
                                 
                                 
 
@@ -605,4 +668,4 @@ const nuevaPass = (req,res)=>{
      */
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass};
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,recuperarPass};
