@@ -11,13 +11,17 @@
 }
 
 #sec-btn-admin{
-    top:300px;
+    
+    border-radius: 20px;
     width:70%;
     height: 35%;
-    margin: auto auto;
+    margin: 0 auto;
     display:flex;
     justify-content: space-around;
-    z-index: -1;
+    vertical-align: middle;
+    align-items: center;    
+    z-index: -2;
+
 }
 
 .btn-admin{
@@ -96,7 +100,7 @@
 .titulo-form-admin{
     color: white;
     font-size: 120%;
-    font-family:'Bruno Ace', cursive;
+    
     margin-top: 20px;
     width: 100%;
     display: flex;
@@ -255,10 +259,13 @@
 }
 
 #tarjetaEliminarPrograma{
-    color: whitesmoke;
-    position: absolute;
+    color: whitesmoke;    
+    border: 1px solid whitesmoke;
     top: 100px;
+    
 }
+
+
 
 #btn-XeliminarPrograma{
     font-size: 30px;
@@ -331,7 +338,32 @@
     .form-programa, .form-admin{
         width:60%;
     }
+
+
 }
+ 
+@media screen and (max-width: 1000px) {
+    #tarjetaEliminarPrograma{
+        top:0px;
+        border: 1px solid whitesmoke;
+        width: 60%;
+        margin-left: 20%;
+    } 
+
+    .h5Eliminar{
+        margin-top: 0px;
+    }
+} 
+
+@media screen and (max-width: 500px) {
+    #tarjetaEliminarPrograma{
+        border: 1px solid whitesmoke;
+        top:0px;
+        width: 80%;
+        margin-left: 35%;
+    } 
+}
+
 
 
 

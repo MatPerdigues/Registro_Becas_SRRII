@@ -20,6 +20,18 @@
 
 }
 
+.btn-submit1{
+    color: #FFA800;
+    background-color: transparent;
+    border: 1px solid #f58505; 
+}
+
+.btn-submit1:hover{
+    transition: 0.5s;
+    color: black;
+    background-color: #f58505;
+ }
+
 /* @media screen and (max-width: 1300px) {
     #sec-datos-passs{
         width: 70%;

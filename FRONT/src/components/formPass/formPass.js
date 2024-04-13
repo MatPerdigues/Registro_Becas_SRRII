@@ -113,7 +113,7 @@ export default function Pass () {
                     </div>
                     <div id='div-btns'>
                         <button type='button' id='btn-submit1'onClick={limpiarPass}><FontAwesomeIcon icon={faXmark} /></button>
-                        <button type="submit" id='btn-submit' ><FontAwesomeIcon icon={faCheck}/></button>
+                        <button type="submit" id='btn-submit1' class='btn-submit1'><FontAwesomeIcon icon={faCheck}/></button>
                     </div>
 
             

@@ -32,7 +32,7 @@ export default function Home() {
     const spinner = ()=>{
         document.getElementById('form-login').style.display='none';
         //document.getElementById(`contornoLogin`).style.display='flex';
-        document.getElementById(`contenedorSpinner`).style.display='flex';
+        document.getElementById(`contenedorSpinner`).style.display='block';
     }
 
     const ocultar=()=>{
@@ -55,7 +55,7 @@ export default function Home() {
 
         spinner();
         
-        //const response = await fetch("http://localhost:3200/login",{
+         //const response = await fetch("http://localhost:3200/login",{
         const response = await fetch(API+"/login",{
         method:"POST",
         body:formLogin,
@@ -99,15 +99,12 @@ export default function Home() {
             alert(dato.mensaje);
             window.location.reload();
         }
-
+ 
         
      }
 
  
-     
 
-
-       
     const limpiar = event=> {
     document.getElementById("form-login").reset()
     }
@@ -207,6 +204,7 @@ export default function Home() {
 
              <section class='contenedorSpinner' id='contenedorSpinner'>
                 <div class="spinner" id='spinner'></div>
+                <div><h6 class='h6spinner'>Paciencia, esto puede demorar hasta 60 segundos...</h6></div>
              </section>
             
 
@@ -225,7 +223,7 @@ export default function Home() {
                         </div>
                     </div>
                     <div id='div-btns'>
-                        <button type='button' id='btn-submit1'><FontAwesomeIcon icon={faXmark} onClick={limpiar}/></button>
+                        
                         <button type="submit" id='btn-submit'><FontAwesomeIcon icon={faCheck}/></button>
                     </div>
                     <section class='secRecuperacion' onClick={contorno}>

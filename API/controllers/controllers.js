@@ -31,23 +31,21 @@ const agregarAdmin=async(req,res)=>{
     dbConnection.query(`SELECT * FROM admins WHERE usuario="${usuario}"`,(error,data)=>{
        
         if(error){
+            console.log(error);
            
-            res.send(
-                error);
+            res.send({mensaje:error})
+                
         }else{
             if(data.length>0){
                 
-                res.json(
-                    `Ya existe un Admin con ese usuario`)
+                res.send({mensaje:`Ya existe un Admin con ese usuario`})
             }else{
                 dbConnection.query("INSERT INTO admins (nombre,apellido,unidad_academica,nivel,mail,usuario,password) VALUES (?,?,?,?,?,?,?)",[nombre,apellido,unidad_academica,nivel,mail,usuario,passEncript],(error,data)=>{
                     if(error){
                         
-                        res.send(
-                            error);
+                        res.send({mensaje:error});
                     }else{
-                         res.json(
-                            `Administrador/a registrado/a correctamente. Se ha enviado un correo electrónico a la dirección ${mail} con los datos de acceso.`);
+                         res.send({mensaje:`Administrador/a registrado/a correctamente. Se ha enviado un correo electrónico a la dirección ${mail} con los datos de acceso.`});
                         
                     }
                 })
@@ -64,8 +62,10 @@ const login = (req,res)=>{
     
     dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
         if(error){
-            res.send({
-                mensaje:"Error en el servidor " + error})
+            
+            dbConnection.destroy();
+            res.send({mensaje:"Error en el servidor " + error})
+
             }else{
                 if(data.length==0){
                     res.send({
@@ -634,38 +634,6 @@ const nuevaPass = (req,res)=>{
             }
         })}
 
-
-
-
-
-                
-                                
-                                
-
-/* 
-
-
-    const enviarS3Url = async(req,res)=>{
-
-        const{nombreCorto}=req.body;
-
-        const imgS3=req.file.filename;
-    
-            
-            let params=({
-                Bucket:'registro.becas.srrii.uba',
-                Key:`${imgS3}`,
-                Expires: 60
-            })
-        
-            let url = await s3.getSignedUrlPromise('putObject', params);
-
-            console.log(url);
-
-            res.json(url);
-        
-        }
-     */
 
 
 module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,recuperarPass};

@@ -140,7 +140,7 @@ export default function Postulantes() {
 
             <section class='contornoAdmin' id='contornoAdmin'></section>
 
-                <h4 class='tituloAdmins'>{programa}</h4>
+                <h4 class='tituloAdmins' id='tituloPostulantes'>{programa}</h4>
 
                 <div>
                     <table class='tablaAdmin' id='tablaPostulantes1' >

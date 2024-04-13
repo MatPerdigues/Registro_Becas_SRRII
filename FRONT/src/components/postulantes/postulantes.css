@@ -54,6 +54,8 @@ main{
     display: none;
     position: absolute;
     top: 0px;
+
+    
 }
 
 
@@ -84,26 +86,62 @@ main{
     margin-top: 30px;
 }
 
+#tituloPostulantes{
+    min-width: 600px;
+}
 
 
+ 
 @media screen and (max-width: 620px) {
 
     #tarjetaEliminarPost{
+        top: 10%;
         width: 80%;
-        right: 40px;
+        margin: 0 auto; 
+        left: 10%;
        
     }
     
 }
 
 
-@media screen and (min-width: 620px) and (max-width: 820px) {
+@media screen and (min-width: 620px) and (max-width: 1000px) {
 
 
     #tarjetaEliminarPost{
+        
         width: 60%;
-        right: 120px;
+        right: 20%;
+       
     }
 
+} 
+
+@media screen and (max-width: 1000px) {
+    #excel{
+        display: none;
+    }
 }
+
+/* @media screen and (max-width: 1000px) {
+    #tarjetaEliminarPost{
+        top:0px;
+        border: 1px solid whitesmoke;
+        width: 60%;
+        margin-left: 20%;
+    } 
+
+    .h5Eliminar{
+        margin-top: 0px;
+    }
+} 
+
+@media screen and (max-width: 500px) {
+    #tarjetaEliminarPost{
+        border: 1px solid whitesmoke;
+        top:0px;
+        width: 80%;
+        margin-left: 35%;
+    } 
+} */
 

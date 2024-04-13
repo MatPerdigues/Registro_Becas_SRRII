@@ -230,6 +230,7 @@ export default function Admin_1() {
 
             if(dato==='Sesión expirada'){
                 alert(dato);
+                sessionStorage.clear();
                 window.location.href='../'
             } else{
 
@@ -418,29 +419,32 @@ export default function Admin_1() {
                 <section class='contornoAdmin' id='contornoAdmin'></section>
 
                     <Llave aplicarContorno={mostrar}/>
-                     <section id="sec-btn-admin">
-                        <button type="button" id='btn-admin' class="btn-admin" onClick={mostrar}>
-                            <FontAwesomeIcon icon={faSquarePlus} id='icon-login'/>
-                            <span id='span-admin'>Generar Programa</span>
-                        </button>
-                        <button type="button" id='btn-admin1' class="btn-admin" onClick={mostrar}>
-                            <FontAwesomeIcon icon={faTrashCan} id='icon-login'/>
-                            <span id='span-admin'>Borrar Programa</span>
-                        </button>
 
-                        <button type="button" id='btn-admin3' class="btn-admin" onClick={verRegistros}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} id='icon-login'/>
-                            <span id='span-admin4'>Visualizar Registros</span>
-                        </button>
-                        <button type="button" id='btn-admin4' class="btn-admin"  onClick={mostrar}>
-                            <FontAwesomeIcon icon={faUserPlus} id='icon-login'/>
-                            <span id='span-admin4'>Generar Admin</span>
-                        </button>
-                        <button type="button" id='btn-admin5' class="btn-admin"  onClick={visitarAdmins}>
-                            <FontAwesomeIcon icon={faUserMinus} id='icon-login'/>
-                            <span id='span-admin4'>Eliminar Admin</span>
-                        </button>
-                </section>
+                       
+                            <section id="sec-btn-admin">
+                                <button type="button" id='btn-admin' class="btn-admin" onClick={mostrar}>
+                                    <FontAwesomeIcon icon={faSquarePlus} id='icon-login'/>
+                                    <span id='span-admin'>Generar Programa</span>
+                                </button>
+                                <button type="button" id='btn-admin1' class="btn-admin" onClick={mostrar}>
+                                    <FontAwesomeIcon icon={faTrashCan} id='icon-login'/>
+                                    <span id='span-admin'>Borrar Programa</span>
+                                </button>
+
+                                <button type="button" id='btn-admin3' class="btn-admin" onClick={verRegistros}>
+                                    <FontAwesomeIcon icon={faMagnifyingGlass} id='icon-login'/>
+                                    <span id='span-admin4'>Ver Registros</span>
+                                </button>
+                                <button type="button" id='btn-admin4' class="btn-admin"  onClick={mostrar}>
+                                    <FontAwesomeIcon icon={faUserPlus} id='icon-login'/>
+                                    <span id='span-admin4'>Generar Admin</span>
+                                </button>
+                                <button type="button" id='btn-admin5' class="btn-admin"  onClick={visitarAdmins}>
+                                    <FontAwesomeIcon icon={faUserMinus} id='icon-login'/>
+                                    <span id='span-admin4'>Ver Admins</span>
+                                </button>
+                            </section>
+                        
 
                 
 
@@ -571,6 +575,7 @@ export default function Admin_1() {
 
             : ''}
 
+          
             <section class='tarjetaEliminar' id='tarjetaEliminarPrograma'>
                 <h5 class='h5Eliminar'>Esta acción eliminará también los archivos vinculados al Programa</h5>
                 <div id='div-btns'>
@@ -578,6 +583,7 @@ export default function Admin_1() {
                     <button type="submit" class='btnEliminar'><FontAwesomeIcon icon={faCheck} onClick={eliminarPrograma}/></button>
                 </div>
             </section>
+        
 
             <section class='tarjetaEliminar' id='tarjetaPass'>
                 <h5 class='h5Eliminar'>¿Desea actualizar su contraseña?</h5>

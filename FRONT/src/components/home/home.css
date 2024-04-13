@@ -24,13 +24,21 @@
  }
  
  #btn-submit{
-     background-color: #FFA800;
+     color: #FFA800;
+     background-color: transparent;
+     border: 1px solid #f58505; 
      font-size: 30px;
      font-weight: 300px;
      border-radius: 10px;
-     width: 50px;
+     width: 70px;
      height: 50px;
      margin-top: 30px;
+ }
+
+ #btn-submit:hover{
+    transition: 0.5s;
+    color: black;
+    background-color: #f58505;
  }
  
  #btn-submit1{
@@ -156,11 +164,16 @@
 }
 
 .contenedorSpinner{
+    
     display: none;
     width: 100%;
     height: 100%;
     justify-content: center;
-    margin-top: 400px;
+    padding-top: 300px;
+    text-align: center;
+    vertical-align: middle;
+    align-items: center;
+ 
 }
 
 .spinner {
@@ -171,10 +184,26 @@
     width: 120px;
     height: 120px;
     animation: spin 2s linear infinite;
+    margin: 0 auto;
   }
-  
+
+  .h6spinner{
+    margin: 0 auto;
+    margin-top: 50px;
+    color: #FF8C00;
+
+  }
+
+    
   @keyframes spin {
     0% { transform: rotate(0deg); }
     80% { transform: rotate(360deg); }
   }
+
+  @media screen and (max-height: 600px) {
+    .contenedorSpinner{
+        padding-top: 100px;
+    }
+  }
+
 
