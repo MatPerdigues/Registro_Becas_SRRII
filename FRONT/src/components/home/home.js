@@ -185,7 +185,7 @@ export default function Home() {
     
             alert(`Se ha enviado un correo electrónico a la dirección ${dato.mail}`);
     
-            
+            window.location.reload();
     
             
             document.getElementById("form-pass1").reset();

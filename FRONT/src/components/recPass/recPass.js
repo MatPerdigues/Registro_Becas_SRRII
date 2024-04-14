@@ -50,7 +50,7 @@ export default function RecPass(){
     
                     alert(dato.mensaje);
 
-                    if(dato.mensaje==='xxxxxxx'){
+                    if(dato.mensaje==='Contraseña actualizada correctamente'){
 
                         window.location.href='../';
 
