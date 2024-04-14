@@ -64,52 +64,53 @@ const login = (req,res)=>{
         if(error){
 
             
-           
-            res.send({mensaje:"Error en el servidor " + error})
-
-            }else{
-                if(data.length==0){
-                    res.send({
-                        mensaje:"Usuario no registrado"
-                    });
+                if(error === "Error: Can't add new command when connection is in closed state"){
+                    dbConnection.end();
+                    res.sned({mensaje:'Se ha cerreado la conexión con el servidor'})
+                
                 }else{
-                    let info=data[0];
-                    const passOk=await bcrypt.compare(password,info.password);
+                res.send({mensaje:error})
+                }
 
-                    if(passOk){
-
-                        //jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
-                          jwt.sign({usuario},PASS_SEGURA,{expiresIn:'30m'},(error,token)=>{  
-                           
+                     
+        }else{
+            if(data.length==0){
+                res.send({
+                    mensaje:"Usuario no registrado"
+                });
+            }else{
+                let info=data[0];
+                const passOk=await bcrypt.compare(password,info.password);
+                if(passOk){
+                    //jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
+                      jwt.sign({usuario},PASS_SEGURA,{expiresIn:'30m'},(error,token)=>{  
+                       
+                    
+                        if(error){
+                            res.send({
+                                mensaje:error})
+                        }else{                            
+                            res.send({
+                                mensaje:("Usuario logeado correctamente!"),
+                                claveToken:token,
+                                nivel:info.nivel,
+                                facultad:info.unidad_academica,
+                                gestor:info.usuario,
+                                nombre:info.nombre,
+                                apellido:info.apellido,
+                                mail:info.mail
+                            }) 
                         
-                            if(error){
-                                res.send({
-                                    mensaje:error})
-                            }else{                            
-                                res.send({
-                                    mensaje:("Usuario logeado correctamente!"),
-                                    claveToken:token,
-                                    nivel:info.nivel,
-                                    facultad:info.unidad_academica,
-                                    gestor:info.usuario,
-                                    nombre:info.nombre,
-                                    apellido:info.apellido,
-                                    mail:info.mail
-
-
-                                }) 
-                            
-
-                            }
-                        })
-                    }else{
-                        res.send({
-                            mensaje:"Contraseña incorrecta"
-                        })
-                    }
+                        }
+                    })
+                }else{
+                    res.send({
+                        mensaje:"Contraseña incorrecta"
+                    })
                 }
-                }
-            })
+            }
+            }
+        })
         }
 
 
