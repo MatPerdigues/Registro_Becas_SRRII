@@ -60,7 +60,7 @@ export default function Home() {
 
         spinner();
         
-         //const response = await fetch("http://localhost:3200/login",{
+        //const response = await fetch("http://localhost:3200/login",{
         const response = await fetch(API+"/login",{
         method:"POST",
         body:formLogin,

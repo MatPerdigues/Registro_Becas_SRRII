@@ -63,7 +63,7 @@ const login = (req,res)=>{
     dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
         if(error){
 
-            dbConnection.destroy();
+            
            
             res.send({mensaje:"Error en el servidor " + error})
 
