@@ -349,12 +349,16 @@
         width:60%;
     }
 
+    #div-btns {
+        margin-top: -20px;
+    }
+
 
 }
  
 @media screen and (max-width: 1000px) {
     #tarjetaEliminarPrograma{
-        top:0px;
+        top:25px;
         border: 1px solid whitesmoke;
         width: 60%;
         margin-left: 20%;

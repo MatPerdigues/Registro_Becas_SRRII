@@ -123,6 +123,15 @@ main{
     .tarjetaEliminar{
        width: 80%;
        left: -25%;
+       margin-top: 80px;
     
     }
+}
+
+@media screen and (min-width:600px) and (max-width:1000px){
+    .tarjetaEliminar{
+        width: 70%;
+        margin-left: 15%;
+        margin-top: 80px;
+}
 }
