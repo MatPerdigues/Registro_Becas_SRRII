@@ -131,7 +131,7 @@ export default function Administradores() {
                         </div>
                     </section>
 
-                    <h4 class='tituloAdmins'>Seleccione el/la Administrador/a que desea eliminar</h4>
+                    
                     
 
 

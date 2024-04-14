@@ -126,6 +126,9 @@ main{
        margin-top: 80px;
     
     }
+    #tablaCardAdmin {
+        margin-top: 100px;
+    }
 }
 
 @media screen and (min-width:600px) and (max-width:1000px){
@@ -133,5 +136,10 @@ main{
         width: 70%;
         margin-left: 15%;
         margin-top: 80px;
-}
+    }
+
+    #tablaCardAdmin {
+        margin-top: 100px;
+    }
+
 }
