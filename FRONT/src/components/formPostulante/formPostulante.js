@@ -243,7 +243,7 @@ export default function FormPostulante() {
                 
                 <section id='div-btns' class="btns-sumPostulante">
                     <button type='button' id='btn-submit1'><FontAwesomeIcon icon={faXmark} onClick={ocultar}/></button>
-                    <button type="submit" id='btn-submit'><FontAwesomeIcon icon={faCheck}/></button>
+                    <button type="submit" id='btn-submit1' class='btn-submit1' ><FontAwesomeIcon icon={faCheck}/></button>
                 </section>
 
             </form>  

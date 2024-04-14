@@ -199,11 +199,38 @@
     0% { transform: rotate(0deg); }
     80% { transform: rotate(360deg); }
   }
-
+/* 
   @media screen and (max-height: 600px) {
     .contenedorSpinner{
         padding-top: 100px;
     }
+  } */
+
+  @media screen and (max-width: 600px){
+    #tarjetaPass1{
+        margin-top: -450px;
+        height: 400px;
+    }
+
+    #sec-datos-login{
+        margin-top: 20%;
+    }
   }
+
+
+  @media screen and (min-width: 620px) and (max-width: 1000px) {
+    #tarjetaPass1{
+        height: 300px;
+        margin-top: -250px;
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    #form-pass1{
+        margin-top: -50px;
+    }
+  }
+    
+  
 
 

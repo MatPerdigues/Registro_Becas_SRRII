@@ -123,25 +123,4 @@ main{
     }
 }
 
-/* @media screen and (max-width: 1000px) {
-    #tarjetaEliminarPost{
-        top:0px;
-        border: 1px solid whitesmoke;
-        width: 60%;
-        margin-left: 20%;
-    } 
-
-    .h5Eliminar{
-        margin-top: 0px;
-    }
-} 
-
-@media screen and (max-width: 500px) {
-    #tarjetaEliminarPost{
-        border: 1px solid whitesmoke;
-        top:0px;
-        width: 80%;
-        margin-left: 35%;
-    } 
-} */
 

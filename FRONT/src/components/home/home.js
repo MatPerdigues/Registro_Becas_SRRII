@@ -1,3 +1,4 @@
+
 import './home.css';
 import {Fragment} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
@@ -27,6 +28,8 @@ export default function Home() {
  
         document.getElementById(`contornoEliminar`).style.display='block';
         document.getElementById(`tarjetaPass1`).style.display='block';
+        //document.getElementById('form-login').style.display='none';
+        document.getElementById('sec-datos-login').style.display='none';
     }
 
     const spinner = ()=>{
@@ -38,6 +41,8 @@ export default function Home() {
     const ocultar=()=>{
         document.getElementById(`contornoEliminar`).style.display='none';
         document.getElementById(`tarjetaPass1`).style.display='none';
+        document.getElementById('form-login').style.display='flex';
+        document.getElementById('sec-datos-login').style.display='block';
     }
 
 
@@ -70,6 +75,7 @@ export default function Home() {
         .catch(error => console.log("Se ha producido un error... " +error));
 
         console.log(dato.mensaje);
+
 
          if(dato.mensaje === "Usuario logeado correctamente!"){
 
@@ -229,7 +235,6 @@ export default function Home() {
                     <section class='secRecuperacion' onClick={contorno}>
                         <div class='divIconRecuperacion'><FontAwesomeIcon icon={faPaperPlane} /></div>
                         <div class='divRecuperacion'><h6 class='h6Recuperacion'>Recuperar contraseña</h6></div>
-
                     </section>
             
                 </section>

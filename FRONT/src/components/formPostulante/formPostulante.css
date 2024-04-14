@@ -86,3 +86,27 @@
     justify-content: center;
     text-align: center;
 }
+
+.btn-submit1{
+    color: #FFA800;
+    background-color: transparent;
+    border: 1px solid #f58505; 
+}
+
+.btn-submit1:hover{
+    transition: 0.5s;
+    color: black;
+    background-color: #f58505;
+ }
+
+ @media screen and (max-width:600px){
+    .formSumarPostulante{
+        width: 80%;
+    }
+ }
+
+ @media screen and (max-width:1000px){
+    .programaFormPostulante {
+        margin-top: 15px;
+    }
+ }
