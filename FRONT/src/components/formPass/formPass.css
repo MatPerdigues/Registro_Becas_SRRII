@@ -48,6 +48,10 @@
 @media screen and (max-width: 600px) {
     #sec-datos-pass{
         width: 90%;
+        }
+
+    #form-pass {
+        margin-top: 70px;
     }
 }
 

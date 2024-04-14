@@ -87,11 +87,13 @@
 @media screen and (max-width:600px){
     .tarjetaUser{
         width: 65%;
+        margin-top: 100px;
     }
 }
 
 @media screen and (max-width:400px){
     .tarjetaUser{
         width: 85%;
+        margin-top: 100px;
     }
 }
