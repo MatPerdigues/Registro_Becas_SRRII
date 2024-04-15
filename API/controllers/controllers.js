@@ -65,11 +65,13 @@ const login = (req,res)=>{
 
             
                 if(error === "Error: Can't add new command when connection is in closed state"){
+                    res.send({mensaje:'Se ha cerreado la conexión con el servidor'})
                     dbConnection.end();
-                    res.sned({mensaje:'Se ha cerreado la conexión con el servidor'})
+                    
                 
                 }else{
                 res.send({mensaje:error})
+                dbConnection.end();
                 }
 
                      
