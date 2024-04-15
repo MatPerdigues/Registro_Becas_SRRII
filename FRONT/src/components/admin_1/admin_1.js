@@ -219,7 +219,7 @@ export default function Admin_1() {
         .then((res)=>res.json())
         .then((data)=>{dato=data})
 
-        console.log(dato);
+        console.log(dato.mensaje);
 
 
         if(dato.message==='jwt malformed'){
@@ -234,17 +234,17 @@ export default function Admin_1() {
                 window.location.href='../'
             } else{
 
-                if(dato===`Administrador/a registrado/a correctamente. Se ha enviado un correo electrónico a la dirección ${mail} con los datos de acceso.`){
+                if(dato.mensaje===`Administrador/a registrado/a correctamente. Se ha enviado un correo electrónico a la dirección ${mail} con los datos de acceso.`){
 
                     enviarMail(nombre,usuario,mail,clave);
 
-                    alert(dato);
+                    alert(dato.mensaje);
 
                     window.location.reload();
                     
                 } else{
 
-                    alert(dato);
+                    alert(dato.mensaje);
                     
                     window.location.reload();
                 }
