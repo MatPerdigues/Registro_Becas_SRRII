@@ -1,13 +1,15 @@
 .tarjetaUser{
     border: 1px solid whitesmoke;
     width: 25%;
-    height: 500px;
+    height: 552px;
     margin: auto;
     margin-top: 150px;
     color: whitesmoke;
     border-radius: 20px;
     backdrop-filter: blur(5px) grayscale(30%);
 }
+
+
 
 
 .secSuperior{
@@ -21,6 +23,7 @@
 
 .secInferior{
     height: 350px;
+    word-break:break-all;
  
 }
 
@@ -64,6 +67,7 @@
     border-right: 1px solid whitesmoke;
     font-weight: 600;
     font-size: 20px;
+    height: 100px;
 
 }
 
@@ -72,7 +76,7 @@
 
 @media screen and (max-width:1300px){
     .tarjetaUser{
-        width: 35%;
+        width: 45%;
     }
 }
 
@@ -80,20 +84,20 @@
 
 @media screen and (max-width:900px){
     .tarjetaUser{
-        width: 45%;
+        width: 65%;
     }
 }
 
 @media screen and (max-width:600px){
     .tarjetaUser{
-        width: 65%;
+        width: 95%;
         margin-top: 100px;
     }
 }
 
 @media screen and (max-width:400px){
     .tarjetaUser{
-        width: 85%;
+        width: 95%;
         margin-top: 100px;
     }
 }
