@@ -58,6 +58,8 @@ export default function Home() {
             
         })
 
+       
+
         spinner();
         
         //const response = await fetch("http://localhost:3200/login",{
@@ -72,9 +74,8 @@ export default function Home() {
 
         .then((res)=>res.json())
         .then((data)=>{dato=data})
-        .catch(error => console.log("Se ha producido un error... " +error));
-
-        console.log(dato.mensaje);
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        
 
 
          if(dato.mensaje === "Usuario logeado correctamente!"){
@@ -158,6 +159,9 @@ export default function Home() {
 
         .then((res)=>res.json())
         .then((data)=>{dato=data})
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+
+        console.log(dato);
 
         if(dato.mensaje=='Contraseña actualizada correctamente'){
             

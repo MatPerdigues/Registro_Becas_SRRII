@@ -109,9 +109,9 @@ export default function FormPostulante() {
            
         }})
 
-        .then((res)=>res.json())
-        
-        .then((data)=>{respuesta=data});
+        .then((res)=>res.json())        
+        .then((data)=>{respuesta=data})
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
         console.log(respuesta);
 

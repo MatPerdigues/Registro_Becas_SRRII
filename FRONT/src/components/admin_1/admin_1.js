@@ -218,8 +218,9 @@ export default function Admin_1() {
 
         .then((res)=>res.json())
         .then((data)=>{dato=data})
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
-        console.log(dato.mensaje);
+        
 
 
         if(dato.message==='jwt malformed'){
@@ -307,6 +308,7 @@ export default function Admin_1() {
             })
             .then((res)=>res.json())
             .then((data)=>{dato=data})
+            .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
             
 
@@ -344,7 +346,7 @@ export default function Admin_1() {
         let programas= await fetch(API+"/traerProgramasAdmin")
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})
-        .catch(error => console.log("Se ha producido un error... " +error));
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
             return programas;
         }
 
@@ -381,6 +383,7 @@ export default function Admin_1() {
 
         .then((res)=>res.json())
         .then((data)=>{resEliminarPrograma=data})
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
 
         if(resEliminarPrograma.message==='jwt malformed'){

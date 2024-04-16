@@ -58,6 +58,7 @@ export default function Pass () {
         
                 .then((res)=>res.json())
                 .then((data)=>{dato=data})
+                .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
 
                 alert(dato.mensaje);

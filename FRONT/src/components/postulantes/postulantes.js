@@ -53,7 +53,7 @@ export default function Postulantes() {
 
         .then((res)=>res.json())
         .then(data=>{setRespuesta(data)})
-        .catch(error => console.log("Se ha producido un error... " +error));
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
     }
     
     useEffect(()=>{
@@ -101,6 +101,7 @@ export default function Postulantes() {
 
         .then((res)=>res.json())
         .then((data)=>{resBorrarPostulante=data})
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
         if(resBorrarPostulante.message==='jwt malformed'){
 

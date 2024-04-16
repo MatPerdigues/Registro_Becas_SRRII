@@ -47,7 +47,7 @@ export default function Programas() {
         
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})
-        .catch(error => console.log("Se ha producido un error... " +error));
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
             return programas;
         }
 

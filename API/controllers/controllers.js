@@ -34,6 +34,7 @@ const agregarAdmin=async(req,res)=>{
             console.log(error);
            
             res.send({mensaje:error})
+            
                 
         }else{
             if(data.length>0){
@@ -65,13 +66,15 @@ const login = (req,res)=>{
 
             
                 if(error === "Error: Can't add new command when connection is in closed state"){
-                    res.send({mensaje:'Se ha cerreado la conexión con el servidor'})
+                    
+                    res.send({mensaje:'Se ha cerreado la conexión con el servidor'});
                     dbConnection.end();
                     
                 
                 }else{
-                res.send({mensaje:error})
-                dbConnection.end();
+                    
+                    res.send({mensaje:error})
+                    dbConnection.end();
                 }
 
                      
@@ -85,7 +88,7 @@ const login = (req,res)=>{
                 const passOk=await bcrypt.compare(password,info.password);
                 if(passOk){
                     //jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
-                      jwt.sign({usuario},PASS_SEGURA,{expiresIn:'30m'},(error,token)=>{  
+                      jwt.sign({usuario},PASS_SEGURA,{expiresIn:'30m'},(error,{token})=>{  
                        
                     
                         if(error){
@@ -525,12 +528,14 @@ const nuevaPass = (req,res)=>{
                 /* res.send(error); */
                 else{res.json(error)}
             }else{
-                
+
+                          
                 next();
             }
         })
     
     }
+
 
 
     

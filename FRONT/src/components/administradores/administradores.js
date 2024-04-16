@@ -52,7 +52,7 @@ export default function Administradores() {
         
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})
-        .catch(error => console.log("Se ha producido un error... " +error));
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
     
     }
 
@@ -92,6 +92,7 @@ export default function Administradores() {
 
         .then((res)=>res.json())
         .then((data)=>{resBorrarAdmin=data})
+        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
         
         if(resBorrarAdmin.message==='jwt malformed'){
