@@ -9,6 +9,7 @@ import Postulantes from '../postulantes/postulantes';
 import Pass from '../formPass/formPass';
 import User from '../user/user';
 import RecPass from '../recPass/recPass';
+import Plantila from '../plantilla/plantilla';
 
 let log = sessionStorage.getItem('log');
 
@@ -49,6 +50,9 @@ return(
           :''}
           {log==='true'?
           <Route path='/user' element={<User/>}></Route>
+          :''}
+          {log==='true'?
+          <Route path='/convocatoria' element={<Plantila/>}></Route>
           :''}
           <Route path='/newPass' element={<RecPass/>}></Route>
       

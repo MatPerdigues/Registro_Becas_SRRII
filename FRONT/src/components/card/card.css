@@ -20,6 +20,10 @@
     
 }
 
+.nombrePrograma:hover{
+    cursor: pointer;
+}
+
 .vtoPrograma{
     
     display: flex;

@@ -644,5 +644,25 @@ const nuevaPass = (req,res)=>{
         })}
 
 
+    const traerConvocatoria = async(req,res)=>{
+        const{programaId}=req.body;
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,recuperarPass};
+        console.log(programaId)
+
+        dbConnection.query("SELECT * FROM programas WHERE id=?",[programaId],async(error,data)=>{
+            if(error){
+                res.json({mensaje:error})
+            }else{
+               
+                let info=data[0];
+                console.log(info.nombre)
+                res.json({nombre:info.nombre})
+                
+            }
+
+        }
+    )
+}
+
+
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,recuperarPass,traerConvocatoria};
