@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const upload=require('../multer/multer'); 
+const uploadPrograma=require('../multer/multer'); 
 const uploadPostulantes=require('../multer/multerPostulantes')
 
 
@@ -8,7 +8,7 @@ const {agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traer
 
 router.post('/agregarAdmin',verificacionUsuario,agregarAdmin);
 router.post('/login',login);
-router.post('/agregarPrograma',verificacionUsuario,upload.single('imagen'),agregarPrograma);
+router.post('/agregarPrograma',verificacionUsuario,uploadPrograma,agregarPrograma);
 router.get('/traerProgramas',traerProgramas);
 router.post('/agregarPostulante',verificacionUsuario,uploadPostulantes,agregarPostulante);
 router.post('/traerAdmins',traerAdmins);

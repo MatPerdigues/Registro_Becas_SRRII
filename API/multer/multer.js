@@ -13,13 +13,26 @@ const storage=multer.memoryStorage({
 
     filename:(req,file,cb)=>{
         const ext=file.originalname.split(".").pop(); 
-        const filename=`img-${Date.now()}.${ext}`; 
-        cb(null,filename);
+
+        if(file.fieldname==='imagen'){            
+            const filename=`img-${Date.now()}.${ext}`; 
+            cb(null,filename);
+        }else{
+            const filename=`convocatoria-${Date.now()}.${ext}`; 
+            cb(null,filename);
+        }
     },
 });
 
-const upload=multer({storage:storage});
+const uploadPrograma=multer({storage:storage});
 
 
 
-module.exports=upload
+//module.exports=upload
+
+module.exports=uploadPrograma.fields([
+    {name:'imagen'},
+    {name:'convocatoria'}
+
+
+])

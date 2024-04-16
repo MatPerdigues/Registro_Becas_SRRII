@@ -85,7 +85,7 @@
 
 .form-programa{
     width: 30%;
-    height: 550px;
+    height: 600px;
     margin: auto;
     margin-top: -200px;
     background-color: transparent;
@@ -164,7 +164,7 @@
 
 .div-btns-info{
     position: relative;
-    top: 450px;
+    top: 500px;
     display: flex;
     justify-content: space-evenly;
     

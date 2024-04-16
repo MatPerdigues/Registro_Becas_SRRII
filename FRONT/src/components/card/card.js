@@ -38,10 +38,10 @@ export default function Card({info}) {
             
         }
 
-        const convocatoria = ()=>{
+/*         const convocatoria = ()=>{
             sessionStorage.setItem("programaId",info.id);
             window.location.href='../convocatoria'
-        }
+        } */
 
 
 
@@ -50,7 +50,7 @@ export default function Card({info}) {
            
              <section class="tarjeta">
                  <div class="nombrePrograma">
-                     <h5 onClick={convocatoria}>{info.nombre}</h5>
+                     <h5><a href={info.convocatoria}>{info.nombre}</a></h5>
                  </div>
                  <div class="vtoPrograma">
                      <h6>Vencimiento SRRII: {info.vencimientoPublic}</h6>

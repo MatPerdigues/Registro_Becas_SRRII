@@ -125,30 +125,54 @@ const login = (req,res)=>{
 
     const agregarPrograma= async (req,res)=>{
         const{nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
-        const imgS3=req.file.buffer;
-        
-        const ext=req.file.originalname.split(".").pop(); 
-        const filename=`img-${Date.now()}.${ext}`; 
 
+        const subirArchivo = async(archivo,buffer)=>{
 
-        const params = {
-            Bucket: process.env.S3BUCKET_NAME,
-            Key: `programas/${nombreCorto}/imagenes/${filename}`,
-            Body: imgS3,
-            ContentType: req.file.mimeType
+            const params = {
+                Bucket: process.env.S3BUCKET_NAME,
+                Key: `programas/${nombreCorto}/convocatoria/${archivo}`,
+                Body: buffer,
+                ContentType: req.files.mimeType
+            }
+            const commandPut = new PutObjectCommand(params);
+            await s3Client.send(commandPut)
         }
 
-        const commandPut = new PutObjectCommand(params);
+
+        if(req.files.imagen===undefined){
+            img = 'N/A'
+        } else {
+    
+            const ext=req.files.imagen[0].originalname.split(".").pop(); 
+            const archivo=`img-${Date.now()}.${ext}`; 
+            const buffer=req.files.imagen[0].buffer;
+    
+                  
+            subirArchivo(archivo,buffer);
+            
+            img=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/convocatoria/${archivo}`;
+        };
+
+       
+       
+        if(req.files.convocatoria===undefined){
+            convocatoria = 'N/A'
+        } else {
+    
+            const ext=req.files.convocatoria[0].originalname.split(".").pop(); 
+            const archivo=`convocatoria-${Date.now()}.${ext}`; 
+            const buffer=req.files.convocatoria[0].buffer;
+    
+                  
+            subirArchivo(archivo,buffer);
+            
+            convocatoria=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/convocatoria/${archivo}`;
+        };
+
+
 
         
-
-        await s3Client.send(commandPut) 
-
-
-        const img=` https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/imagenes/` + filename;
-
-        
-        dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI) VALUES (?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI],(error,data)=>{
+         dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria) VALUES (?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria],(error,data)=>{
             if(error){
                 console.log(error);
                 res.json({
@@ -160,7 +184,8 @@ const login = (req,res)=>{
                 
             }
         }
-        )}
+        ) 
+    }
    
 
        
@@ -655,7 +680,7 @@ const nuevaPass = (req,res)=>{
             }else{
                
                 let info=data[0];
-                console.log(info.nombre)
+               
                 res.json({nombre:info.nombre})
                 
             }

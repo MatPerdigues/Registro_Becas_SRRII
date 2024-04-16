@@ -1,7 +1,7 @@
 import './admin_1.css';
 import { Fragment } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faSquarePlus,faTrashCan,faPenToSquare,faMagnifyingGlass,faXmark,faCheck,faUserPlus,faUserMinus} from '@fortawesome/free-solid-svg-icons'
+import {faSquarePlus,faTrashCan,faFileLines,faMagnifyingGlass,faXmark,faCheck,faUserPlus,faUserMinus} from '@fortawesome/free-solid-svg-icons'
 import { useRef, useEffect, useState } from "react";
 import emailjs from '@emailjs/browser';
 import CardProgramas from '../cardProgramas/cardProgramas';
@@ -31,11 +31,18 @@ export default function Admin_1() {
     let resEliminarPrograma = '';
     let adminNivel = sessionStorage.getItem("adminNivel");
     let url = '';
+    let fileConv={};
     
     
     const handleChange=(event)=>{
         setImg(event.target.files[0]);
+
     }
+
+    const handleChangeConvocatoria=(event)=>{
+        fileConv=event.target.files[0];
+        
+    };
 
     const aplicarContorno = ()=>{
         document.getElementById("contornoAdmin").style.display="flex";
@@ -286,6 +293,7 @@ export default function Admin_1() {
         
         const form = new FormData();
         form.append('imagen',img);
+        form.append('fileConv',fileConv);
         form.append("nombre",event.target[0].value);
         form.append("nombreCorto",event.target[1].value);
         form.append("vencimiento",event.target[2].value);
@@ -474,6 +482,12 @@ export default function Admin_1() {
                     <div class="mb-3" id='file-form-info'>
                         <label for="formFile" class="form-label" id='label-formFile'>Imagen</label>
                         <input class="form-control" type="file" id="formFile" name='imagen' onChange={handleChange} required/>
+                    </div>
+
+                    <div class="mb-3" id='convocatoria'>
+                        {/* <span class="input-group-text" id="iconFile"><FontAwesomeIcon icon={faFileLines}/></span> */}
+                        <span class="input-group-text" id="iconFile">Convocatoria</span>
+                        <input class="form-control" type="file" id="formFile" name='convocatoria' required onChange={handleChangeConvocatoria} accept=".pdf" />
                     </div> 
 
                     <div class="documentacion" id='documentacion'>
