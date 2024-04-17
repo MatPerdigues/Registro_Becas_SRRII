@@ -21,7 +21,10 @@ router.post('/nuevaPass',verificacionUsuario,nuevaPass);
 router.post('/enviarPass',enviarPass);
 router.post('/recuperarPass',recuperarPass);
 router.post('/traerConvocatoria',traerConvocatoria);
-traerConvocatoria
+
+route.get('/respuesta', (req, res) => {
+  res.send('Respuesta Correcta!')
+})
 
 
 module.exports=router;
