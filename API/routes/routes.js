@@ -22,7 +22,7 @@ router.post('/enviarPass',enviarPass);
 router.post('/recuperarPass',recuperarPass);
 router.post('/traerConvocatoria',traerConvocatoria);
 
-route.get('/respuesta', (req, res) => {
+router.get('/respuesta', (req, res) => {
   res.send('Respuesta Correcta!')
 })
 
