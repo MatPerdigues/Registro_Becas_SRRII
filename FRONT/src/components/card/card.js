@@ -1,7 +1,7 @@
 import './card.css';
 import { Fragment } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faMagnifyingGlass,faUserPlus} from '@fortawesome/free-solid-svg-icons';
+import {faMagnifyingGlass,faUserPlus, faDownload} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -10,6 +10,7 @@ import {faMagnifyingGlass,faUserPlus} from '@fortawesome/free-solid-svg-icons';
 export default function Card({info}) {
 
     let adminNivel = sessionStorage.getItem("adminNivel");
+    let linkConvocatoria = info.convocatoria;
     
     
     const establecerPrograma=event=>{
@@ -38,10 +39,8 @@ export default function Card({info}) {
             
         }
 
-/*         const convocatoria = ()=>{
-            sessionStorage.setItem("programaId",info.id);
-            window.location.href='../convocatoria'
-        } */
+
+        
 
 
 
@@ -50,7 +49,7 @@ export default function Card({info}) {
            
              <section class="tarjeta">
                  <div class="nombrePrograma">
-                     <h5><a href={info.convocatoria}>{info.nombre}</a></h5>
+                     <h5>{info.nombre}</h5>
                  </div>
                  <div class="vtoPrograma">
                      <h6>Vencimiento SRRII: {info.vencimientoPublic}</h6>
@@ -72,6 +71,10 @@ export default function Card({info}) {
                         <FontAwesomeIcon icon={faMagnifyingGlass} id='iconPostulante'/>
                         <span id='span-admin'></span>
                     </button>
+                    <a class='linkDescarga' href={linkConvocatoria}><button type="button" id='descConvocatoria' class="btn-admin">
+                        <FontAwesomeIcon icon={faDownload} id='iconPostulante'/>
+                        <span id='span-admin'></span>
+                    </button></a>
                  </div>
              </section> 
 

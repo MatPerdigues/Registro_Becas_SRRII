@@ -293,7 +293,7 @@ export default function Admin_1() {
         
         const form = new FormData();
         form.append('imagen',img);
-        form.append('fileConv',fileConv);
+        form.append('convocatoria',fileConv);
         form.append("nombre",event.target[0].value);
         form.append("nombreCorto",event.target[1].value);
         form.append("vencimiento",event.target[2].value);
@@ -396,7 +396,7 @@ export default function Admin_1() {
 
         if(resEliminarPrograma.message==='jwt malformed'){
 
-            alert('La sesión ha sido cerrada');
+            alert('La sesión ha sido cerrada al eliminar');
             window.location.href='../'
         }else{
 

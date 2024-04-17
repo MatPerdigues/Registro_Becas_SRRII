@@ -1,6 +1,6 @@
 const multer=require('multer');
-const API = process.env.REACT_APP_BACKEND_URL;
-const fs = require('fs');
+/* const API = process.env.REACT_APP_BACKEND_URL;
+const fs = require('fs'); */
 
 
 

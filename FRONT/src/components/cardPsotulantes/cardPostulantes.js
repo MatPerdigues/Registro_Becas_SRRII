@@ -17,12 +17,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
     let linkInvitacion = inData.invitacion;
     let linkCv = inData.cv;
 
-    const descarga = ()=>{
-        
-        console.log('funciona la funcion')
-        
-        
-    }
+
     
     const elimPostulante = ()=>{
             let nomPostulante = inData.nombre;
@@ -55,7 +50,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
 
                         
 
-                        <td class='datoAdmin' id='descargaAval' ><a class='linkDescarga' href={linkAval} ><FontAwesomeIcon icon={faDownload} id='iconDescargaAval' onClick={descarga}/></a></td>
+                        <td class='datoAdmin' id='descargaAval' ><a class='linkDescarga' href={linkAval} ><FontAwesomeIcon icon={faDownload} id='iconDescargaAval'/></a></td>
                         :''}
 
                         {avalOri==='true'?

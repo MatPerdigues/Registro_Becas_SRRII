@@ -3,7 +3,11 @@ const multer=require('multer');
 
 //const storage=multer.diskStorage({
 
+
+
 const storage=multer.memoryStorage({
+
+    
 
     
 /*      destination:(req,file,cb)=>{ 
@@ -13,6 +17,8 @@ const storage=multer.memoryStorage({
 
     filename:(req,file,cb)=>{
         const ext=file.originalname.split(".").pop(); 
+
+        console.log(req.file.fieldname)
 
         if(file.fieldname==='imagen'){            
             const filename=`img-${Date.now()}.${ext}`; 

@@ -31,9 +31,10 @@ const agregarAdmin=async(req,res)=>{
     dbConnection.query(`SELECT * FROM admins WHERE usuario="${usuario}"`,(error,data)=>{
        
         if(error){
-            console.log(error);
+            
            
             res.send({mensaje:error})
+            dbConnection.end();
             
                 
         }else{
@@ -56,21 +57,23 @@ const agregarAdmin=async(req,res)=>{
 
 
 
+function generateAccessToken(username) {
+    return jwt.sign({username}, PASS_SEGURA, { expiresIn: '30m' });
+    
+  }
+
 
 const login = (req,res)=>{
     const{usuario,password}=req.body;
-
+    
     
     dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
         if(error){
-
             
-                if(error === "Error: Can't add new command when connection is in closed state"){
+            if(error === "Error: Can't add new command when connection is in closed state"){
                     
                     res.send({mensaje:'Se ha cerreado la conexión con el servidor'});
                     dbConnection.end();
-                    
-                
                 }else{
                     
                     res.send({mensaje:error})
@@ -84,30 +87,46 @@ const login = (req,res)=>{
                     mensaje:"Usuario no registrado"
                 });
             }else{
+               
                 let info=data[0];
                 const passOk=await bcrypt.compare(password,info.password);
+                
                 if(passOk){
-                    //jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
-                      jwt.sign({usuario},PASS_SEGURA,{expiresIn:'30m'},(error,{token})=>{  
-                       
+                    let token = generateAccessToken(usuario);
+                    res.send({
+                        mensaje: ("Usuario logeado correctamente!"),
+                        claveToken: token,
+                        nivel: info.nivel,
+                        facultad: info.unidad_academica,
+                        gestor: info.usuario,
+                        nombre: info.nombre,
+                        apellido: info.apellido,
+                        mail: info.mail
+                    });
+
                     
-                        if(error){
+/*                     //jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
+                      jwt.sign({ usuario },PASS_SEGURA,{ expiresIn: '30m' }, (error, { token }) => {
+                        if (error) {
+                            res.send({ mensaje: error });
+                            console.log("error de token" + error);
+
+                        } else {
+                            
+                            console.log(token);
                             res.send({
-                                mensaje:error})
-                        }else{                            
-                            res.send({
-                                mensaje:("Usuario logeado correctamente!"),
-                                claveToken:token,
-                                nivel:info.nivel,
-                                facultad:info.unidad_academica,
-                                gestor:info.usuario,
-                                nombre:info.nombre,
-                                apellido:info.apellido,
-                                mail:info.mail
-                            }) 
-                        
+                                mensaje: ("Usuario logeado correctamente!"),
+                                claveToken: token,
+                                nivel: info.nivel,
+                                facultad: info.unidad_academica,
+                                gestor: info.usuario,
+                                nombre: info.nombre,
+                                apellido: info.apellido,
+                                mail: info.mail
+                            });
+
                         }
-                    })
+                    }) */
                 }else{
                     res.send({
                         mensaje:"Contraseña incorrecta"
@@ -115,8 +134,8 @@ const login = (req,res)=>{
                 }
             }
             }
-        })
-        }
+        }) 
+        }  
 
 
 
@@ -125,6 +144,8 @@ const login = (req,res)=>{
 
     const agregarPrograma= async (req,res)=>{
         const{nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
+
+        
 
         const subirArchivo = async(archivo,buffer)=>{
 
@@ -172,11 +193,12 @@ const login = (req,res)=>{
 
 
         
-         dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria) VALUES (?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria],(error,data)=>{
+         dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria) VALUES (?,?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria],(error,data)=>{
             if(error){
                 console.log(error);
                 res.json({
                     mensaje:error.sqlMessage});
+                    dbConnection.end();
             }else{
 
                 res.json({
@@ -196,6 +218,7 @@ const traerProgramas = (req,res)=>{
     dbConnection.query('SELECT * FROM programas',(error,data)=>{
         if(error){
             res.send(error);
+            dbConnection.end();
         }else{
             res.send(data);
         }
@@ -301,6 +324,7 @@ const agregarPostulante=(req,res)=>{
             res.json({
                 mensaje:'Hubo un error'+' '+error
             })
+            dbConnection.end();
         }else{
                   
             res.json({
@@ -324,6 +348,7 @@ const traerAdmins = (req,res)=>{
         dbConnection.query('SELECT * FROM admins',(error,data)=>{
             if(error){
                 res.send(error);
+                dbConnection.end();
             }else{
                 res.send(data);
             }
@@ -333,6 +358,7 @@ const traerAdmins = (req,res)=>{
         dbConnection.query('SELECT * FROM admins WHERE nivel=2',(error,data)=>{
             if(error){
                 res.send(error);
+                dbConnection.end();
             }else{
                 res.send(data);
             }
@@ -351,6 +377,7 @@ const borrarAdmin = (req,res)=>{
 
          if(error){
             res.send("Hubo un error" + error)
+            dbConnection.end();
         }else{
             res.json(`Admin eliminado/a correctamente!`);
         } 
@@ -362,6 +389,7 @@ const traerProgramasAdmin = (req,res)=>{
     dbConnection.query('SELECT * FROM programas',(error,data)=>{
         if(error){
             res.send(error);
+            dbConnection.end();
         }else{
             res.send(data);
         }
@@ -370,6 +398,8 @@ const traerProgramasAdmin = (req,res)=>{
 
 
 const eliminarPrograma = async (req,res)=>{
+
+    
 
     let listObjetos = [];
     const{programaId,nombreCorto}=req.body;
@@ -413,6 +443,7 @@ const eliminarPrograma = async (req,res)=>{
 
          if(error){
             res.send("Hubo un error" + error)
+            dbConnection.end();
         }else{
             res.json(`Programa eliminado correctamente!`);
         } 
@@ -431,6 +462,7 @@ const traerPostulantes = (req,res)=>{
         dbConnection.query(`SELECT * FROM postulaciones WHERE programaId = ${programaId}`,(error,data)=>{
             if(error){
                 res.json("Hubo un error" + error);
+                dbConnection.end();
             }else{
                 res.json(data);
             }
@@ -444,6 +476,7 @@ const traerPostulantes = (req,res)=>{
         dbConnection.query(`SELECT * FROM postulaciones WHERE facultad = "${facultad}" AND programaId = ${programaId}`,(error,data)=>{
             if(error){
                 res.json("Hubo un error" + error);
+                dbConnection.end();
             }else{
                 res.json(data);
             }
@@ -474,7 +507,8 @@ const borrarPostulante = (req,res)=>{
      dbConnection.query(`DELETE FROM postulaciones WHERE id="${idPostulante}"`,(error,data)=>{
 
         if(error){
-           res.send("Hubo un error" + error)
+           res.send("Hubo un error" + error);
+           dbConnection.end();
        }else{
            res.json(`Registro eliminado correctamente`);
        } 
@@ -493,7 +527,8 @@ const nuevaPass = (req,res)=>{
     dbConnection.query("SELECT * FROM admins WHERE usuario=?",[usuario],async(error,data)=>{
         if(error){
             
-            res.send("Error en el servidor " + error)
+            res.send("Error en el servidor " + error);
+            dbConnection.end();
             }else{
                 if(data.length==0){
                    
@@ -574,7 +609,9 @@ const nuevaPass = (req,res)=>{
             if(error){
                 res.json({
                     mensaje:"Error en el servidor" + error
+                    
                 })
+                dbConnection.end();
             }else{
                 if(data.length==0){
                     res.json({
@@ -621,6 +658,7 @@ const nuevaPass = (req,res)=>{
                 res.json({
                     mensaje:"Error en el servidor" + error
                 })
+                dbConnection.end();
             }else{
                 if(data.length==0){
                     res.json({
@@ -672,11 +710,12 @@ const nuevaPass = (req,res)=>{
     const traerConvocatoria = async(req,res)=>{
         const{programaId}=req.body;
 
-        console.log(programaId)
+        
 
         dbConnection.query("SELECT * FROM programas WHERE id=?",[programaId],async(error,data)=>{
             if(error){
                 res.json({mensaje:error})
+                dbConnection.end();
             }else{
                
                 let info=data[0];

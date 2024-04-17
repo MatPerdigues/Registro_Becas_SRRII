@@ -20,9 +20,6 @@
     
 }
 
-.nombrePrograma:hover{
-    cursor: pointer;
-}
 
 .vtoPrograma{
     
@@ -77,6 +74,14 @@
 }
 
 #buscarPostulante{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px; 
+}
+
+#descConvocatoria{
     width: 50px;
     height: 50px;
     display: flex;
