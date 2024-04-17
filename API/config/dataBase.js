@@ -7,6 +7,7 @@ const dataBaseInfo = {
     user:process.env.DB_USER,
     database: process.env.DB,
     password: process.env.PASS,
+    connect_timeout:1000
     
 };
 
