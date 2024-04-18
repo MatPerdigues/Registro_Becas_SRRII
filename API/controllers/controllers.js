@@ -34,7 +34,7 @@ const agregarAdmin=async(req,res)=>{
             
            
             res.send({mensaje:error})
-            //dbConnection.end();
+            dbConnection.end();
             
                 
         }else{
@@ -73,11 +73,11 @@ const login = (req,res)=>{
             if(error === "Error: Can't add new command when connection is in closed state"){
                     
                     res.send({mensaje:'Se ha cerreado la conexión con el servidor'});
-                    //dbConnection.end();
+                    dbConnection.end();
                 }else{
                     
                     res.send({mensaje:error})
-                    //dbConnection.end();
+                    dbConnection.end();
                 }
 
                      
@@ -198,7 +198,7 @@ const login = (req,res)=>{
                 console.log(error);
                 res.json({
                     mensaje:error.sqlMessage});
-                    //dbConnection.end();
+                    dbConnection.end();
             }else{
 
                 res.json({
@@ -218,7 +218,7 @@ const traerProgramas = (req,res)=>{
     dbConnection.query('SELECT * FROM programas',(error,data)=>{
         if(error){
             res.send(error);
-            //dbConnection.end();
+            dbConnection.end();
         }else{
             res.send(data);
         }
@@ -324,7 +324,7 @@ const agregarPostulante=(req,res)=>{
             res.json({
                 mensaje:'Hubo un error'+' '+error
             })
-            //dbConnection.end();
+            dbConnection.end();
         }else{
                   
             res.json({
@@ -348,7 +348,7 @@ const traerAdmins = (req,res)=>{
         dbConnection.query('SELECT * FROM admins',(error,data)=>{
             if(error){
                 res.send(error);
-                //dbConnection.end();
+                dbConnection.end();
             }else{
                 res.send(data);
             }
@@ -358,7 +358,7 @@ const traerAdmins = (req,res)=>{
         dbConnection.query('SELECT * FROM admins WHERE nivel=2',(error,data)=>{
             if(error){
                 res.send(error);
-                //dbConnection.end();
+                dbConnection.end();
             }else{
                 res.send(data);
             }
@@ -377,7 +377,7 @@ const borrarAdmin = (req,res)=>{
 
          if(error){
             res.send("Hubo un error" + error)
-            //dbConnection.end();
+            dbConnection.end();
         }else{
             res.json(`Admin eliminado/a correctamente!`);
         } 
@@ -389,7 +389,7 @@ const traerProgramasAdmin = (req,res)=>{
     dbConnection.query('SELECT * FROM programas',(error,data)=>{
         if(error){
             res.send(error);
-            //dbConnection.end();
+            dbConnection.end();
         }else{
             res.send(data);
         }
@@ -443,7 +443,7 @@ const eliminarPrograma = async (req,res)=>{
 
          if(error){
             res.send("Hubo un error" + error)
-            //dbConnection.end();
+            dbConnection.end();
         }else{
             res.json(`Programa eliminado correctamente!`);
         } 
@@ -462,7 +462,7 @@ const traerPostulantes = (req,res)=>{
         dbConnection.query(`SELECT * FROM postulaciones WHERE programaId = ${programaId}`,(error,data)=>{
             if(error){
                 res.json("Hubo un error" + error);
-                //dbConnection.end();
+                dbConnection.end();
             }else{
                 res.json(data);
             }
@@ -476,7 +476,7 @@ const traerPostulantes = (req,res)=>{
         dbConnection.query(`SELECT * FROM postulaciones WHERE facultad = "${facultad}" AND programaId = ${programaId}`,(error,data)=>{
             if(error){
                 res.json("Hubo un error" + error);
-                //dbConnection.end();
+                dbConnection.end();
             }else{
                 res.json(data);
             }
@@ -508,7 +508,7 @@ const borrarPostulante = (req,res)=>{
 
         if(error){
            res.send("Hubo un error" + error);
-           //dbConnection.end();
+           dbConnection.end();
        }else{
            res.json(`Registro eliminado correctamente`);
        } 
@@ -528,7 +528,7 @@ const nuevaPass = (req,res)=>{
         if(error){
             
             res.send("Error en el servidor " + error);
-            //dbConnection.end();
+            dbConnection.end();
             }else{
                 if(data.length==0){
                    
@@ -611,7 +611,7 @@ const nuevaPass = (req,res)=>{
                     mensaje:"Error en el servidor" + error
                     
                 })
-                //dbConnection.end();
+                dbConnection.end();
             }else{
                 if(data.length==0){
                     res.json({
@@ -658,7 +658,7 @@ const nuevaPass = (req,res)=>{
                 res.json({
                     mensaje:"Error en el servidor" + error
                 })
-                //dbConnection.end();
+                dbConnection.end();
             }else{
                 if(data.length==0){
                     res.json({
@@ -715,7 +715,7 @@ const nuevaPass = (req,res)=>{
         dbConnection.query("SELECT * FROM programas WHERE id=?",[programaId],async(error,data)=>{
             if(error){
                 res.json({mensaje:error})
-                //dbConnection.end();
+                dbConnection.end();
             }else{
                
                 let info=data[0];
