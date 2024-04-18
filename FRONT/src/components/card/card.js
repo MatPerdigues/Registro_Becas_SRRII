@@ -62,16 +62,16 @@ export default function Card({info}) {
 
                 {adminNivel != 1?
                     
-                     <button type="button" id='sumPostulante' class="btn-admin" onClick={establecerPrograma}>
+                     <button type="button" id='sumPostulante' class="btn-programa" onClick={establecerPrograma}>
                         <FontAwesomeIcon icon={faUserPlus} id='iconPostulante'/>
                         <span id='span-admin'></span>
                     </button>
                 : ''}
-                    <button type="button" id='buscarPostulante' class="btn-admin" onClick={buscarPostulante}>
+                    <button type="button" id='buscarPostulante' class="btn-programa" onClick={buscarPostulante}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} id='iconPostulante'/>
                         <span id='span-admin'></span>
                     </button>
-                    <a class='linkDescarga' href={linkConvocatoria}><button type="button" id='descConvocatoria' class="btn-admin">
+                    <a class='linkDescarga' href={linkConvocatoria}><button type="button" id='descConvocatoria' class="btn-programa">
                         <FontAwesomeIcon icon={faDownload} id='iconPostulante'/>
                         <span id='span-admin'></span>
                     </button></a>

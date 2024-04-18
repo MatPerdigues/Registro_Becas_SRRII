@@ -48,6 +48,7 @@
     width: 80%;
     margin: 0 auto;
     margin-bottom: 50px;
+    max-width:300px;
 }
 
 #sumPostulante{
@@ -88,6 +89,28 @@
     justify-content: center;
     margin-top: 15px; 
 }
+
+.btn-programa{
+    margin: 0px;
+    margin-top: 10%;
+    left: -1800px;
+    top: 0px;
+    color: #f58505;
+    width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    background-color: transparent;
+    border-color: #f58505;
+    display: flex;
+    z-index: 0;
+}
+
+.btn-programa:hover{
+    transition: 0.5s;
+    background-color: #f58505;
+    color: black;
+}
+
 
 @media screen and (max-width: 600px) {
     .tarjeta {
