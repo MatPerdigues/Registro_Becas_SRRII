@@ -348,7 +348,8 @@ const traerAdmins = (req,res)=>{
         dbConnection.query('SELECT * FROM admins',(error,data)=>{
             if(error){
                 res.send(error);
-                dbConnection.end();
+                console.log("Se pudrió todo con la base de datos");
+                //dbConnection.end();
             }else{
                 res.send(data);
             }
