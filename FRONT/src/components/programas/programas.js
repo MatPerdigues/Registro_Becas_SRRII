@@ -11,6 +11,9 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export default function Programas() {
 
+    const [esconder, setEsconder] = useState(true);
+    setTimeout(() => setEsconder(false), 1000);
+
     const aplicarContorno = ()=>{
         document.getElementById("contornoAdmin").style.display="flex";
     }
@@ -45,7 +48,7 @@ export default function Programas() {
         //let programas= await fetch('http://localhost:3200/traerProgramas')
         let programas= await fetch(API+'/traerProgramas')
         
-        .then((res)=>res.json())
+        .then ((res)=>res.json())
         .then(data=>{setConsulta(data)})
         .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
             return programas;
@@ -53,7 +56,8 @@ export default function Programas() {
 
 
     useEffect(()=>{
-        traerProgramas();
+        
+       traerProgramas();
             
     },[])
 
@@ -68,24 +72,29 @@ export default function Programas() {
 
         <Fragment>
 
-            <section class='contornoAdmin' id='contornoAdmin'></section>
+                <section class='contornoAdmin' id='contornoAdmin'></section>
 
-            <Llave aplicarContorno={mostrar}/>
+                <Llave aplicarContorno={mostrar}/>
 
-            <section class="contenedorTarjetas">
-                {consulta.map((dato)=>{                            
-                    return <Card key={dato.id} info={dato}/>
-                })}
-             </section>
+                {esconder===false?
 
-             <section class='tarjetaEliminar' id='tarjetaPass'>
-                <h5 class='h5Eliminar'>¿Desea actualizar su contraseña?</h5>
-                <div id='div-btns'>
-                    <button type='button' id='btn-XeliminarPrograma' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
-                    <button type="submit" class='btnEliminar' onClick={redirigirPass}><FontAwesomeIcon icon={faCheck} /></button>
-                </div>
-            </section>
+                <section class="contenedorTarjetas">
+                    {consulta.map((dato)=>{                            
+                        return <Card key={dato.id} info={dato}/>
+                    })}
+                 </section>
 
+                 :''}
+
+                 <section class='tarjetaEliminar' id='tarjetaPass'>
+                    <h5 class='h5Eliminar'>¿Desea actualizar su contraseña?</h5>
+                    <div id='div-btns'>
+                        <button type='button' id='btn-XeliminarPrograma' onClick={ocultar}><FontAwesomeIcon icon={faXmark} /></button>
+                        <button type="submit" class='btnEliminar' onClick={redirigirPass}><FontAwesomeIcon icon={faCheck} /></button>
+                    </div>
+                </section>
+
+    
              
         </Fragment>
 

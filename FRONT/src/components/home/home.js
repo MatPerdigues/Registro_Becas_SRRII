@@ -214,7 +214,7 @@ export default function Home() {
 
              <section class='contenedorSpinner' id='contenedorSpinner'>
                 <div class="spinner" id='spinner'></div>
-                <div><h6 class='h6spinner'>Paciencia, esto puede demorar hasta 60 segundos...</h6></div>
+                <div><h6 class='h6spinner'>Conectando, esto puede demorar hasta 60 segundos...</h6></div>
              </section>
             
 

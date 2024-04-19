@@ -22,13 +22,12 @@ export default function Postulantes() {
     let resBorrarPostulante = '';
     let programa = sessionStorage.getItem('programa');
     let adminNivel = sessionStorage.getItem('adminNivel');
+    const [esconder, setEsconder] = useState(true);
 
-
-  
-
+    setTimeout(() => setEsconder(false), 1000);
 
     
-    const traerPostulantes= async()=>{
+     const traerPostulantes= async()=>{
         
         let programaId = sessionStorage.getItem('programaId');
         let facultad = sessionStorage.getItem('facultad');
@@ -55,11 +54,14 @@ export default function Postulantes() {
         .then(data=>{setRespuesta(data)})
         .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
     }
-    
-    useEffect(()=>{
+     
+
+
+
+     useEffect(()=>{
         traerPostulantes();
             
-    },[])
+    },[]) 
 
 
 
@@ -122,8 +124,7 @@ export default function Postulantes() {
 
 
     }
-
-        
+       
 
     
     const {onDownload} = useDownloadExcel({
@@ -133,15 +134,31 @@ export default function Postulantes() {
     })
 
 
- 
+    
 
-    return(
+
+     
+     return(
         <Fragment>
             <main>
 
+           
+
             <section class='contornoAdmin' id='contornoAdmin'></section>
 
+           
+
+            <section class='contenedorSpinner' id='contenedorSpinner'>
+                <div class="spinner" id='spinner'></div>
+                <div><h6 class='h6spinner'>Conectando, esto puede demorar hasta 60 segundos...</h6></div>
+             </section>
+
+            {esconder===false?
                 <h4 class='tituloAdmins' id='tituloPostulantes'>{programa}</h4>
+            :''}
+
+
+            {esconder===false?
 
                 <div>
                     <table class='tablaAdmin' id='tablaPostulantes1' >
@@ -153,39 +170,49 @@ export default function Postulantes() {
                             <th class='datoAdmin' id='datoPostulante'>Registrado por</th>
                             <th class='datoAdmin' id='datoPostulante'>Fecha</th>
 
-                            {aval==='true'?
+                            {aval==='true' && esconder===false?
                             <th class='datoAdmin' id='descargaAval'>Aval</th>
                             :''}
-                            {avalOri==='true'?
+                            {avalOri==='true' && esconder===false?
                             
                             <th class='datoAdmin' id='descargaAvalOri'>Aval ORI</th>
                             :''}
-                            {invitacion==='true'?
+                            {invitacion==='true' && esconder===false?
                             
                             <th class='datoAdmin' id='descargaInvitacion'>Invitación</th>
                             :''}
-                            {cv==='true'?
+                            {cv==='true' && esconder===false?
                             
                             <th class='datoAdmin' id='descargaCv'>CV</th>
                             :''}
 
-                            {adminNivel != 1?
+                            {adminNivel !== 1 && esconder===false?
                             <th class='datoAdmin' id='iconPostulantes'></th>
                             :''}
                             
                         </tr>
                     </table>
                 </div>
+
+            :''}
+
+            {esconder===false?
                 
                  <section class="contenedorPostulantes" id='contenedorPostulantes'>
                     {respuesta.map((datoMap)=>{                            
                         return <CardPostulantes key={datoMap.id} inData={datoMap} aval={aval} avalOri={avalOri} invitacion={invitacion} cv={cv} actualizarnombre={actualizarnombre}/>
                     })}
                 </section>
+            :''}
 
-                 <div class='divExcel'>
+            
+            {esconder===false?
+                 <div class='divExcel' id='divExcel'>
                     <button type="button" class="btn btn-success" id='excel' onClick={onDownload}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>
                 </div> 
+            :''}
+
+            
 
                 <section class='tarjetaEliminar' id='tarjetaEliminarPost'>
                     <h5 class='h5Eliminar'>¿Seguro desea eliminar el registro de {nompostulante}?</h5>
@@ -195,8 +222,12 @@ export default function Postulantes() {
                     </div>
                 </section>
 
+           
+
             </main> 
 
         </Fragment>
     )
 }
+
+

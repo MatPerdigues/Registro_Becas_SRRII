@@ -46,6 +46,7 @@ main{
     width: 5%;
     border: none;
     min-width: 30px;
+    background-color: none;
 }
 
 

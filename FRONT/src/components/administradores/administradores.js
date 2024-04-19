@@ -16,11 +16,11 @@ export default function Administradores() {
     let [nombreAdmin,setNombreAdmin] = useState('');
     let [apellidoAdmin,setApellidoAdmin] = useState('');
     let [facultadAdmin, setFacultadAdmin] = useState('');
-
     let resBorrarAdmin='';
-
-
     let [consulta,setConsulta]=useState([]);
+    const [esconder, setEsconder] = useState(true);
+    setTimeout(() => setEsconder(false), 1000);
+
 
     const ocultar = ()=>{
         document.getElementById('tarjetaEliminar').style.display='none';
@@ -121,6 +121,8 @@ export default function Administradores() {
 
     return(
         <Fragment>
+
+            {esconder===false?
             <main>
                 
                     <section class='contornoEliminar' id='contornoEliminar'></section>
@@ -158,6 +160,8 @@ export default function Administradores() {
                     </section>
                 
             </main>
+
+            :''}
         </Fragment>
     )
 }
