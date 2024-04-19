@@ -26,7 +26,7 @@ main{
     height: 60px;
     font-size: 18px;
     font-style: italic;
-    backdrop-filter: blur(50px) grayscale(30%);
+    
     word-break:break-all;
     
 }
@@ -46,7 +46,7 @@ main{
     width: 5%;
     border: none;
     min-width: 30px;
-    background-color: none;
+    backdrop-filter: none;
 }
 
 
