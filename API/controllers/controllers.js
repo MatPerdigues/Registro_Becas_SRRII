@@ -221,7 +221,7 @@ const traerProgramas = (req,res)=>{
             dbConnection.end();
         }else{
             res.send(data);
-            console.log(data.length);
+           
         }
     })
 }

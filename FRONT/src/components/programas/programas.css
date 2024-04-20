@@ -23,7 +23,7 @@
 
 #contenedorSpinner3{
     display: block;
-    padding-top: 100px;
+    padding-top: 180px;
     margin-top: 0px;
 
 }
@@ -59,6 +59,7 @@
         grid-template-columns: repeat(3, 1fr);
         column-gap: 20px;
     }
+
 }
 
 @media screen and (min-width:600px) and (max-width:1000px){

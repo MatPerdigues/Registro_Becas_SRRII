@@ -238,6 +238,13 @@
         margin-top: -50px;
     }
   }
+
+  @media screen and (min-width:1000px){
+    .contenedorSpinner{
+        padding-top: 300px;
+
+    }
+}
     
   
 
