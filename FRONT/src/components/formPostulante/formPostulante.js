@@ -1,5 +1,6 @@
 import './formPostulante.css';
 import { Fragment } from 'react';
+import { useState } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faIdCard,faEnvelope,faUser,faXmark,faCheck,faPassport,faFileSignature,faFileLines} from '@fortawesome/free-solid-svg-icons'
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -20,6 +21,7 @@ export default function FormPostulante() {
     let archivoInvitacion={};
     let archivoCV={};
     let archivoAvalOri={};
+    let[errorCon,setErrorCon]=useState('');
 
 
 
@@ -111,9 +113,13 @@ export default function FormPostulante() {
 
         .then((res)=>res.json())        
         .then((data)=>{respuesta=data})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        
+        if(errorCon){
+            alert(errorCon);
+            window.location.href='../'
+        }
 
-        console.log(respuesta);
 
         
         if(respuesta.message==='jwt malformed'){

@@ -221,6 +221,7 @@ const traerProgramas = (req,res)=>{
             dbConnection.end();
         }else{
             res.send(data);
+            console.log(data.length);
         }
     })
 }
@@ -708,7 +709,7 @@ const nuevaPass = (req,res)=>{
         })}
 
 
-    const traerConvocatoria = async(req,res)=>{
+/*     const traerConvocatoria = async(req,res)=>{
         const{programaId}=req.body;
 
         
@@ -727,7 +728,7 @@ const nuevaPass = (req,res)=>{
 
         }
     )
-}
+} */
 
 
-module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,recuperarPass,traerConvocatoria};
+module.exports={agregarAdmin,login,agregarPrograma,traerProgramas,agregarPostulante,traerAdmins,borrarAdmin,traerProgramasAdmin,eliminarPrograma,traerPostulantes,descargar,borrarPostulante,nuevaPass,verificacionUsuario,enviarPass,recuperarPass};

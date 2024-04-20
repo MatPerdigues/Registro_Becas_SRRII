@@ -89,6 +89,10 @@ main{
     min-width: 600px;
 }
 
+#contenedorSpinner1{
+    display: block;
+}
+
 
  
 @media screen and (max-width: 620px) {

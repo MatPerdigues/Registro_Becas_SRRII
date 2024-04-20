@@ -11,11 +11,21 @@ export default function Card({info}) {
 
     let adminNivel = sessionStorage.getItem("adminNivel");
     let linkConvocatoria = info.convocatoria;
+    let fechaDb = info.vencimiento
+    let bloqueo = null;
+    let fechaFormat=new Date(fechaDb);
+    let fechaVto = fechaFormat.setDate(fechaFormat.getDate()+1);
+    let ctrlBloqueo = new Date();
+    if(ctrlBloqueo>fechaVto){
+        bloqueo=true;
+      
+    }else{
+        bloqueo=false;
+    }
     
     
     const establecerPrograma=event=>{
-        let programa = info.nombre;
-        
+        let programa = info.nombre;           
         sessionStorage.setItem("programa",info.nombre);
         sessionStorage.setItem("aval",info.aval);
         sessionStorage.setItem("invitacion",info.invitacion);
@@ -27,18 +37,17 @@ export default function Card({info}) {
 
     }
 
-        const buscarPostulante = ()=>{
-            sessionStorage.setItem("programa",info.nombre);
-            sessionStorage.setItem('programaId',info.id);
-            sessionStorage.setItem("aval",info.aval);
-            sessionStorage.setItem("invitacion",info.invitacion);
-            sessionStorage.setItem("cv",info.cv);
-            sessionStorage.setItem("avalORI",info.avalORI);
-            sessionStorage.setItem("nombreCorto",info.nombreCorto);
-            window.location.href='../postulantes';
-            
-        }
-
+    const buscarPostulante = ()=>{            
+        sessionStorage.setItem("programa",info.nombre);
+        sessionStorage.setItem('programaId',info.id);
+        sessionStorage.setItem("aval",info.aval);
+        sessionStorage.setItem("invitacion",info.invitacion);
+        sessionStorage.setItem("cv",info.cv);
+        sessionStorage.setItem("avalORI",info.avalORI);
+        sessionStorage.setItem("nombreCorto",info.nombreCorto);
+        window.location.href='../postulantes';
+        
+    }
 
         
 
@@ -60,7 +69,7 @@ export default function Card({info}) {
                  </div>
                  <div class="opcionesPrograma">
 
-                {adminNivel != 1?
+                {adminNivel != 1 && bloqueo===false?
                     
                      <button type="button" id='sumPostulante' class="btn-programa" onClick={establecerPrograma}>
                         <FontAwesomeIcon icon={faUserPlus} id='iconPostulante'/>

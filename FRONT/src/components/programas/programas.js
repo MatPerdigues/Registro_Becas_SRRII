@@ -13,6 +13,7 @@ export default function Programas() {
 
     const [esconder, setEsconder] = useState(true);
     setTimeout(() => setEsconder(false), 1000);
+    let[errorCon,setErrorCon]=useState('');
 
     const aplicarContorno = ()=>{
         document.getElementById("contornoAdmin").style.display="flex";
@@ -40,7 +41,7 @@ export default function Programas() {
         sessionStorage.setItem("avalORI",'true');
 
     
-    let [consulta,setConsulta]=useState([]);
+    let [consulta,setConsulta]=useState('');
     
     
     const traerProgramas= async()=>{
@@ -50,16 +51,26 @@ export default function Programas() {
         
         .then ((res)=>res.json())
         .then(data=>{setConsulta(data)})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
-            return programas;
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+
+        
+        
+        if(errorCon){
+            alert(errorCon);
+            window.location.href='../'
         }
+
+        
+
+    }
 
 
     useEffect(()=>{
-        
-       traerProgramas();
-            
+        traerProgramas();  
     },[])
+
+    
+        
 
 
     const redirigirPass = ()=>{
@@ -76,7 +87,14 @@ export default function Programas() {
 
                 <Llave aplicarContorno={mostrar}/>
 
-                {esconder===false?
+                {consulta==''?
+                    <section class='contenedorSpinner' id='contenedorSpinner1'>
+                        <div class="spinner" id='spinner'></div>
+                        <div><h6 class='h6spinner'>Conectando...</h6></div>
+                     </section>
+                    :''}
+
+                {consulta!=''?
 
                 <section class="contenedorTarjetas">
                     {consulta.map((dato)=>{                            

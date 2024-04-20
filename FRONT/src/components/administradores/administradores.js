@@ -17,9 +17,10 @@ export default function Administradores() {
     let [apellidoAdmin,setApellidoAdmin] = useState('');
     let [facultadAdmin, setFacultadAdmin] = useState('');
     let resBorrarAdmin='';
-    let [consulta,setConsulta]=useState([]);
+    let [consulta,setConsulta]=useState('');
     const [esconder, setEsconder] = useState(true);
     setTimeout(() => setEsconder(false), 1000);
+    let[errorCon,setErrorCon]=useState('');
 
 
     const ocultar = ()=>{
@@ -52,7 +53,12 @@ export default function Administradores() {
         
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        
+        if(errorCon){
+            alert(errorCon);
+            window.location.href='../'
+        }
     
     }
 
@@ -122,8 +128,20 @@ export default function Administradores() {
     return(
         <Fragment>
 
-            {esconder===false?
-            <main>
+
+
+           
+                <main>
+
+                    {consulta==''?
+                    <section class='contenedorSpinner' id='contenedorSpinner1'>
+                        <div class="spinner" id='spinner'></div>
+                        <div><h6 class='h6spinner'>Conectando...</h6></div>
+                     </section>
+                    :''}
+
+
+                    
                 
                     <section class='contornoEliminar' id='contornoEliminar'></section>
                     <section class='tarjetaEliminar' id='tarjetaEliminar'>
@@ -134,9 +152,9 @@ export default function Administradores() {
                         </div>
                     </section>
 
+                                 
                     
-                    
-
+                    {consulta!=''?
 
                     <table class='tablaAdmin' id='tablaCardAdmin'>
                         <tr>
@@ -148,7 +166,10 @@ export default function Administradores() {
                             <th class='thTablaAdmin' id='thAccion'></th>
                         </tr>
                     </table>
+                    :''}
 
+                    
+                    {consulta!=''?
 
                     <section class='mapAdmins'>
                         {consulta.map((dato)=>{   
@@ -158,10 +179,14 @@ export default function Administradores() {
                         }
                         })}
                     </section>
-                
-            </main>
 
-            :''}
+                    :''}
+
+                    
+                
+                </main>
+
+            
         </Fragment>
     )
 }

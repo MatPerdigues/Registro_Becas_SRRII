@@ -28,7 +28,7 @@ const dbConnection = mysql.createPool(dataBaseInfo)
 dbConnection.getConnection((error,connect)=>{
     if (error) {
         connect.release();
-        throw err;
+        //throw err;
     }else{
         console.log('Conexión con DB MySQL exitosa')
     }   

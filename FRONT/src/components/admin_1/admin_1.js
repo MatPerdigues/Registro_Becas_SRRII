@@ -32,6 +32,7 @@ export default function Admin_1() {
     let adminNivel = sessionStorage.getItem("adminNivel");
     let url = '';
     let fileConv={};
+    let[errorCon,setErrorCon]=useState('');
     
     
     const handleChange=(event)=>{
@@ -225,10 +226,12 @@ export default function Admin_1() {
 
         .then((res)=>res.json())
         .then((data)=>{dato=data})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
-
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
         
-
+        if(errorCon){
+            alert(errorCon);
+            window.location.href='../'
+        }
 
         if(dato.message==='jwt malformed'){
 
@@ -316,7 +319,12 @@ export default function Admin_1() {
             })
             .then((res)=>res.json())
             .then((data)=>{dato=data})
-            .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+            .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        
+            if(errorCon){
+                alert(errorCon);
+                window.location.href='../'
+            }
 
             
 
@@ -354,9 +362,13 @@ export default function Admin_1() {
         let programas= await fetch(API+"/traerProgramasAdmin")
         .then((res)=>res.json())
         .then(data=>{setConsulta(data)})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
-            return programas;
-        }
+            .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+            
+            if(errorCon){
+                alert(errorCon);
+                window.location.href='../'
+            }
+    }
 
 
     useEffect(()=>{
@@ -391,8 +403,12 @@ export default function Admin_1() {
 
         .then((res)=>res.json())
         .then((data)=>{resEliminarPrograma=data})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
-
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+            
+        if(errorCon){
+            alert(errorCon);
+            window.location.href='../'
+        }
 
         if(resEliminarPrograma.message==='jwt malformed'){
 

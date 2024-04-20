@@ -1,5 +1,6 @@
 import { Fragment } from 'react';
 import './formPass.css';
+import { useState } from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faKey,faPaperPlane,faCheck,faXmark} from '@fortawesome/free-solid-svg-icons'
 const API = process.env.REACT_APP_BACKEND_URL;
@@ -8,6 +9,7 @@ export default function Pass () {
 
     let dato = '';
     let nivel = sessionStorage.getItem('adminNivel')
+    let[errorCon,setErrorCon]=useState('');
 
 
     const limpiarPass = event=> {
@@ -58,7 +60,12 @@ export default function Pass () {
         
                 .then((res)=>res.json())
                 .then((data)=>{dato=data})
-                .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+                .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        
+                if(errorCon){
+                    alert(errorCon);
+                   
+                }
 
 
                 alert(dato.mensaje);

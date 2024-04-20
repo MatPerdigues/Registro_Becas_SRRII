@@ -12,7 +12,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export default function Postulantes() {
 
-    let [respuesta,setRespuesta]=useState([]);
+    let [respuesta,setRespuesta]=useState(false);
     let aval = sessionStorage.getItem('aval');
     let avalOri = sessionStorage.getItem('avalORI');
     let invitacion = sessionStorage.getItem('invitacion');
@@ -22,11 +22,15 @@ export default function Postulantes() {
     let resBorrarPostulante = '';
     let programa = sessionStorage.getItem('programa');
     let adminNivel = sessionStorage.getItem('adminNivel');
-    const [esconder, setEsconder] = useState(true);
+    let[errorCon,setErrorCon]=useState('');
+/*     const [esconder, setEsconder] = useState(true);
 
-    setTimeout(() => setEsconder(false), 1000);
+    setTimeout(() => setEsconder(false), 1000); */
 
-    
+  
+
+
+        
      const traerPostulantes= async()=>{
         
         let programaId = sessionStorage.getItem('programaId');
@@ -52,18 +56,24 @@ export default function Postulantes() {
 
         .then((res)=>res.json())
         .then(data=>{setRespuesta(data)})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
-    }
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+
+
+        
+        if(errorCon){
+            alert(errorCon);
+            window.location.href='../'
+        }    
+     }
      
 
-
-
      useEffect(()=>{
-        traerPostulantes();
+        //setTimeout(() => traerPostulantes(), 1000);
+        traerPostulantes()
             
     },[]) 
 
-
+  
 
 
     const actualizarnombre = () => {
@@ -103,7 +113,12 @@ export default function Postulantes() {
 
         .then((res)=>res.json())
         .then((data)=>{resBorrarPostulante=data})
-        .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+        
+        if(errorCon){
+            alert(errorCon);
+            window.location.href='../'
+        }
 
         if(resBorrarPostulante.message==='jwt malformed'){
 
@@ -147,18 +162,19 @@ export default function Postulantes() {
             <section class='contornoAdmin' id='contornoAdmin'></section>
 
            
-
-            <section class='contenedorSpinner' id='contenedorSpinner'>
+            {respuesta===false?
+            <section class='contenedorSpinner' id='contenedorSpinner1'>
                 <div class="spinner" id='spinner'></div>
-                <div><h6 class='h6spinner'>Conectando, esto puede demorar hasta 60 segundos...</h6></div>
+                <div><h6 class='h6spinner'>Conectando...</h6></div>
              </section>
+            :''}
 
-            {esconder===false?
+            {respuesta?
                 <h4 class='tituloAdmins' id='tituloPostulantes'>{programa}</h4>
             :''}
 
 
-            {esconder===false?
+            {respuesta?
 
                 <div>
                     <table class='tablaAdmin' id='tablaPostulantes1' >
@@ -170,23 +186,23 @@ export default function Postulantes() {
                             <th class='datoAdmin' id='datoPostulante'>Registrado por</th>
                             <th class='datoAdmin' id='datoPostulante'>Fecha</th>
 
-                            {aval==='true' && esconder===false?
+                            {aval==='true' && respuesta!=''?
                             <th class='datoAdmin' id='descargaAval'>Aval</th>
                             :''}
-                            {avalOri==='true' && esconder===false?
+                            {avalOri==='true' && respuesta!=''?
                             
                             <th class='datoAdmin' id='descargaAvalOri'>Aval ORI</th>
                             :''}
-                            {invitacion==='true' && esconder===false?
+                            {invitacion==='true' && respuesta!=''?
                             
                             <th class='datoAdmin' id='descargaInvitacion'>Invitación</th>
                             :''}
-                            {cv==='true' && esconder===false?
+                            {cv==='true' && respuesta!=''?
                             
                             <th class='datoAdmin' id='descargaCv'>CV</th>
                             :''}
 
-                            {adminNivel !== 1 && esconder===false?
+                            {adminNivel !== 1 && respuesta!=''?
                             <th class='datoAdmin' id='iconPostulantes'></th>
                             :''}
                             
@@ -196,31 +212,31 @@ export default function Postulantes() {
 
             :''}
 
-            {esconder===false?
+            {respuesta?
                 
-                 <section class="contenedorPostulantes" id='contenedorPostulantes'>
-                    {respuesta.map((datoMap)=>{                            
-                        return <CardPostulantes key={datoMap.id} inData={datoMap} aval={aval} avalOri={avalOri} invitacion={invitacion} cv={cv} actualizarnombre={actualizarnombre}/>
-                    })}
-                </section>
+            <section class="contenedorPostulantes" id='contenedorPostulantes'>
+                {respuesta.map((datoMap)=>{                            
+                    return <CardPostulantes key={datoMap.id} inData={datoMap} aval={aval} avalOri={avalOri} invitacion={invitacion} cv={cv} actualizarnombre={actualizarnombre}/>
+                })}
+            </section>
             :''}
 
             
-            {esconder===false?
-                 <div class='divExcel' id='divExcel'>
-                    <button type="button" class="btn btn-success" id='excel' onClick={onDownload}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>
-                </div> 
+            {respuesta?
+            <div class='divExcel' id='divExcel'>
+                <button type="button" class="btn btn-success" id='excel' onClick={onDownload}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>
+            </div> 
             :''}
 
             
 
-                <section class='tarjetaEliminar' id='tarjetaEliminarPost'>
-                    <h5 class='h5Eliminar'>¿Seguro desea eliminar el registro de {nompostulante}?</h5>
-                    <div id='div-btns'>
-                        <button type='button' id='btnXPostulantes' onClick={cerrarCuadro}><FontAwesomeIcon icon={faXmark}/></button>
-                        <button type="submit" class='btnEliminar' onClick={borrarPostulante}><FontAwesomeIcon icon={faCheck}/></button>
-                    </div>
-                </section>
+            <section class='tarjetaEliminar' id='tarjetaEliminarPost'>
+                <h5 class='h5Eliminar'>¿Seguro desea eliminar el registro de {nompostulante}?</h5>
+                <div id='div-btns'>
+                    <button type='button' id='btnXPostulantes' onClick={cerrarCuadro}><FontAwesomeIcon icon={faXmark}/></button>
+                    <button type="submit" class='btnEliminar' onClick={borrarPostulante}><FontAwesomeIcon icon={faCheck}/></button>
+                </div>
+            </section>
 
            
 
