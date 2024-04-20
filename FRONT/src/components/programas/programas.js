@@ -34,12 +34,11 @@ export default function Programas() {
 
     }
 
-    
-        sessionStorage.setItem("aval",'true');
-        sessionStorage.setItem("invitacion",'true');
-        sessionStorage.setItem("cv",'true');
-        sessionStorage.setItem("avalORI",'true');
 
+    sessionStorage.setItem("aval",'true');
+    sessionStorage.setItem("invitacion",'true');
+    sessionStorage.setItem("cv",'true');
+    sessionStorage.setItem("avalORI",'true');
     
     let [consulta,setConsulta]=useState('');
     
@@ -58,15 +57,14 @@ export default function Programas() {
         if(errorCon){
             alert(errorCon);
             window.location.href='../'
-        }
-
-        
+        }   
 
     }
 
 
     useEffect(()=>{
-        setTimeout(() => traerProgramas(), 100000);
+        //setTimeout(() => traerProgramas(), 1000);
+        traerProgramas();
     },[])
 
     
@@ -86,13 +84,13 @@ export default function Programas() {
                 <section class='contornoAdmin' id='contornoAdmin'></section>
 
                 <Llave aplicarContorno={mostrar}/>
-
-                {consulta==''?
-                    <section class='contenedorSpinner' id='contenedorSpinner1'>
-                        <div class="spinner" id='spinner'></div>
-                        <div><h6 class='h6spinner'>Conectando...</h6></div>
-                     </section>
-                    :''}
+ 
+                {consulta==''? 
+                <section class='contenedorSpinner' id='contenedorSpinner3'>
+                    <div class="spinner" id='spinner'></div>
+                    <div><h6 class='h6spinner'>Conectando...</h6></div>
+                 </section>
+                :''} 
 
                 {consulta!=''?
 

@@ -33,6 +33,8 @@ export default function Home() {
     }
 
     const spinner = ()=>{
+
+        
         document.getElementById('form-login').style.display='none';
         //document.getElementById(`contornoLogin`).style.display='flex';
         document.getElementById(`contenedorSpinner`).style.display='block';
