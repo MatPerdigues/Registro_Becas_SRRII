@@ -215,6 +215,10 @@
     #sec-datos-login{
         margin-top: 20%;
     }
+
+    .contenedorSpinner{
+        padding-top: 100px;
+    }
   }
 
 
@@ -227,7 +231,7 @@
     }
 
     .contenedorSpinner{
-        padding-top: 100px;
+        padding-top: 20px;
     }
 
     #form-pass1{

@@ -66,7 +66,7 @@ export default function Programas() {
 
 
     useEffect(()=>{
-        traerProgramas();  
+        setTimeout(() => traerProgramas(), 100000);
     },[])
 
     
