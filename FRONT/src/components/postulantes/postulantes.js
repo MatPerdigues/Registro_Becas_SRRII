@@ -186,23 +186,23 @@ export default function Postulantes() {
                             <th class='datoAdmin' id='datoPostulante'>Registrado por</th>
                             <th class='datoAdmin' id='datoPostulante'>Fecha</th>
 
-                            {aval==='true' && respuesta!=''?
+                            {aval==='true'?
                             <th class='datoAdmin' id='descargaAval'>Aval</th>
                             :''}
-                            {avalOri==='true' && respuesta!=''?
+                            {avalOri==='true'?
                             
                             <th class='datoAdmin' id='descargaAvalOri'>Aval ORI</th>
                             :''}
-                            {invitacion==='true' && respuesta!=''?
+                            {invitacion==='true'?
                             
                             <th class='datoAdmin' id='descargaInvitacion'>Invitación</th>
                             :''}
-                            {cv==='true' && respuesta!=''?
+                            {cv==='true'?
                             
                             <th class='datoAdmin' id='descargaCv'>CV</th>
                             :''}
 
-                            {adminNivel !== 1 && respuesta!=''?
+                            {adminNivel !== 1?
                             <th class='datoAdmin' id='iconPostulantes'></th>
                             :''}
                             
