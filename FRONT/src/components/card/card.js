@@ -13,14 +13,21 @@ export default function Card({info}) {
     let linkConvocatoria = info.convocatoria;
     let fechaDb = info.vencimiento
     let bloqueo = null;
-    let fechaFormat=new Date(fechaDb);
-    let fechaVto = fechaFormat.setDate(fechaFormat.getDate()+1);
-    let ctrlBloqueo = new Date();
+    let fechaVto=new Date(fechaDb);
+    let diaVto=fechaVto.getDate()
+    fechaVto.setDate(diaVto+1);
+    fechaVto.setHours(23);
+    fechaVto.setMinutes(59);
+    let ctrlBloqueo = new Date()
     if(ctrlBloqueo>fechaVto){
         bloqueo=true;
+        
+       
       
     }else{
         bloqueo=false;
+
+       
     }
     
     
@@ -37,7 +44,10 @@ export default function Card({info}) {
 
     }
 
-    const buscarPostulante = ()=>{            
+    const buscarPostulante = ()=>{ 
+
+        console.log(bloqueo);
+        
         sessionStorage.setItem("programa",info.nombre);
         sessionStorage.setItem('programaId',info.id);
         sessionStorage.setItem("aval",info.aval);
@@ -45,7 +55,7 @@ export default function Card({info}) {
         sessionStorage.setItem("cv",info.cv);
         sessionStorage.setItem("avalORI",info.avalORI);
         sessionStorage.setItem("nombreCorto",info.nombreCorto);
-        window.location.href='../postulantes';
+        //window.location.href='../postulantes';
         
     }
 
