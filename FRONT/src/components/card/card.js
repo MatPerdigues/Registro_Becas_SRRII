@@ -46,7 +46,7 @@ export default function Card({info}) {
 
     const buscarPostulante = ()=>{ 
 
-        console.log(bloqueo);
+        
         
         sessionStorage.setItem("programa",info.nombre);
         sessionStorage.setItem('programaId',info.id);
@@ -55,7 +55,7 @@ export default function Card({info}) {
         sessionStorage.setItem("cv",info.cv);
         sessionStorage.setItem("avalORI",info.avalORI);
         sessionStorage.setItem("nombreCorto",info.nombreCorto);
-        //window.location.href='../postulantes';
+        window.location.href='../postulantes';
         
     }
 
