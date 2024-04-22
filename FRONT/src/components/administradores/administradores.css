@@ -27,7 +27,7 @@ main{
     font-size: 18px;
     font-style: italic;
     
-    word-break:break-all;
+    word-break:break-word;
     
 }
 
@@ -62,7 +62,7 @@ main{
     height: 70px;
     padding-top: 20px;
     backdrop-filter: blur(50px) grayscale(30%);
-    word-break:break-all;
+    word-break:break-word;
 }
 
 #nivelAdmin{

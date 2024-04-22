@@ -34,6 +34,8 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
     return(
         <Fragment>
 
+            
+
             <section class='contenedorCardPostulantes'>
                
 
