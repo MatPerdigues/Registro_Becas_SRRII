@@ -222,11 +222,11 @@ export default function Postulantes() {
             :''}
 
             
-            {respuesta?
+            {/* {respuesta? */}
             <div class='divExcel' id='divExcel'>
                 <button type="button" class="btn btn-success" id='excel' onClick={onDownload}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>
             </div> 
-            :''}
+            {/* :''} */}
 
             
 
