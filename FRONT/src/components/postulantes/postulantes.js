@@ -212,14 +212,14 @@ export default function Postulantes() {
 
             :''}
 
-            {respuesta?
+            //{respuesta?
                 
             <section class="contenedorPostulantes" id='contenedorPostulantes'>
                 {respuesta.map((datoMap)=>{                            
                     return <CardPostulantes key={datoMap.id} inData={datoMap} aval={aval} avalOri={avalOri} invitacion={invitacion} cv={cv} actualizarnombre={actualizarnombre}/>
                 })}
             </section>
-            :''}
+            //:''}
 
             
             {respuesta?
