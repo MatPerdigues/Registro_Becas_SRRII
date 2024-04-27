@@ -1,7 +1,8 @@
 import { Fragment} from 'react';
 import './cardPostulantes.css';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faTrashCan,faDownload} from '@fortawesome/free-solid-svg-icons'
+import {faTrashCan,faDownload} from '@fortawesome/free-solid-svg-icons';
+
 
 
 
@@ -9,6 +10,7 @@ import {faTrashCan,faDownload} from '@fortawesome/free-solid-svg-icons'
 export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actualizarnombre}) {
     
     let adminNivel = sessionStorage.getItem("adminNivel");
+    
 
     
 
@@ -39,7 +41,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
             <section class='contenedorCardPostulantes'>
                
 
-                <table class='tablaAdmin' id='tablaPostulantes' >
+                <table class='tablaAdmin' id='tablaPostulantes'>
                     <tr class='trAdmin'>
                         <td class='datoAdmin' id='datoPostulante'>{inData.nombre+' '+inData.apellido}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.dni}</td>

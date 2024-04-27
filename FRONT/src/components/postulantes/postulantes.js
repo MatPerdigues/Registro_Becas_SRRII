@@ -180,7 +180,7 @@ export default function Postulantes() {
             {respuesta?
 
                 <div>
-                    <table class='tablaAdmin' id='tablaPostulantes1' >
+                    <table class='tablaAdmin' id='tablaPostulantes1' ref={tableRef}>
                         <tr>
                             <th class='datoAdmin' id='datoPostulante'>Nombre y apellido</th>
                             <th class='datoAdmin' id='datoPostulante'>DNI</th>
@@ -217,7 +217,7 @@ export default function Postulantes() {
 
              {respuesta? 
                 
-            <section class="contenedorPostulantes" id='contenedorPostulantes' ref={tableRef}>
+            <section class="contenedorPostulantes" id='contenedorPostulantes'>
                 {respuesta.map((datoMap)=>{                            
                     return <CardPostulantes key={datoMap.id} inData={datoMap} aval={aval} avalOri={avalOri} invitacion={invitacion} cv={cv} actualizarnombre={actualizarnombre}/>
                 })}
