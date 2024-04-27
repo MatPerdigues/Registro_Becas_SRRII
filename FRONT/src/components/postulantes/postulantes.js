@@ -1,11 +1,11 @@
 import { Fragment } from 'react';
 import './postulantes.css';
 import CardPostulantes from '../cardPsotulantes/cardPostulantes';
-import { useState,useEffect,useRef} from 'react';
+import { useState,useEffect} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCheck,faXmark,faFileExcel} from '@fortawesome/free-solid-svg-icons'
 import { useDownloadExcel } from 'react-export-table-to-excel';
-import { DownloadTableExcel } from 'react-export-table-to-excel';
+
 
 const API = process.env.REACT_APP_BACKEND_URL;
 
@@ -15,7 +15,7 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export default function Postulantes() {
 
-    const tableRef = useRef(null);
+
     let [respuesta,setRespuesta]=useState(false);
     let aval = sessionStorage.getItem('aval');
     let avalOri = sessionStorage.getItem('avalORI');
@@ -27,9 +27,9 @@ export default function Postulantes() {
     let programa = sessionStorage.getItem('programa');
     let adminNivel = sessionStorage.getItem('adminNivel');
     let[errorCon,setErrorCon]=useState('');
-/*     const [esconder, setEsconder] = useState(true);
+     const [tabla, setTabla] = useState('');
 
-    setTimeout(() => setEsconder(false), 1000); */
+    //setTimeout(() => setEsconder(false), 1000); 
 
 
 
@@ -140,18 +140,35 @@ export default function Postulantes() {
             }
         }
 
-    }     
+    }  
 
+    
 
+     
+     
 /*     
-     const {onDownload} = useDownloadExcel({
-        currentTableRef: document.getElementById('contenedorPostulantes'),
+        const {onDownload} = useDownloadExcel({
+            currentTableRef: document.getElementById('contenedorPostulantes'),
+            filename: 'Postulantes',
+            sheet: 'Postulantes'
+    }) */
+
+
+        
+    const {onDownload} = useDownloadExcel({
+        currentTableRef: tabla,
         filename: 'Postulantes',
         sheet: 'Postulantes'
-    })
-     
- */
+})
 
+    useEffect(() => {
+        if(respuesta){
+            setTabla(document.getElementById('contenedorPostulantes'));
+        }
+
+    });  
+
+    
 
 
 
@@ -180,7 +197,7 @@ export default function Postulantes() {
             {respuesta?
 
                 <div>
-                    <table class='tablaAdmin' id='tablaPostulantes1' ref={tableRef}>
+                    <table class='tablaAdmin' id='tablaPostulantes1'>
                         <tr>
                             <th class='datoAdmin' id='datoPostulante'>Nombre y apellido</th>
                             <th class='datoAdmin' id='datoPostulante'>DNI</th>
@@ -227,11 +244,7 @@ export default function Postulantes() {
             
             {respuesta?
             <div class='divExcel' id='divExcel'>
-                 {/* <button type="button" class="btn btn-success" id='excel' onClick={onDownload}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>  */}
-                 <DownloadTableExcel filename="users table" sheet="users" currentTableRef={tableRef.current}>
-                    <button type="button" class="btn btn-success" id='excel'><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button> 
-                </DownloadTableExcel>
-               
+                <button type="button" class="btn btn-success" id='excel' onClick={(onDownload)}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>                
             </div> 
             :''} 
 
