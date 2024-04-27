@@ -39,7 +39,7 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
             <section class='contenedorCardPostulantes'>
                
 
-                <table class='tablaAdmin' id='tablaPostulantes'>
+                <table class='tablaAdmin' id='tablaPostulantes' >
                     <tr class='trAdmin'>
                         <td class='datoAdmin' id='datoPostulante'>{inData.nombre+' '+inData.apellido}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.dni}</td>

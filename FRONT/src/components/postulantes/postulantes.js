@@ -1,17 +1,21 @@
 import { Fragment } from 'react';
 import './postulantes.css';
 import CardPostulantes from '../cardPsotulantes/cardPostulantes';
-import { useState,useEffect} from 'react';
+import { useState,useEffect,useRef} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCheck,faXmark,faFileExcel} from '@fortawesome/free-solid-svg-icons'
 import { useDownloadExcel } from 'react-export-table-to-excel';
+import { DownloadTableExcel } from 'react-export-table-to-excel';
+
 const API = process.env.REACT_APP_BACKEND_URL;
+
 
 
 
 
 export default function Postulantes() {
 
+    const tableRef = useRef(null);
     let [respuesta,setRespuesta]=useState(false);
     let aval = sessionStorage.getItem('aval');
     let avalOri = sessionStorage.getItem('avalORI');
@@ -27,7 +31,6 @@ export default function Postulantes() {
 
     setTimeout(() => setEsconder(false), 1000); */
 
-  
 
 
         
@@ -137,19 +140,19 @@ export default function Postulantes() {
             }
         }
 
+    }     
 
-    }
-       
 
-    
-    const {onDownload} = useDownloadExcel({
+/*     
+     const {onDownload} = useDownloadExcel({
         currentTableRef: document.getElementById('contenedorPostulantes'),
         filename: 'Postulantes',
         sheet: 'Postulantes'
     })
+     
+ */
 
 
-    
 
 
      
@@ -212,21 +215,25 @@ export default function Postulantes() {
 
             :''}
 
-            {respuesta?
+             {respuesta? 
                 
-            <section class="contenedorPostulantes" id='contenedorPostulantes'>
+            <section class="contenedorPostulantes" id='contenedorPostulantes' ref={tableRef}>
                 {respuesta.map((datoMap)=>{                            
                     return <CardPostulantes key={datoMap.id} inData={datoMap} aval={aval} avalOri={avalOri} invitacion={invitacion} cv={cv} actualizarnombre={actualizarnombre}/>
                 })}
             </section>
-            :''}
+            :''} 
 
             
-            {/* {respuesta? */}
+            {respuesta?
             <div class='divExcel' id='divExcel'>
-                <button type="button" class="btn btn-success" id='excel' onClick={onDownload}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>
+                 {/* <button type="button" class="btn btn-success" id='excel' onClick={onDownload}><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button>  */}
+                 <DownloadTableExcel filename="users table" sheet="users" currentTableRef={tableRef.current}>
+                    <button type="button" class="btn btn-success" id='excel'><FontAwesomeIcon icon={faFileExcel} id='iconExcel'/></button> 
+                </DownloadTableExcel>
+               
             </div> 
-            {/* :''} */}
+            :''} 
 
             
 
