@@ -20,8 +20,11 @@ export default function Home() {
     const[nombre,setNombre]=useState('');
     const[usuario,setUsuario]=useState('');
     const[mail,setMail]=useState('');
+    const [consulta,setConsulta]=useState('');
+    const[errorCon,setErrorCon]=useState('');
+ 
 
-   
+          
     
 
     const contorno = ()=>{
@@ -40,6 +43,10 @@ export default function Home() {
         document.getElementById(`contenedorSpinner`).style.display='block';
     }
 
+       
+
+    
+
     const ocultar=()=>{
         document.getElementById(`contornoEliminar`).style.display='none';
         document.getElementById(`tarjetaPass1`).style.display='none';
@@ -47,6 +54,32 @@ export default function Home() {
         document.getElementById('sec-datos-login').style.display='block';
     }
 
+
+
+     const actServer = async()=>{
+
+
+
+        let programas= await fetch(API+'/respuesta')
+        
+        .then ((res)=>res.json())
+        .then(data=>{setConsulta(data)})
+        .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+
+        console.log(consulta)
+
+        
+
+    }
+
+    if(consulta===''){
+        actServer();
+    }else{
+        document.getElementById('form-login').style.display='flex';
+        document.getElementById(`contenedorSpinner1`).style.display='none';
+    }
+ 
+  
 
     
     
@@ -77,6 +110,7 @@ export default function Home() {
         .then((res)=>res.json())
         .then((data)=>{dato=data})
         .catch(error => alert("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
+
         
 
 
@@ -216,8 +250,13 @@ export default function Home() {
 
              <section class='contenedorSpinner' id='contenedorSpinner'>
                 <div class="spinner" id='spinner'></div>
-                <div><h6 class='h6spinner'>Conectando, esto puede demorar hasta 60 segundos...</h6></div>
+                <div><h6 class='h6spinner'>Conectando...</h6></div>
              </section>
+
+              <section class='contenedorSpinner' id='contenedorSpinner1'>
+                <div class="spinner" id='spinner'></div>
+                <div><h6 class='h6spinner'>Conectando, esto puede demorar hasta 60 segundos...</h6></div>
+             </section> 
             
 
             <form id='form-login'method='POST' onSubmit={(event)=>{login(event)}}>  

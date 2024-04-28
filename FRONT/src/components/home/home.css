@@ -1,7 +1,7 @@
 
 
 #form-login{
-    display: flex;
+    display: none;
     justify-content: center;
     height: 80%;
 }
@@ -192,6 +192,10 @@
     margin-top: 50px;
     color: #FF8C00;
 
+  }
+
+  .contenedorSpinner1{
+    display: block;
   }
 
     

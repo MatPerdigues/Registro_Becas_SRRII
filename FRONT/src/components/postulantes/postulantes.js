@@ -144,15 +144,6 @@ export default function Postulantes() {
 
     
 
-     
-     
-/*     
-        const {onDownload} = useDownloadExcel({
-            currentTableRef: document.getElementById('contenedorPostulantes'),
-            filename: 'Postulantes',
-            sheet: 'Postulantes'
-    }) */
-
 
         
     const {onDownload} = useDownloadExcel({

@@ -15,6 +15,8 @@ main{
     font-size: 16px;
     font-style: italic;
     margin-top: 80px;
+   
+   
 }
 
 #excel{
@@ -76,6 +78,11 @@ main{
    
 }
 
+#iconPostulantes{
+    opacity: 0%;
+    
+}
+
 #btnXPostulantes{
 
     width: 50px;
@@ -92,6 +99,13 @@ main{
 #contenedorSpinner1{
     display: block;
 }
+
+#datoPostulante,#descargaAval,#descargaCv,#descargaAvalOri,#descargaInvitacion{
+    backdrop-filter: blur(5px) grayscale(30%);
+}
+
+
+
 
 
  

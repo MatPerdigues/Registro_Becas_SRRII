@@ -23,7 +23,8 @@ router.post('/recuperarPass',recuperarPass);
 //router.post('/traerConvocatoria',traerConvocatoria);
 
 router.get('/respuesta', (req, res) => {
-  res.send('Respuesta Correcta!')
+  res.json({mensaje:'Respuesta Correcta!'})
+  
 })
 
 

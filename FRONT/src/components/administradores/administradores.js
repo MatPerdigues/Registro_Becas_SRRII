@@ -158,10 +158,10 @@ export default function Administradores() {
 
                     <table class='tablaAdmin' id='tablaCardAdmin'>
                         <tr>
-                            <th class='thTablaAdmin'>Nombre y Apellido</th>
-                            <th class='thTablaAdmin'>Unidad Académica</th>
-                            <th class='thTablaAdmin'>Correo electrónico</th>
-                            <th class='thTablaAdmin'>Usuario</th>
+                            <th class='thTablaAdmin' id='nomAdmin'>Nombre y Apellido</th>
+                            <th class='thTablaAdmin' id='facAdmin'>Unidad Académica</th>
+                            <th class='thTablaAdmin' id='mailAdmin'>Correo electrónico</th>
+                            <th class='thTablaAdmin' id='usuarioAdmin'>Usuario</th>
                             <th class='thTablaAdmin' id='thNivel'>Nivel</th>
                             <th class='thTablaAdmin' id='thAccion'></th>
                         </tr>
