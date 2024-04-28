@@ -149,3 +149,8 @@ main{
 }
 
 
+@media screen and (max-width:1000px) {
+    #datoPostulante,#descargaAval,#descargaCv,#descargaAvalOri,#descargaInvitacion{
+        backdrop-filter:none;
+    }
+}
