@@ -6,7 +6,7 @@ main{
     color:whitesmoke;
     width: 100%;
     margin: 0 auto;
-    height: 95vh;
+    height: 100vh;
     z-index: 1;
     overflow-y: scroll;
 }
