@@ -1,17 +1,17 @@
 
 
 #tablaPostulantes{
-    width: 90%;
+    width: 1800px;
 }
 
 #datoPostulante{
-    width: 10%;
-    min-width: 80px;
+   
+
 }
 
 #descargaAval, #descargaAvalOri, #descargaInvitacion, #descargaCv{
-    width: 5%;
-    min-width: 50px;
+  
+    width: 100px;
 }
 
 #iconPostulane{

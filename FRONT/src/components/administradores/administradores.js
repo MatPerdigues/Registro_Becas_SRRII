@@ -154,33 +154,39 @@ export default function Administradores() {
 
                                  
                     
-                    {consulta!=''?
-
-                    <table class='tablaAdmin' id='tablaCardAdmin'>
-                        <tr>
-                            <th class='thTablaAdmin' id='nomAdmin'>Nombre y Apellido</th>
-                            <th class='thTablaAdmin' id='facAdmin'>Unidad Académica</th>
-                            <th class='thTablaAdmin' id='mailAdmin'>Correo electrónico</th>
-                            <th class='thTablaAdmin' id='usuarioAdmin'>Usuario</th>
-                            <th class='thTablaAdmin' id='thNivel'>Nivel</th>
-                            <th class='thTablaAdmin' id='thAccion'></th>
-                        </tr>
-                    </table>
-                    :''}
-
                     
-                    {consulta!=''?
 
-                    <section class='mapAdmins'>
-                        {consulta.map((dato)=>{   
+                    <section class='contenedorTablaAdmins'>
 
-                            if(dato.nivel > 0) {
-                                return <CardAdmins key={dato.id} info={dato} idContorno={'contornoEliminar'} idTarjetaEliminar={'tarjetaEliminar'} actDatos={actDatos}/>
-                        }
-                        })}
+                        {consulta!=''?  
+
+
+                        <table class='tablaAdmin' id='tablaCardAdmin'>
+                            <tr>
+                                <th class='thTablaAdmin' id='nomAdmin'>Nombre y Apellido</th>
+                                <th class='thTablaAdmin' id='facAdmin'>Unidad Académica</th>
+                                <th class='thTablaAdmin' id='mailAdmin'>Correo electrónico</th>
+                                <th class='thTablaAdmin' id='usuarioAdmin'>Usuario</th>
+                                <th class='thTablaAdmin' id='thNivel'>Nivel</th>
+                                <th class='thTablaAdmin' id='thAccion'></th>
+                            </tr>
+                        </table>
+                        :''}
+
+
+                        {consulta!=''?
+
+                        <section class='mapAdmins'>
+                            {consulta.map((dato)=>{   
+                                
+                                if(dato.nivel > 0) {
+                                    return <CardAdmins key={dato.id} info={dato} idContorno={'contornoEliminar'} idTarjetaEliminar={'tarjetaEliminar'} actDatos={actDatos}/>
+                                }
+                            })}
+                        </section>
+
+                        :''}
                     </section>
-
-                    :''}
 
                     
                 

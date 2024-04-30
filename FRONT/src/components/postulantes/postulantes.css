@@ -9,7 +9,7 @@ main{
 }
 
 #tablaPostulantes1{
-    width: 90%;
+    width: 1800px;
     text-align: center;
     height: 60px;
     font-size: 16px;
@@ -31,7 +31,7 @@ main{
 
 .divExcel{
 
-    width: 90%;
+    width: 1800px;
     display: flex;
     justify-content: center;
     margin:50px auto;
@@ -93,7 +93,8 @@ main{
 }
 
 #tituloPostulantes{
-    min-width: 600px;
+    width: 1800px;
+    margin: 50px auto;
 }
 
 #contenedorSpinner1{
@@ -102,7 +103,9 @@ main{
 
 #datoPostulante,#descargaAval,#descargaCv,#descargaAvalOri,#descargaInvitacion{
     backdrop-filter: blur(5px) grayscale(30%);
+    width: 200px;
 }
+
 
 
 
