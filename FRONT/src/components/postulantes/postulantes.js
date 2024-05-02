@@ -190,9 +190,9 @@ export default function Postulantes() {
                 <div>
                     <table class='tablaAdmin' id='tablaPostulantes1'>
                         <tr>
-                            <th class='datoAdmin' id='datoPostulante'>Nombre y apellido</th>
+                            <th class='datoAdmin' id='datoPostulante1'>Nombre y apellido</th>
                             <th class='datoAdmin' id='datoPostulante'>DNI</th>
-                            <th class='datoAdmin' id='datoPostulante'>Unidad Académica</th>
+                            <th class='datoAdmin' id='datoPostulante3'>Unidad Académica</th>
                             <th class='datoAdmin' id='datoPostulante'>Coreo electrónico</th>
                             <th class='datoAdmin' id='datoPostulante'>Registrado por</th>
                             <th class='datoAdmin' id='datoPostulante'>Fecha</th>

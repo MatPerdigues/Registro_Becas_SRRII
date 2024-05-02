@@ -31,22 +31,23 @@ export default function FormPostulante() {
 
     const handleChangeAval=(event)=>{
         archivoAval=event.target.files[0];
-        console.log(archivoAval)
+        
+
     };
 
     const handleChangeInvitacion=(event)=>{
         archivoInvitacion=event.target.files[0];
-        console.log(archivoInvitacion)
+     
     };
 
     const handleChangeCV=(event)=>{
         archivoCV=event.target.files[0];
-        console.log(archivoCV)
+   
     };
 
     const handleChangeAvalORI=(event)=>{
         archivoAvalOri=event.target.files[0];
-        console.log(archivoAvalOri)
+     
     };
     
     
@@ -54,6 +55,8 @@ export default function FormPostulante() {
     const ocultar= event=>{
         window.location.href='../programas';
     }
+    
+
     
     
     const agregarPostulante = async(event)=>{
@@ -66,6 +69,10 @@ export default function FormPostulante() {
 
         if(result>0){
             return(alert('Error: el DNI debe contener solo números'))
+        }
+
+        if(archivoAval.size>3000000 || archivoAvalOri.size>3000000 || archivoInvitacion.size>3000000 ||archivoCV.size>3000000){
+            return(alert('Los archivos deben pesar menos de 3 MB'))
         }
 
 

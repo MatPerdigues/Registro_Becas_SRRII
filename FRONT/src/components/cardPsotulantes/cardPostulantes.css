@@ -4,13 +4,21 @@
     width: 1800px;
 }
 
-#datoPostulante{
-   
-
+#datoPostulante1{
+    word-break: normal;
+    
 }
 
-#descargaAval, #descargaAvalOri, #descargaInvitacion, #descargaCv{
-  
+#datoPostulante3{
+    word-break: normal;
+   
+    
+}
+
+
+
+
+#descargaAval, #descargaAvalOri, #descargaInvitacion, #descargaCv{  
     width: 100px;
 }
 

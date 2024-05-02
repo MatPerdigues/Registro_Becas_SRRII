@@ -43,9 +43,9 @@ export default function CardPostulantes({inData,aval,avalOri,invitacion,cv,actua
 
                 <table class='tablaAdmin' id='tablaPostulantes'>
                     <tr class='trAdmin'>
-                        <td class='datoAdmin' id='datoPostulante'>{inData.nombre+' '+inData.apellido}</td>
+                        <td class='datoAdmin' id='datoPostulante1'>{inData.nombre+' '+inData.apellido}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.dni}</td>
-                        <td class='datoAdmin' id='datoPostulante'>{inData.facultad}</td>
+                        <td class='datoAdmin' id='datoPostulante3'>{inData.facultad}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.email}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.gestor}</td>
                         <td class='datoAdmin' id='datoPostulante'>{inData.fecha_registro}</td>
