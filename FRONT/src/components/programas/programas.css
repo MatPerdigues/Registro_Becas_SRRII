@@ -40,6 +40,20 @@
 
 }
 
+.h4Programs{
+    color: whitesmoke;
+    border: 1px solid whitesmoke;
+    border-radius: 10px;
+    width: 50%;
+    height: 30vh;
+    backdrop-filter: blur(8px) grayscale(30%);
+    text-align: center;   
+    padding: 10vh;
+    margin: 0 auto;
+    margin-top: 100px;
+    
+}
+
 
 @media screen and (max-width: 600px) {
     .contenedorTarjetas {
@@ -53,6 +67,10 @@
 
     #tarjetaPass{
         height: 40vh;
+    }
+
+    .h4Programs{
+        width: 90%;
     }
 }
 
@@ -78,6 +96,10 @@
 
     #contenedorSpinner3{
         padding-top: 0px;
+    }
+
+    .h4Programs{
+        margin-top: 50px;
     }
 
 }

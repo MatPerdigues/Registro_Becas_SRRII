@@ -11,8 +11,13 @@ const API = process.env.REACT_APP_BACKEND_URL;
 
 export default function Programas() {
 
-    const [esconder, setEsconder] = useState(true);
+    const [esconder, setEsconder] = useState(true); 
     setTimeout(() => setEsconder(false), 1000);
+
+    const [spinner, SetSpinner] = useState(true);
+    setTimeout(() => SetSpinner(false), 2000);
+
+    
     let[errorCon,setErrorCon]=useState('');
 
     const aplicarContorno = ()=>{
@@ -35,6 +40,8 @@ export default function Programas() {
     }
 
 
+
+
     sessionStorage.setItem("aval",'true');
     sessionStorage.setItem("invitacion",'true');
     sessionStorage.setItem("cv",'true');
@@ -52,6 +59,7 @@ export default function Programas() {
         .then(data=>{setConsulta(data)})
         .catch(error => setErrorCon("Ha fallado la conexión con el servidor. Intentelo nuevamente en unos instantes"));
 
+        
         
         
         if(errorCon){
@@ -84,13 +92,20 @@ export default function Programas() {
                 <section class='contornoAdmin' id='contornoAdmin'></section>
 
                 <Llave aplicarContorno={mostrar}/>
- 
-                {consulta==''? 
+  
+                {spinner?
                 <section class='contenedorSpinner' id='contenedorSpinner3'>
                     <div class="spinner" id='spinner'></div>
                     <div><h6 class='h6spinner'>Conectando...</h6></div>
                  </section>
                 :''} 
+
+
+                {consulta.length===0?
+
+                <h4 class='h4Programs'>En este momento no hay programas disponibles</h4>
+                
+                :''}
 
                 {consulta!=''?
 

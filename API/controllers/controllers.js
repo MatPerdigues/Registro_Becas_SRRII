@@ -105,28 +105,7 @@ const login = (req,res)=>{
                     });
 
                     
-/*                     //jwt.sign({usuario},PASS_SEGURA,{expiresIn:'10m'},(error,token)=>{
-                      jwt.sign({ usuario },PASS_SEGURA,{ expiresIn: '30m' }, (error, { token }) => {
-                        if (error) {
-                            res.send({ mensaje: error });
-                            console.log("error de token" + error);
 
-                        } else {
-                            
-                            console.log(token);
-                            res.send({
-                                mensaje: ("Usuario logeado correctamente!"),
-                                claveToken: token,
-                                nivel: info.nivel,
-                                facultad: info.unidad_academica,
-                                gestor: info.usuario,
-                                nombre: info.nombre,
-                                apellido: info.apellido,
-                                mail: info.mail
-                            });
-
-                        }
-                    }) */
                 }else{
                     res.send({
                         mensaje:"Contraseña incorrecta"
