@@ -214,106 +214,126 @@ const agregarPostulante=(req,res)=>{
     const{nombre,apellido,dni,email,facultad,programa,nombreCorto,programaId,fecha_registro,year_registro,gestor}=req.body;
 
 
-    let aval=''
-    let avalORI=''
-    let invitacion=''
-    let cv=''
-
-    const subirArchivo = async(archivo,buffer)=>{
-
-        const params = {
-            Bucket: process.env.S3BUCKET_NAME,
-            Key: `programas/${nombreCorto}/archivos/${archivo}`,
-            Body: buffer,
-            ContentType: req.files.mimeType
-        }
-        const commandPut = new PutObjectCommand(params);
-        await s3Client.send(commandPut)
-    }
-    
-    
-    if(req.files.aval===undefined){
-        aval='N/A'
-    } else {
-
-        const ext=req.files.aval[0].originalname.split(".").pop(); 
-        const archivo=`aval-${apellido}-${Date.now()}.${ext}`;
-        const buffer=req.files.aval[0].buffer;
-
-              
-        subirArchivo(archivo,buffer);
-        
-        //aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
-        aval =`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
-    
-    };
-
-    
-    
-     if(req.files.avalORI===undefined){
-        avalORI = 'N/A'
-    } else {
-        
-        const ext=req.files.avalORI[0].originalname.split(".").pop(); 
-        const archivo=`avalORI-${apellido}-${Date.now()}.${ext}`;
-        const buffer=req.files.avalORI[0].buffer;
-
-              
-        subirArchivo(archivo,buffer);
+    dbConnection.query(`SELECT * FROM postulaciones WHERE programa="${programa}" AND dni="${dni}"`,(error,data)=>{
        
-            
-        avalORI=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
-    };
-
-
-
-    if(req.files.invitacion===undefined){
-        invitacion = 'N/A'
-    } else {
-
-        const ext=req.files.invitacion[0].originalname.split(".").pop(); 
-        const archivo=`invitacion-${apellido}-${Date.now()}.${ext}`;
-        const buffer=req.files.invitacion[0].buffer;
-
-              
-        subirArchivo(archivo,buffer);
-        
-        invitacion=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
-    };
-
-    
-    
-    if(req.files.cv===undefined){
-        cv = 'N/A'
-    } else {
-
-        const ext=req.files.cv[0].originalname.split(".").pop(); 
-        const archivo=`CV-${apellido}-${Date.now()}.${ext}`;
-        const buffer=req.files.cv[0].buffer;
-
-              
-        subirArchivo(archivo,buffer);
-        
-        cv=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
-    };
-    
-    
-    
-    dbConnection.query("INSERT INTO postulaciones (nombre,apellido,dni,email,facultad,programa,programaId,fecha_registro,año_registro,gestor,aval,avalORI,invitacion,cv) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[nombre,apellido,dni,email,facultad,programa,programaId,fecha_registro,year_registro,gestor,aval,avalORI,invitacion,cv],(error,data)=>{
         if(error){
-            res.json({
-                mensaje:'Hubo un error'+' '+error
-            })
-            dbConnection.end();
-        }else{
-                  
-            res.json({
-                mensaje:"Postulante registrado/a correctamente"
-            });
             
+           
+            res.send({mensaje:error})
+            dbConnection.end();
+            
+                
+        }else{
+            if(data.length>0){
+                
+                res.send({mensaje:`Este registro ya existe`})
+            }else{
+
+                    let aval=''
+                    let avalORI=''
+                    let invitacion=''
+                    let cv=''
+
+                    const subirArchivo = async(archivo,buffer)=>{
+
+                        const params = {
+                            Bucket: process.env.S3BUCKET_NAME,
+                            Key: `programas/${nombreCorto}/archivos/${archivo}`,
+                            Body: buffer,
+                            ContentType: req.files.mimeType
+                        }
+                        const commandPut = new PutObjectCommand(params);
+                        await s3Client.send(commandPut)
+                    }
+                    
+                    
+                    if(req.files.aval===undefined){
+                        aval='N/A'
+                    } else {
+
+                        const ext=req.files.aval[0].originalname.split(".").pop(); 
+                        const archivo=`aval-${apellido}-${Date.now()}.${ext}`;
+                        const buffer=req.files.aval[0].buffer;
+
+                            
+                        subirArchivo(archivo,buffer);
+                        
+                        //aval ='http://localhost:3200/public/' + req.files.aval[0].filename;
+                        aval =`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
+                    
+                    };
+
+                    
+                    
+                    if(req.files.avalORI===undefined){
+                        avalORI = 'N/A'
+                    } else {
+                        
+                        const ext=req.files.avalORI[0].originalname.split(".").pop(); 
+                        const archivo=`avalORI-${apellido}-${Date.now()}.${ext}`;
+                        const buffer=req.files.avalORI[0].buffer;
+
+                            
+                        subirArchivo(archivo,buffer);
+                    
+                            
+                        avalORI=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
+                    };
+
+
+
+                    if(req.files.invitacion===undefined){
+                        invitacion = 'N/A'
+                    } else {
+
+                        const ext=req.files.invitacion[0].originalname.split(".").pop(); 
+                        const archivo=`invitacion-${apellido}-${Date.now()}.${ext}`;
+                        const buffer=req.files.invitacion[0].buffer;
+
+                            
+                        subirArchivo(archivo,buffer);
+                        
+                        invitacion=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
+                    };
+
+                    
+                    
+                    if(req.files.cv===undefined){
+                        cv = 'N/A'
+                    } else {
+
+                        const ext=req.files.cv[0].originalname.split(".").pop(); 
+                        const archivo=`CV-${apellido}-${Date.now()}.${ext}`;
+                        const buffer=req.files.cv[0].buffer;
+
+                            
+                        subirArchivo(archivo,buffer);
+                        
+                        cv=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/archivos/${archivo}`;
+                    };
+                    
+                    
+        
+                    dbConnection.query("INSERT INTO postulaciones (nombre,apellido,dni,email,facultad,programa,programaId,fecha_registro,año_registro,gestor,aval,avalORI,invitacion,cv) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[nombre,apellido,dni,email,facultad,programa,programaId,fecha_registro,year_registro,gestor,aval,avalORI,invitacion,cv],(error,data)=>{
+                        if(error){
+                            res.json({
+                                mensaje:'Hubo un error'+' '+error
+                            })
+                            dbConnection.end();
+                        }else{
+                                
+                            res.json({
+                                mensaje:"Postulante registrado/a correctamente"
+                            });
+                            
+                        }
+                    })
+                }
+                
+            }
         }
-    })
-} 
+    )
+    }
  
 
 
