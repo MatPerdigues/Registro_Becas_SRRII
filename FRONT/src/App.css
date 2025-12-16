@@ -6,6 +6,7 @@
     width: 100%; 
     overflow-y: auto;
     overflow-x: hidden;
+    background-position: center center;
 }
 
 /* .App {
@@ -20,3 +21,4 @@
     overflow-y: auto;
     overflow-x: hidden;
 } */
+
