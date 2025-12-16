@@ -279,7 +279,7 @@ export default function Admin_1() {
         
 
 
-        let formatoFecha = event.target[2].value.split("-")
+        let formatoFecha = event.target[3].value.split("-")
         let dia = formatoFecha[2];
         let mes = formatoFecha[1];
         let year = formatoFecha[0];
@@ -296,10 +296,11 @@ export default function Admin_1() {
         
         const form = new FormData();
         form.append('imagen',img);
-        form.append('convocatoria',fileConv);
+        // form.append('convocatoria',fileConv);
         form.append("nombre",event.target[0].value);
         form.append("nombreCorto",event.target[1].value);
-        form.append("vencimiento",event.target[2].value);
+        form.append("link",event.target[2].value);
+        form.append("vencimiento",event.target[3].value);
         form.append("vencimientoPublic",vencimientoPublic);
         form.append("aval",check1.checked);
         form.append("invitacion",check2.checked);
@@ -480,34 +481,40 @@ export default function Admin_1() {
                 <section id="sec1-form-info">
                     <p class='titulo-form-admin'>Complete los datos del Programa</p>
                     
-                    <div class="input-group mb-3" id='input-admin1'>
+                    <div class="input-group mb-3" id='inputTexto'>
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
-                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre del Programa...' name="nombre"/>
+                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre del Programa' name="nombre"/>
                     </div>
             
+                    <div class="input-group mb-3" id='inputTexto'>
+                        <span class="input-group-text" id="inputGroup-sizing-default"></span>
+                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre corto' name="nombreCorto"/>
+                    </div>
+
+                    <div class="input-group mb-3" id='inputTexto'>
+                        <span class="input-group-text" id="inputGroup-sizing-default"></span>
+                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Link Convocatoria' name="nombre"/>
+                    </div>
+                    
+                    <div id='tituloVencimiento'>--- Vencimiento ---</div> 
                     <div class="input-group mb-3" id='input-admin1'>
                         <span class="input-group-text" id="inputGroup-sizing-default"></span>
-                        <input type="text" required class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Nombre corto...' name="nombreCorto"/>
+                        <input type="date" required class="form-control" id='vtoUBA' aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" name="nomCient"/>
                     </div>
-                    
-                    <div class="input-group mb-3" id='input-admin1'>
-                        <span class="input-group-text" id="inputGroup-sizing-default">Vencimiento UBA</span>
-                        <input type="date" required class="form-control" id='vtoUBA' aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder='Vencimiento UBA...' name="nomCient"/>
-                    </div>
-                    
+
+
+                    <div id='tituloVencimiento'>--- Imagen ---</div> 
                     <div class="mb-3" id='file-form-info'>
-                        <label for="formFile" class="form-label" id='label-formFile'>Imagen</label>
+                        <span class="input-group-text" id="inputGroup-sizing-default"></span>
                         <input class="form-control" type="file" id="formFile" name='imagen' onChange={handleChange} required/>
                     </div>
 
-                    <div class="mb-3" id='convocatoria'>
-                        {/* <span class="input-group-text" id="iconFile"><FontAwesomeIcon icon={faFileLines}/></span> */}
+                    {/* <div class="mb-3" id='convocatoria'>                        
                         <span class="input-group-text" id="iconFile">Convocatoria</span>
                         <input class="form-control" type="file" id="formFile" name='convocatoria' required onChange={handleChangeConvocatoria} accept=".pdf" />
-                    </div> 
-
-                    <div class="documentacion" id='documentacion'>
-                        <p id='p-documentacion'>Documentación requerida</p>
+                    </div>  */}
+                    <div id='tituloVencimiento'>--- Documentación ---</div> 
+                    <div class="documentacion" id='documentacion'>                        
                         <div>
                             <input type="checkbox" class="item-documentación" id='item1-documentación' />
                             <label for="item1-documentación" class="label-documentacion">Aval Decano</label>

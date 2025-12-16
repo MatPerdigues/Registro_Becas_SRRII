@@ -23,10 +23,11 @@ const storage=multer.memoryStorage({
         if(file.fieldname==='imagen'){            
             const filename=`img-${Date.now()}.${ext}`; 
             cb(null,filename);
-        }else{
-            const filename=`convocatoria-${Date.now()}.${ext}`; 
-            cb(null,filename);
         }
+        // else{
+        //     const filename=`convocatoria-${Date.now()}.${ext}`; 
+        //     cb(null,filename);
+        // }
     },
 });
 
@@ -38,7 +39,7 @@ const uploadPrograma=multer({storage:storage});
 
 module.exports=uploadPrograma.fields([
     {name:'imagen'},
-    {name:'convocatoria'}
+    // {name:'convocatoria'}
 
 
 ])

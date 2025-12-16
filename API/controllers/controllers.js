@@ -122,7 +122,7 @@ const login = (req,res)=>{
 
 
     const agregarPrograma= async (req,res)=>{
-        const{nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
+        const{nombre,nombreCorto,link,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI}=req.body;
 
         
 
@@ -155,24 +155,24 @@ const login = (req,res)=>{
 
        
        
-        if(req.files.convocatoria===undefined){
-            convocatoria = 'N/A'
-        } else {
+        // if(req.files.convocatoria===undefined){
+        //     convocatoria = 'N/A'
+        // } else {
     
-            const ext=req.files.convocatoria[0].originalname.split(".").pop(); 
-            const archivo=`convocatoria-${Date.now()}.${ext}`; 
-            const buffer=req.files.convocatoria[0].buffer;
+        //     const ext=req.files.convocatoria[0].originalname.split(".").pop(); 
+        //     const archivo=`convocatoria-${Date.now()}.${ext}`; 
+        //     const buffer=req.files.convocatoria[0].buffer;
     
                   
-            subirArchivo(archivo,buffer);
+        //     subirArchivo(archivo,buffer);
             
-            convocatoria=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/convocatoria/${archivo}`;
-        };
+        //     convocatoria=`https://s3.sa-east-1.amazonaws.com/registro.becas.srrii.uba/programas/${nombreCorto}/convocatoria/${archivo}`;
+        // };
 
 
 
         
-         dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria) VALUES (?,?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria],(error,data)=>{
+         dbConnection.query("INSERT INTO programas (imagen,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,convocatoria) VALUES (?,?,?,?,?,?,?,?,?,?)",[img,nombre,nombreCorto,vencimiento,vencimientoPublic,aval,invitacion,cv,avalORI,link],(error,data)=>{
             if(error){
                 console.log(error);
                 res.json({
